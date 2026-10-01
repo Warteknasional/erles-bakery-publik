@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import {
   Heart,
   MapPin,
-  Phone,
   Clock,
   ArrowRight,
   Leaf,
