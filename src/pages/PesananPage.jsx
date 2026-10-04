@@ -1,124 +1,106 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   ShoppingBag,
   X,
   Search,
   Plus,
   Minus,
-  ShoppingCart,
+  MessageCircle,
+  Gift,
+  CheckCircle,
+  Clock,
+  Trash2,
 } from 'lucide-react';
 
-const dummyProducts = [
+const products = [
   {
     id: 1,
-    nama: 'Roti Tawar Premium',
-    harga: 25000,
-    kategori: 'Roti',
-    stok: 50,
-    deskripsi:
-      'Tekstur sangat lembut dan wangi susu segar, cocok untuk santapan keluarga setiap hari.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCD_uknovKEHZ9EoHPpe-xkLdcsADeFVDG0knPyxCM1PvQOY8jFARPun8nTd7afhy_H01n0XPOr5EwBK2VmE41YSUJRys-B9NGyVHlK_dM_ZBqnwlgtvVJNIvqrVYEtCneLaIPBiAdj7peXbDxu30svoCxnuQIGrIEWhZ8_QwbfpN_wJl0KdiNaVxqOSgAVEwpxM0_-fwZyXpf3RBjGVl6ZtQnXeRGDbbawSRWcv-VBxHHoaLxqsbpI4g',
+    nama: 'Donat Topping Almond Panggang',
+    harga: 9000,
+    kategori: 'Donat',
+    deskripsi: 'Donat kentang empuk berlapis glaze vanila manis lembut dengan taburan kacang almond panggang renyah melimpah.',
+    image: 'https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?auto=format&fit=crop&w=700&q=80',
+    isFavorit: true,
   },
   {
     id: 2,
-    nama: 'Butter Croissant',
-    harga: 18000,
-    kategori: 'Roti',
-    stok: 30,
-    deskripsi:
-      'Flaky, buttery dengan lapisan renyah khas Prancis dan aroma mentega murni.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBAGsqjIfAEamDCqyscuQDII_wUjawjN597Ybf2qouDd9f9HTmVtBtePAAAylNWKSkz_BKsi5KI6Px7M_CEZLD-v1iXiCkyE40sq9wbkjCZJysyVljop5MtuMr-w-9OcR2OXww3luQYwLdTC3p_Hc8DPuoh6JYdsyN_sPgPMTn9EgXjfCX_d9vE3ovl3V-1QOKugjvUXS3KZrI3CzYQlon2Ot5VG2cs9G7SVjl3Lnlo__Ay30kynNCcLg',
+    nama: 'Donat Cokelat Glaze Spesial',
+    harga: 8500,
+    kategori: 'Donat',
+    deskripsi: 'Donat lembut bertabur lelehan cokelat glaze pekat dengan rasa manis yang seimbang dan tidak bikin enek.',
+    image: 'https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=700&q=80',
+    isFavorit: true,
   },
   {
     id: 3,
-    nama: 'Brownies Coklat',
-    harga: 35000,
-    kategori: 'Kue',
-    stok: 20,
-    deskripsi:
-      'Brownies coklat lembut dan fudgy dengan rasa coklat premium.',
+    nama: 'Donat Keju Cheddar Melimpah',
+    harga: 8500,
+    kategori: 'Donat',
+    deskripsi: 'Olesan krim mentega lembut dengan parutan keju cheddar melimpah yang gurih manis.',
+    image: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=700&q=80',
   },
   {
     id: 4,
-    nama: 'Red Velvet Cake',
-    harga: 150000,
-    kategori: 'Kue',
-    stok: 10,
-    deskripsi:
-      'Kue lembut dengan cream cheese frosting yang manis dan segar.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDcapKvZmb2_DRCqVo4cYbOPMpf4ne9PwvSXN68WwJ-Mlj1XTFh4zt_eGVrqMypyu3j_v0_PbOov5yyi-tRisd2MS09cofgxIsNzFd0bblJeDas-zm9UPXoyT0KrDbD__HMSjJrfLqrSZg6FYvdY5k1Qt35SbHLc7qvjxcCxiglgF731I7nxmPiOO10-toTKIb-W17OQyGARmJteqXwYB0I00MD729CVp2IRTU8rQ-Yqw7HmyqH-3qGDw',
+    nama: 'Donat Gula Halus Tradisional',
+    harga: 6000,
+    kategori: 'Donat',
+    deskripsi: 'Donat kentang rumahan bertekstur empuk nostalgia dengan baluran gula halus lembut.',
+    image: 'https://images.unsplash.com/photo-1579888944880-d98341245702?auto=format&fit=crop&w=700&q=80',
   },
   {
     id: 5,
-    nama: 'Hampers Lebaran Deluxe',
-    harga: 350000,
-    kategori: 'Hampers',
-    stok: 15,
-    deskripsi:
-      'Paket hampers premium berisi aneka kue pilihan dengan kemasan elegan.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuA699ixzAfxDLv2kn9VG6y1inXtUwNodFyNwvoyY7dNs9vkyQ6UHfQdU0m6UxhD-E-AottAqOgCpw1kE20Vp7ti4qaTo2Jz-bRmobWHdcP8JfE6QDKnaUh_YRvY5XpIRcIvIj2tK7r4gxYeBdQEeAnXL9yN664dSlI0q4GrYrpbxoMS7mF6g7vqjd-KLLivygHgboOPIK0VO17q8QySmmy9k0iSjA7ax8DV6nSwQsCq2ob8QnPCgp5hbw',
+    nama: 'Roti Manis Cokelat Rumahan',
+    harga: 7000,
+    kategori: 'Roti Manis',
+    deskripsi: 'Roti manis berserat halus dengan isian cokelat lumer khas buatan dapur rumah yang padat dan wangi.',
+    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80',
+    isFavorit: true,
   },
   {
     id: 6,
-    nama: 'Hampers Wedding Classic',
-    harga: 275000,
-    kategori: 'Hampers',
-    stok: 25,
-    deskripsi:
-      'Hampers pernikahan elegan dengan pilihan kue favorit untuk hari spesial.',
+    nama: 'Roti Sisir Mentega Gula',
+    harga: 12000,
+    kategori: 'Roti Manis',
+    deskripsi: 'Roti sisir mentega empuk yang lembut dikoyak, dioles mentega wangi dan taburan butiran gula pasir.',
+    image: 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=700&q=80',
   },
   {
     id: 7,
-    nama: 'Hampers Birthday Joy',
-    harga: 200000,
-    kategori: 'Hampers',
-    stok: 20,
-    deskripsi:
-      'Paket ulang tahun berisi kue dan cookies pilihan dalam kemasan istimewa.',
+    nama: 'Roti Sobek Cokelat Keju',
+    harga: 18000,
+    kategori: 'Roti Manis',
+    deskripsi: 'Satu loyang roti sobek dengan kombinasi separuh isi cokelat pekat dan separuh isi keju gurih.',
+    image: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=700&q=80',
   },
   {
     id: 8,
-    nama: 'Donat Gula',
-    harga: 8000,
-    kategori: 'Roti',
-    stok: 40,
-    deskripsi:
-      'Donat empuk dengan taburan gula halus dan tekstur lembut.',
+    nama: 'Hampers Parsel Manis Spesial',
+    harga: 95000,
+    kategori: 'Hampers',
+    deskripsi: 'Box hampers eksklusif berisi 6 donat premium (almond & cokelat) dan 2 roti manis pilihan, diikat pita satin emas lengkap dengan kartu ucapan kustom.',
+    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=700&q=80',
+    isHampers: true,
   },
   {
     id: 9,
-    nama: 'Kue Lapis Legit',
-    harga: 180000,
-    kategori: 'Kue',
-    stok: 8,
-    deskripsi:
-      'Lapis legit tradisional dengan aroma rempah dan rasa premium.',
+    nama: 'Hampers Perayaan Deluxe Box',
+    harga: 175000,
+    kategori: 'Hampers',
+    deskripsi: 'Kotak bingkisan kaku mewah berisi 12 donat aneka topping lengkap dan 4 roti manis spesial, cocok untuk hantaran kerabat, syukuran, atau hari raya.',
+    image: 'https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&w=700&q=80',
+    isHampers: true,
   },
 ];
 
-const categories = ['Semua', 'Roti', 'Kue', 'Hampers'];
-
-const getProductEmoji = (kategori) => {
-  if (kategori === 'Hampers') return '🎁';
-  if (kategori === 'Kue') return '🎂';
-  return '🍞';
-};
-
-const getCategoryClass = (kategori) => {
-  if (kategori === 'Hampers') return 'hamper';
-  if (kategori === 'Kue') return 'cake';
-  return 'bread';
-};
+const categories = ['Semua', 'Donat', 'Roti Manis', 'Hampers'];
 
 export default function PesananPage() {
   const [selectedCategory, setSelectedCategory] = useState('Semua');
   const [searchTerm, setSearchTerm] = useState('');
-  const [showModal, setShowModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [cart, setCart] = useState([]);
+  const [deliveryMethod, setDeliveryMethod] = useState('ambil');
+  const [orderSent, setOrderSent] = useState(false);
 
   const [form, setForm] = useState({
     name: '',
@@ -127,15 +109,23 @@ export default function PesananPage() {
     catatan: '',
   });
 
-  const filteredProducts = dummyProducts.filter((product) => {
-    const matchCategory =
-      selectedCategory === 'Semua' ||
-      product.kategori === selectedCategory;
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen]);
 
+  const filteredProducts = products.filter((product) => {
+    const matchCategory =
+      selectedCategory === 'Semua' || product.kategori === selectedCategory;
     const matchSearch = product.nama
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-
     return matchCategory && matchSearch;
   });
 
@@ -147,532 +137,537 @@ export default function PesananPage() {
     }).format(value);
 
   const addToCart = (product) => {
-    setCart((previousCart) => {
-      const existingProduct = previousCart.find(
-        (item) => item.id === product.id
-      );
-
-      if (existingProduct) {
-        return previousCart.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-                qty: item.qty + 1,
-              }
-            : item
+    setCart((prev) => {
+      const existing = prev.find((item) => item.id === product.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
         );
       }
-
-      return [
-        ...previousCart,
-        {
-          ...product,
-          qty: 1,
-        },
-      ];
+      return [...prev, { ...product, qty: 1 }];
     });
   };
 
-  const removeFromCart = (productId) => {
-    setCart((previousCart) =>
-      previousCart
-        .map((item) =>
-          item.id === productId
-            ? {
-                ...item,
-                qty: item.qty - 1,
-              }
-            : item
-        )
-        .filter((item) => item.qty > 0)
+  const updateQty = (id, delta) => {
+    setCart((prev) =>
+      prev
+        .map((item) => {
+          if (item.id === id) {
+            const newQty = item.qty + delta;
+            return newQty > 0 ? { ...item, qty: newQty } : null;
+          }
+          return item;
+        })
+        .filter(Boolean)
     );
   };
 
-  const cartCount = cart.reduce(
-    (total, item) => total + item.qty,
-    0
-  );
+  const removeItem = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
 
-  const totalCart = cart.reduce(
-    (total, item) => total + item.harga * item.qty,
-    0
-  );
+  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  const totalCart = cart.reduce((sum, item) => sum + item.harga * item.qty, 0);
 
-  const handleSubmitOrder = (event) => {
-    event.preventDefault();
+  const handleOpenCheckout = () => {
+    if (cart.length === 0) return;
+    setOrderSent(false);
+    setIsModalOpen(true);
+  };
 
-    alert(
-      `Pesanan berhasil dibuat!\n\n` +
-        `Nama: ${form.name}\n` +
-        `WhatsApp: ${form.phone}\n` +
-        `Alamat: ${form.address}\n` +
-        `Total: ${formatRupiah(totalCart)}\n\n` +
-        `(Demo: pesanan belum terhubung ke backend)`
-    );
+  const handleSendWhatsAppOrder = (e) => {
+    e.preventDefault();
 
-    setShowModal(false);
-    setCart([]);
+    let orderListText = cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.nama} (${item.qty}x) = ${formatRupiah(
+            item.harga * item.qty
+          )}`
+      )
+      .join('\n');
 
-    setForm({
-      name: '',
-      phone: '',
-      address: '',
-      catatan: '',
-    });
+    const methodText =
+      deliveryMethod === 'ambil'
+        ? 'Ambil Sendiri di Toko (Jl. Ikan Gurami No. 7 Malang)'
+        : `Kirim ke Alamat:\n${form.address}`;
+
+    const message =
+      `Halo Erles Bakery, saya ingin melakukan pemesanan:\n\n` +
+      `*DATA PEMESAN:*\n` +
+      `• Nama: ${form.name}\n` +
+      `• No. WhatsApp: ${form.phone}\n` +
+      `• Metode: ${methodText}\n\n` +
+      `*DAFTAR PESANAN:*\n` +
+      `${orderListText}\n\n` +
+      `*TOTAL:* ${formatRupiah(totalCart)}\n\n` +
+      (form.catatan ? `*Catatan Khusus:* ${form.catatan}\n\n` : '') +
+      `Mohon info ketersediaan dan perkiraan waktu siap. Terima kasih!`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const waUrl = `https://wa.me/6282145345270?text=${encodedMessage}`;
+
+    // Open WhatsApp in new tab
+    window.open(waUrl, '_blank');
+    setOrderSent(true);
   };
 
   return (
     <div className="order-page">
-
-      {/* HERO PESANAN */}
-      <section className="order-hero">
-        <div className="order-hero-glow order-glow-one"></div>
-        <div className="order-hero-glow order-glow-two"></div>
-
-        <div className="order-hero-content">
-          <div className="order-mini-badge">
-            <ShoppingBag size={14} />
-            <span>Katalog Erles Bakery</span>
+      {/* HEADER SECTION */}
+      <section className="order-page-header">
+        <div className="order-container">
+          <div className="order-header-content">
+            <span className="order-eyebrow">Katalog &amp; Pemesanan</span>
+            <h1 className="order-title">Pilih Donat, Roti Manis &amp; Hampers</h1>
+            <p className="order-subtitle">
+              Pilih menu yang Anda sukai, tambahkan ke keranjang, dan kirimkan pesanan Anda langsung ke WhatsApp dapur Erles Bakery.
+            </p>
           </div>
-
-          <h1>
-            Temukan Favoritmu,
-            <br />
-            <em>Pesan dengan Mudah</em>
-          </h1>
-
-          <p>
-            Pilih roti, kue, donat, dan hampers favorit Anda.
-            Tidak perlu membuat akun, cukup pilih produk lalu
-            lengkapi data pemesanan.
-          </p>
         </div>
       </section>
 
+      {/* FILTER & PENCARIAN */}
+      <section className="order-controls-section">
+        <div className="order-container">
+          <div className="order-controls-bar">
+            <div className="order-category-tabs" role="tablist" aria-label="Kategori Produk">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedCategory === cat}
+                  className={`category-tab-btn ${
+                    selectedCategory === cat ? 'active' : ''
+                  } ${cat === 'Hampers' ? 'tab-hampers' : ''}`}
+                  onClick={() => setSelectedCategory(cat)}
+                >
+                  {cat === 'Hampers' && <Gift size={15} className="tab-icon" />}
+                  {cat}
+                </button>
+              ))}
+            </div>
 
-      {/* KATALOG */}
-      <section className="order-container">
-
-        <div className="order-section-heading">
-          <div>
-            <span className="order-small-label">
-              🍞 Fresh From The Oven
-            </span>
-
-            <h2>
-              Katalog Produk
-            </h2>
-
-            <p>
-              Pilih produk favorit dan tambahkan ke keranjang.
-            </p>
-          </div>
-
-          <div className="order-product-count">
-            {filteredProducts.length} Produk
+            <div className="order-search-box">
+              <Search size={18} className="search-icon" />
+              <input
+                type="text"
+                placeholder="Cari donat atau roti..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+                aria-label="Cari produk"
+              />
+              {searchTerm && (
+                <button
+                  type="button"
+                  onClick={() => setSearchTerm('')}
+                  className="search-clear-btn"
+                  aria-label="Bersihkan pencarian"
+                >
+                  <X size={15} />
+                </button>
+              )}
+            </div>
           </div>
         </div>
+      </section>
 
-
-        {/* SEARCH & FILTER */}
-        <div className="order-toolbar">
-
-          <div className="order-search">
-            <Search size={18} />
-
-            <input
-              type="text"
-              placeholder="Cari roti, kue, atau hampers..."
-              value={searchTerm}
-              onChange={(event) =>
-                setSearchTerm(event.target.value)
-              }
-            />
-          </div>
-
-          <div className="order-categories">
-            {categories.map((category) => (
-              <button
-                type="button"
-                key={category}
-                onClick={() =>
-                  setSelectedCategory(category)
-                }
-                className={
-                  selectedCategory === category
-                    ? 'order-category active'
-                    : 'order-category'
-                }
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-        </div>
-
-
-        {/* PRODUCT GRID */}
-        <div className="order-product-grid">
-
-          {filteredProducts.map((product) => {
-            const itemInCart = cart.find(
-              (item) => item.id === product.id
-            );
-
-            return (
-              <article
-                className="order-product-card"
-                key={product.id}
-              >
-
-                <div className="order-product-image">
-
-                  {product.image ? (
-                    <img
-                      src={product.image}
-                      alt={product.nama}
-                    />
-                  ) : (
-                    <div
-                      className={`order-image-placeholder ${getCategoryClass(
-                        product.kategori
-                      )}`}
-                    >
-                      <span>
-                        {getProductEmoji(product.kategori)}
-                      </span>
-                    </div>
-                  )}
-
-                  <span
-                    className={`order-product-category ${getCategoryClass(
-                      product.kategori
-                    )}`}
+      {/* DAFTAR PRODUK & KERANJANG FLOATING/STICKY */}
+      <main className="order-catalog-main">
+        <div className="order-container">
+          <div className="order-main-layout">
+            {/* GRID PRODUK */}
+            <div className="products-grid-column">
+              {filteredProducts.length === 0 ? (
+                <div className="empty-catalog-state">
+                  <p className="empty-state-title">Produk tidak ditemukan</p>
+                  <p className="empty-state-desc">
+                    Tidak ada menu yang sesuai dengan kata kunci &ldquo;{searchTerm}&rdquo;. Coba cari varian lain atau ganti kategori.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedCategory('Semua');
+                      setSearchTerm('');
+                    }}
+                    className="btn-reset-filter"
                   >
-                    {product.kategori}
-                  </span>
+                    Tampilkan Semua Menu
+                  </button>
+                </div>
+              ) : (
+                <div className="catalog-grid">
+                  {filteredProducts.map((product) => {
+                    const isHampers = product.kategori === 'Hampers';
+                    const inCartItem = cart.find((item) => item.id === product.id);
 
-                  <span className="order-product-emoji">
-                    {getProductEmoji(product.kategori)}
-                  </span>
+                    return (
+                      <article
+                        key={product.id}
+                        className={`catalog-card ${isHampers ? 'card-hampers' : ''}`}
+                      >
+                        <div className="catalog-card-image-box">
+                          <img
+                            src={product.image}
+                            alt={product.nama}
+                            className="catalog-card-img"
+                            loading="lazy"
+                          />
+                          <span
+                            className={`catalog-card-tag ${
+                              isHampers ? 'tag-hampers-gold' : 'tag-regular'
+                            }`}
+                          >
+                            {isHampers ? 'Koleksi Hampers' : product.kategori}
+                          </span>
+                        </div>
 
+                        <div className="catalog-card-body">
+                          <h3 className="catalog-card-title">{product.nama}</h3>
+                          <p className="catalog-card-desc">{product.deskripsi}</p>
+
+                          <div className="catalog-card-footer">
+                            <div className="catalog-price-area">
+                              <span className="price-label">Harga</span>
+                              <strong
+                                className={`price-amount ${
+                                  isHampers ? 'hampers-price' : ''
+                                }`}
+                              >
+                                {formatRupiah(product.harga)}
+                              </strong>
+                            </div>
+
+                            <div className="catalog-card-cta">
+                              {inCartItem ? (
+                                <div className="cart-qty-pill">
+                                  <button
+                                    type="button"
+                                    onClick={() => updateQty(product.id, -1)}
+                                    className="qty-btn"
+                                    aria-label={`Kurangi ${product.nama}`}
+                                  >
+                                    <Minus size={14} />
+                                  </button>
+                                  <span className="qty-number">
+                                    {inCartItem.qty}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() => updateQty(product.id, 1)}
+                                    className="qty-btn"
+                                    aria-label={`Tambah ${product.nama}`}
+                                  >
+                                    <Plus size={14} />
+                                  </button>
+                                </div>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={() => addToCart(product)}
+                                  className={`btn-add-cart ${
+                                    isHampers ? 'btn-add-hampers' : ''
+                                  }`}
+                                  aria-label={`Tambah ${product.nama} ke keranjang`}
+                                >
+                                  <Plus size={16} />
+                                  <span>Pilih</span>
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* RINGKASAN KERANJANG SAMPING (DESKTOP) */}
+            <aside className="order-sidebar-cart" aria-label="Keranjang Belanja">
+              <div className="cart-card-sticky">
+                <div className="cart-header">
+                  <div className="cart-header-title">
+                    <ShoppingBag size={20} className="cart-icon" />
+                    <h2>Pesanan Anda</h2>
+                  </div>
+                  {cartCount > 0 && (
+                    <span className="cart-badge">{cartCount} butir</span>
+                  )}
                 </div>
 
-
-                <div className="order-product-content">
-
-                  <div>
-                    <div className="order-stock">
-                      Stok {product.stok}
-                    </div>
-
-                    <h3>
-                      {product.nama}
-                    </h3>
-
-                    <p>
-                      {product.deskripsi}
+                {cart.length === 0 ? (
+                  <div className="cart-empty-box">
+                    <p className="cart-empty-text">Keranjang masih kosong.</p>
+                    <p className="cart-empty-hint">
+                      Silakan pilih donat, roti, atau paket hampers di sebelah kiri.
                     </p>
                   </div>
+                ) : (
+                  <div className="cart-filled-area">
+                    <ul className="cart-item-list">
+                      {cart.map((item) => (
+                        <li key={item.id} className="cart-item-row">
+                          <div className="cart-item-info">
+                            <strong className="cart-item-name">{item.nama}</strong>
+                            <span className="cart-item-sub">
+                              {item.qty} x {formatRupiah(item.harga)}
+                            </span>
+                          </div>
+                          <div className="cart-item-ctrl">
+                            <span className="cart-item-subtotal">
+                              {formatRupiah(item.harga * item.qty)}
+                            </span>
+                            <div className="cart-row-buttons">
+                              <button
+                                type="button"
+                                onClick={() => updateQty(item.id, -1)}
+                                className="cart-row-btn"
+                                aria-label="Kurangi"
+                              >
+                                <Minus size={12} />
+                              </button>
+                              <span className="cart-row-qty">{item.qty}</span>
+                              <button
+                                type="button"
+                                onClick={() => updateQty(item.id, 1)}
+                                className="cart-row-btn"
+                                aria-label="Tambah"
+                              >
+                                <Plus size={12} />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => removeItem(item.id)}
+                                className="cart-row-btn-delete"
+                                aria-label="Hapus"
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
 
-
-                  <div className="order-product-bottom">
-
-                    <div className="order-price">
-                      <small>Harga</small>
-
-                      <strong>
-                        {formatRupiah(product.harga)}
-                      </strong>
-                    </div>
-
-
-                    {itemInCart ? (
-                      <div className="quantity-control">
-
-                        <button
-                          type="button"
-                          onClick={() =>
-                            removeFromCart(product.id)
-                          }
-                        >
-                          <Minus size={14} />
-                        </button>
-
-                        <span>
-                          {itemInCart.qty}
-                        </span>
-
-                        <button
-                          type="button"
-                          className="quantity-plus"
-                          onClick={() =>
-                            addToCart(product)
-                          }
-                        >
-                          <Plus size={14} />
-                        </button>
-
+                    <div className="cart-total-section">
+                      <div className="cart-subtotal-row">
+                        <span>Total Rincian</span>
+                        <strong className="cart-grand-total">
+                          {formatRupiah(totalCart)}
+                        </strong>
                       </div>
-                    ) : (
                       <button
                         type="button"
-                        className="add-product-button"
-                        onClick={() =>
-                          addToCart(product)
-                        }
+                        onClick={handleOpenCheckout}
+                        className="btn-checkout-wa"
                       >
-                        <Plus size={14} />
-                        Tambah
+                        <MessageCircle size={18} />
+                        <span>Kirim Pesanan ke WhatsApp</span>
                       </button>
-                    )}
-
+                    </div>
                   </div>
+                )}
 
+                <div className="cart-note-box">
+                  <Clock size={15} />
+                  <span>Pesanan disiapkan langsung di dapur rumahan Malang.</span>
                 </div>
-
-              </article>
-            );
-          })}
-
-        </div>
-
-
-        {filteredProducts.length === 0 && (
-          <div className="empty-product">
-            <span>🥐</span>
-
-            <h3>Produk tidak ditemukan</h3>
-
-            <p>
-              Coba gunakan kata pencarian atau kategori lainnya.
-            </p>
+              </div>
+            </aside>
           </div>
-        )}
+        </div>
+      </main>
 
-      </section>
-
-      {/* FLOATING CART */}
-      {cart.length > 0 && (
-        <button
-          type="button"
-          className="floating-cart-button"
-          onClick={() => setShowModal(true)}
-        >
-
-          <span className="floating-cart-icon">
-            <ShoppingCart size={20} />
-
-            <span className="cart-counter">
-              {cartCount}
-            </span>
-          </span>
-
-          <span className="floating-cart-text">
-            <small>Keranjang</small>
-
-            <strong>
-              {formatRupiah(totalCart)}
-            </strong>
-          </span>
-
-        </button>
+      {/* BAR KERANJANG BAWAH UNTUK MOBILE */}
+      {cartCount > 0 && (
+        <div className="mobile-cart-bar">
+          <div className="mobile-cart-bar-content">
+            <div className="mobile-cart-left">
+              <span className="mobile-cart-qty">{cartCount} Menu</span>
+              <strong className="mobile-cart-total">{formatRupiah(totalCart)}</strong>
+            </div>
+            <button
+              type="button"
+              onClick={handleOpenCheckout}
+              className="btn-mobile-checkout"
+            >
+              <MessageCircle size={17} />
+              <span>Lanjut Pesan</span>
+            </button>
+          </div>
+        </div>
       )}
 
-
-      {/* MODAL CHECKOUT */}
-      {showModal && (
+      {/* MODAL FORM PEMESANAN WHATSAPP */}
+      {isModalOpen && (
         <div
-          className="order-modal-overlay"
-          onClick={() => setShowModal(false)}
+          className="modal-backdrop"
+          onClick={() => setIsModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
         >
-
           <div
-            className="order-modal"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            className="modal-card"
+            onClick={(e) => e.stopPropagation()}
           >
-
-            <div className="order-modal-header">
-
-              <div>
-                <span className="modal-small-label">
-                  Keranjang Anda
-                </span>
-
-                <h2>
-                  Form Pemesanan
-                </h2>
-              </div>
-
+            <div className="modal-header">
+              <h2 id="modal-title">Konfirmasi &amp; Pengiriman</h2>
               <button
                 type="button"
-                className="close-modal-button"
-                onClick={() => setShowModal(false)}
+                onClick={() => setIsModalOpen(false)}
+                className="modal-close-btn"
+                aria-label="Tutup formulir"
               >
                 <X size={20} />
               </button>
-
             </div>
 
-
-            {/* CART SUMMARY */}
-            <div className="order-summary">
-
-              {cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="order-summary-item"
-                >
-
-                  <div className="summary-product">
-
-                    <div className="summary-product-icon">
-                      {getProductEmoji(item.kategori)}
-                    </div>
-
-                    <div>
-                      <strong>
-                        {item.nama}
-                      </strong>
-
-                      <span>
-                        {formatRupiah(item.harga)}
-                        {' '}× {item.qty}
-                      </span>
-                    </div>
-
-                  </div>
-
-                  <strong>
-                    {formatRupiah(
-                      item.harga * item.qty
-                    )}
-                  </strong>
-
+            {orderSent ? (
+              <div className="modal-success-state">
+                <CheckCircle size={44} className="success-icon" />
+                <h3>Rincian Pesanan Telah Dibuka di WhatsApp</h3>
+                <p>
+                  Pesan Anda telah dirangkum dan diteruskan ke nomor <strong>0821-4534-5270</strong>. Silakan tekan tombol kirim di WhatsApp untuk menyelesaikan pesanan Anda.
+                </p>
+                <div className="success-actions">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsModalOpen(false);
+                      setCart([]);
+                    }}
+                    className="btn-primary-terracotta"
+                  >
+                    Selesai &amp; Kembali ke Menu
+                  </button>
                 </div>
-              ))}
-
-
-              <div className="order-summary-total">
-
-                <span>
-                  Total Pesanan
-                </span>
-
-                <strong>
-                  {formatRupiah(totalCart)}
-                </strong>
-
               </div>
+            ) : (
+              <form onSubmit={handleSendWhatsAppOrder} className="modal-form">
+                <div className="form-summary-pill">
+                  <span>Total {cartCount} item:</span>
+                  <strong>{formatRupiah(totalCart)}</strong>
+                </div>
 
-            </div>
+                <div className="form-field">
+                  <label htmlFor="customer-name">Nama Pemesan</label>
+                  <input
+                    id="customer-name"
+                    type="text"
+                    required
+                    placeholder="Contoh: Ibu Rina"
+                    value={form.name}
+                    onChange={(e) =>
+                      setForm({ ...form, name: e.target.value })
+                    }
+                    className="form-input"
+                  />
+                </div>
 
+                <div className="form-field">
+                  <label htmlFor="customer-phone">Nomor WhatsApp Anda</label>
+                  <input
+                    id="customer-phone"
+                    type="tel"
+                    required
+                    placeholder="Contoh: 08123456789"
+                    value={form.phone}
+                    onChange={(e) =>
+                      setForm({ ...form, phone: e.target.value })
+                    }
+                    className="form-input"
+                  />
+                </div>
 
-            {/* FORM */}
-            <form
-              className="checkout-form"
-              onSubmit={handleSubmitOrder}
-            >
+                <div className="form-field">
+                  <span className="field-label-text">Cara Pengambilan</span>
+                  <div className="delivery-toggle-group">
+                    <label
+                      className={`delivery-option ${
+                        deliveryMethod === 'ambil' ? 'selected' : ''
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="delivery"
+                        value="ambil"
+                        checked={deliveryMethod === 'ambil'}
+                        onChange={() => setDeliveryMethod('ambil')}
+                      />
+                      <span>Ambil Sendiri di Dapur (Jl. Ikan Gurami No. 7)</span>
+                    </label>
 
-              <div className="form-group">
-                <label>
-                  Nama Lengkap
-                </label>
+                    <label
+                      className={`delivery-option ${
+                        deliveryMethod === 'kirim' ? 'selected' : ''
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="delivery"
+                        value="kirim"
+                        checked={deliveryMethod === 'kirim'}
+                        onChange={() => setDeliveryMethod('kirim')}
+                      />
+                      <span>Kirim ke Alamat (Wilayah Malang)</span>
+                    </label>
+                  </div>
+                </div>
 
-                <input
-                  type="text"
-                  required
-                  placeholder="Masukkan nama lengkap"
-                  value={form.name}
-                  onChange={(event) =>
-                    setForm({
-                      ...form,
-                      name: event.target.value,
-                    })
-                  }
-                />
-              </div>
+                {deliveryMethod === 'kirim' && (
+                  <div className="form-field">
+                    <label htmlFor="customer-address">Alamat Pengiriman di Malang</label>
+                    <textarea
+                      id="customer-address"
+                      rows={3}
+                      required
+                      placeholder="Tuliskan alamat lengkap beserta patokan rumah..."
+                      value={form.address}
+                      onChange={(e) =>
+                        setForm({ ...form, address: e.target.value })
+                      }
+                      className="form-textarea"
+                    />
+                  </div>
+                )}
 
+                <div className="form-field">
+                  <label htmlFor="customer-notes">Catatan Khusus (Opsional)</label>
+                  <input
+                    id="customer-notes"
+                    type="text"
+                    placeholder="Contoh: Donat jangan terlalu manis, pita hampers warna emas"
+                    value={form.catatan}
+                    onChange={(e) =>
+                      setForm({ ...form, catatan: e.target.value })
+                    }
+                    className="form-input"
+                  />
+                </div>
 
-              <div className="form-group">
-                <label>
-                  Nomor WhatsApp
-                </label>
-
-                <input
-                  type="tel"
-                  required
-                  placeholder="Contoh: 081234567890"
-                  value={form.phone}
-                  onChange={(event) =>
-                    setForm({
-                      ...form,
-                      phone: event.target.value,
-                    })
-                  }
-                />
-              </div>
-
-
-              <div className="form-group">
-                <label>
-                  Alamat Pengiriman
-                </label>
-
-                <textarea
-                  required
-                  rows="3"
-                  placeholder="Masukkan alamat lengkap"
-                  value={form.address}
-                  onChange={(event) =>
-                    setForm({
-                      ...form,
-                      address: event.target.value,
-                    })
-                  }
-                />
-              </div>
-
-
-              <div className="form-group">
-                <label>
-                  Catatan
-                  <span> (Opsional)</span>
-                </label>
-
-                <textarea
-                  rows="3"
-                  placeholder="Contoh: tulis ucapan di kotak..."
-                  value={form.catatan}
-                  onChange={(event) =>
-                    setForm({
-                      ...form,
-                      catatan: event.target.value,
-                    })
-                  }
-                />
-              </div>
-
-
-              <button
-                type="submit"
-                className="submit-order-button"
-              >
-                <ShoppingBag size={17} />
-
-                Buat Pesanan
-              </button>
-
-            </form>
-
+                <div className="modal-actions">
+                  <button
+                    type="button"
+                    onClick={() => setIsModalOpen(false)}
+                    className="btn-modal-cancel"
+                  >
+                    Batal
+                  </button>
+                  <button type="submit" className="btn-modal-submit">
+                    <MessageCircle size={18} />
+                    <span>Lanjutkan ke WhatsApp</span>
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
-
         </div>
       )}
-
     </div>
   );
 }

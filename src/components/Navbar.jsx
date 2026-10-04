@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, UserRound } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
 
 const logoUrl =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuAVlyEgWtpuj1LwQbi_XQd5fu4Ii2nGknZ1Qm2LKybnrrj6McmJqNPPfExWhH4GO8pCr5NOmQBF1F5GS7hZgpj6Qr-e3ZWa12E43XKiu3o3UEaoEGviBsj7h1OJVAkcm9SafHYCPUyku7u-IQbsTbWPxL4dAQDvGU5M200jaP_xDk6J_BG6lRlBxBvAe0yMRcQ-ci4518oKZrVIWrYpWYRF2uCHjRCxiuOCEd5WqBh9V0zt343tqVxoOg';
@@ -17,19 +17,18 @@ export default function Navbar() {
   return (
     <header className="erles-header">
       <div className="erles-navbar">
-        <Link to="/" className="erles-brand">
+        <Link to="/" className="erles-brand" aria-label="Erles Bakery Beranda">
           <img
             src={logoUrl}
-            alt="Erles Bakery"
+            alt="Logo Erles Bakery"
             className="erles-logo"
           />
-
           <span className="erles-brand-name">
-            Erles Bakery <span>🍞</span>
+            Erles Bakery
           </span>
         </Link>
 
-        <nav className="erles-nav-desktop">
+        <nav className="erles-nav-desktop" aria-label="Navigasi Utama">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -44,19 +43,28 @@ export default function Navbar() {
         </nav>
 
         <div className="erles-nav-actions">
-          <Link to="/pesanan" className="erles-quick-button">
-            Pesan Cepat
-          </Link>
+          <a
+            href="https://wa.me/6282145345270"
+            target="_blank"
+            rel="noreferrer"
+            className="erles-nav-wa-btn"
+            aria-label="Konsultasi Pesanan via WhatsApp"
+            title="Chat WhatsApp 0821-4534-5270"
+          >
+            <MessageCircle size={18} />
+            <span className="erles-nav-wa-text">Tanya Menu</span>
+          </a>
 
-          <div className="erles-user-circle">
-            <UserRound size={17} />
-          </div>
+          <Link to="/pesanan" className="erles-quick-button">
+            Pesan Sekarang
+          </Link>
 
           <button
             type="button"
             className="erles-mobile-button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Buka menu"
+            aria-label={mobileOpen ? 'Tutup navigasi' : 'Buka navigasi'}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -64,7 +72,7 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <nav className="erles-mobile-nav">
+        <nav className="erles-mobile-nav" aria-label="Menu Ponsel">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -77,6 +85,16 @@ export default function Navbar() {
               {item.label}
             </NavLink>
           ))}
+          <a
+            href="https://wa.me/6282145345270"
+            target="_blank"
+            rel="noreferrer"
+            className="erles-mobile-wa-link"
+            onClick={() => setMobileOpen(false)}
+          >
+            <MessageCircle size={18} />
+            Hubungi WhatsApp (0821-4534-5270)
+          </a>
         </nav>
       )}
     </header>
