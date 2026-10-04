@@ -3,419 +3,219 @@ import {
   Heart,
   MapPin,
   Clock,
-  ArrowRight,
-  Leaf,
-  BadgeCheck,
+  MessageCircle,
+  ShoppingBag,
+  Sparkles,
+  ExternalLink,
 } from 'lucide-react';
+import InstagramIcon from '../components/InstagramIcon';
 
-const bakerImage =
+const homeBakeImg =
   'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=85';
-
-const storeImage =
-  'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=85';
+const donutCraftImg =
+  'https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?auto=format&fit=crop&w=900&q=85';
 
 export default function TentangPage() {
   return (
-    <div className="tentang-stitch-page">
-
-      {/* =========================
-          HERO
-      ========================== */}
-      <section className="tentang-stitch-hero">
-
-        <div className="tentang-logo-circle">
-          <span>📦</span>
-
-          <div className="tentang-logo-small">
-            ⚙
+    <div className="about-page">
+      {/* HERO TENTANG KAMI */}
+      <section className="about-hero-section">
+        <div className="about-container">
+          <div className="about-hero-content">
+            <span className="about-eyebrow">Cerita Dapur Kami</span>
+            <h1 className="about-title">Kehangatan Donat &amp; Roti Rumahan Asli Malang</h1>
+            <p className="about-lead">
+              Bukan pabrik atau waralaba besar, melainkan sebuah dapur rumah tangga di mana setiap adonan diuleni, dibentuk, dan dipanggang dengan perhatian penuh satu per satu.
+            </p>
           </div>
         </div>
-
-        <div className="tentang-est-label">
-          <span className="tentang-est-dot"></span>
-          ARTISANAL BAKERY EST. 2020
-        </div>
-
-        <h1>
-          Tentang Erles Bakery
-        </h1>
-
-        <p>
-          Menyajikan roti, kue, donat, dan hampers berkualitas sejak 2020
-          dengan kehangatan cinta dan resep autentik.
-        </p>
-
       </section>
 
-
-      {/* =========================
-          CERITA KAMI
-      ========================== */}
-      <section className="tentang-story-container">
-
-        <div className="tentang-story-card">
-
-          <div className="tentang-story-header">
-
-            <div className="tentang-heart-icon">
-              <Heart
-                size={16}
-                fill="currentColor"
-              />
-            </div>
-
-            <div>
-              <span>
-                FILOSOFI DAPUR KAMI
-              </span>
-
-              <h2>
-                Cerita Kami
-              </h2>
-            </div>
-
-          </div>
-
-
-          <div className="tentang-story-content">
-
-            <div className="tentang-story-text">
-
+      {/* CERITA & FILOSOFI DAPUR */}
+      <section className="about-story-section reveal-on-scroll">
+        <div className="about-container">
+          <div className="about-story-grid">
+            <div className="about-story-text">
+              <div className="story-badge">
+                <Heart size={16} className="badge-heart-icon" />
+                <span>Dari Dapur ke Meja Keluarga</span>
+              </div>
+              <h2 className="story-heading">Dimulai dari Kecintaan pada Roti yang Jujur</h2>
               <p>
-                Berawal dari oven rumahan kecil di tahun 2020, Erles Bakery
-                lahir dari kecintaan kami terhadap aroma roti segar yang baru
-                keluar dari pemanggang. Kami percaya bahwa setiap potong
-                roti bukan sekadar makanan, melainkan lambang kehangatan
-                dan kebersamaan keluarga di meja makan.
+                Erles Bakery tumbuh dari dapur rumah di Malang dengan sebuah tujuan sederhana: menyajikan donat empuk dan roti manis yang rasanya selalu menenangkan, seperti sajian buatan ibu di rumah.
+              </p>
+              <p>
+                Kami tidak memakai pengawet sintesis atau pelembut instan berlebih. Rahasia kelembutan donat dan roti kami ada pada kesabaran proses fermentasi, kebersihan pengolahan, dan pemilihan bahan baku yang segar.
+              </p>
+              <p>
+                Setiap donat topping almond kami taburi kacang yang baru dipanggang agar tetap renyah saat digigit. Sementara untuk hampers, kami merangkai dan mengikat pitanya sendiri agar bingkisan Anda benar-benar terasa personal bagi penerimanya.
               </p>
 
+              <div className="story-owner-note">
+                <p className="owner-quote">
+                  &ldquo;Bagi kami, setiap pesanan yang masuk adalah bentuk kepercayaan sebuah keluarga. Karena itu, kami merawat rasanya seperti memasak untuk keluarga kami sendiri.&rdquo;
+                </p>
+                <span className="owner-signature">Pemilik &amp; Pengelola Erles Bakery</span>
+              </div>
+            </div>
+
+            <div className="about-story-media">
+              <div className="story-image-frame">
+                <img
+                  src={homeBakeImg}
+                  alt="Aktivitas membuat donat dan roti di dapur Erles Bakery"
+                  className="story-img"
+                  loading="lazy"
+                />
+                <div className="story-caption-card">
+                  <strong>Dibuat dalam Batch Terbatas</strong>
+                  <p>Adonan segar setiap hari untuk memastikan cita rasa terbaik.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PRINSIP DAPUR ERLES BAKERY */}
+      <section className="about-values-section reveal-on-scroll">
+        <div className="about-container">
+          <div className="values-intro">
+            <span className="section-eyebrow">Prinsip Kami</span>
+            <h2 className="section-heading">Mengapa Tetap Memilih Skala Rumahan?</h2>
+          </div>
+
+          <div className="values-cards-row">
+            <article className="value-card">
+              <div className="value-icon-box terracotta">
+                <Heart size={20} />
+              </div>
+              <h3>Kualitas yang Terjaga</h3>
               <p>
-                Hingga kini, kami terus berkomitmen menggunakan bahan-bahan
-                alami pilihan tanpa pengawet buatan — mulai dari mentega
-                impor berkualitas tinggi hingga ragi alami sourdough.
-                Setiap hari, artisan baker kami memulai hari sebelum fajar
-                menyingsing agar Anda dapat menikmati roti dan kue dengan
-                kesegaran maksimal.
+                Karena dikelola mandiri, kontrol mutu dilakukan langsung di setiap loyang yang keluar dari pemanggang. Kami tidak berkompromi dengan rasa.
+              </p>
+            </article>
+
+            <article className="value-card">
+              <div className="value-icon-box gold">
+                <Sparkles size={20} />
+              </div>
+              <h3>Sentuhan Personal</h3>
+              <p>
+                Anda bisa meminta variasi topping donat kesukaan, pilihan kartu ucapan hampers, hingga waktu pengambilan yang pas dengan jadwal acara Anda.
+              </p>
+            </article>
+
+            <article className="value-card">
+              <div className="value-icon-box pink">
+                <Clock size={20} />
+              </div>
+              <h3>Pemberitahuan Jujur</h3>
+              <p>
+                Kami menyampaikan ketersediaan stok apa adanya. Jika kapasitas hari itu telah penuh, kami informasikan dengan jujur demi menjaga mutu pesanan.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* LOKASI ASLI & KONTAK */}
+      <section className="about-location-section reveal-on-scroll">
+        <div className="about-container">
+          <div className="location-box-card">
+            <div className="location-info-side">
+              <span className="section-eyebrow">Dapur Kami</span>
+              <h2 className="location-title">Lokasi &amp; Titik Pengambilan</h2>
+              <p className="location-desc">
+                Dapur kami berlokasi di kawasan permukiman yang tenang di Kota Malang. Anda dipersilakan mengambil langsung pesanan yang telah dikonfirmasi atau meminta pengiriman melalui kurir lokal.
               </p>
 
-            </div>
+              <div className="location-detail-list">
+                <div className="location-detail-item">
+                  <MapPin size={20} className="detail-icon" />
+                  <div>
+                    <strong>Alamat Dapur:</strong>
+                    <p>Jl. Ikan Gurami No. 7, Malang, Jawa Timur 65142</p>
+                    <a
+                      href="https://maps.google.com/?q=Jl.+Ikan+Gurami+No.+7,+Malang"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="location-map-link"
+                    >
+                      <span>Lihat Rute di Google Maps</span>
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
+                </div>
 
+                <div className="location-detail-item">
+                  <Clock size={20} className="detail-icon" />
+                  <div>
+                    <strong>Waktu Layanan &amp; Pengambilan:</strong>
+                    <p>Senin - Sabtu: 07.00 - 17.00 WIB</p>
+                    <small className="time-note">
+                      *Disarankan konfirmasi melalui WhatsApp sebelum datang untuk memastikan pesanan Anda sudah siap dikemas.
+                    </small>
+                  </div>
+                </div>
 
-            <div className="tentang-baker-image">
+                <div className="location-detail-item">
+                  <MessageCircle size={20} className="detail-icon" />
+                  <div>
+                    <strong>Kontak Langsung (WhatsApp):</strong>
+                    <p>0821-4534-5270</p>
+                    <a
+                      href="https://wa.me/6282145345270"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="location-wa-link"
+                    >
+                      Kirim Pesan WhatsApp Sekarang
+                    </a>
+                  </div>
+                </div>
 
-              <img
-                src={bakerImage}
-                alt="Artisan baker Erles Bakery"
-              />
-
-              <div className="tentang-image-caption">
-                <span>
-                  HANDMADE DAILY
-                </span>
-
-                <strong>
-                  Sentuhan Kasih Tangan
-                </strong>
+                <div className="location-detail-item">
+                  <InstagramIcon size={20} className="detail-icon" />
+                  <div>
+                    <strong>Instagram Resmi:</strong>
+                    <p>@erles_donut.mlg</p>
+                    <a
+                      href="https://www.instagram.com/erles_donut.mlg/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="location-ig-link"
+                    >
+                      Buka Profil Instagram @erles_donut.mlg
+                    </a>
+                  </div>
+                </div>
               </div>
-
             </div>
 
-          </div>
-
-
-          {/* 3 KEUNGGULAN */}
-          <div className="tentang-benefit-box">
-
-            <div className="tentang-benefit-item">
-
-              <div className="tentang-benefit-icon green">
-                ♨
+            <div className="location-action-side">
+              <div className="action-card-warm">
+                <img
+                  src={donutCraftImg}
+                  alt="Donat istimewa Erles Bakery"
+                  className="action-card-img"
+                  loading="lazy"
+                />
+                <div className="action-card-content">
+                  <h3>Ingin Mencoba Donat &amp; Roti Kami?</h3>
+                  <p>
+                    Lihat daftar menu lengkap dan tentukan varian favorit untuk keluarga hari ini.
+                  </p>
+                  <Link to="/pesanan" className="btn-primary-terracotta btn-full-width">
+                    <ShoppingBag size={18} />
+                    <span>Lihat Menu &amp; Pesan Sekarang</span>
+                  </Link>
+                </div>
               </div>
-
-              <strong>
-                Dipanggang Segar
-              </strong>
-
-              <span>
-                Setiap pagi sebelum fajar
-              </span>
-
             </div>
-
-
-            <div className="tentang-benefit-item">
-
-              <div className="tentang-benefit-icon yellow">
-                <BadgeCheck size={17} />
-              </div>
-
-              <strong>
-                100% Halal & Alami
-              </strong>
-
-              <span>
-                Bahan premium terseleksi
-              </span>
-
-            </div>
-
-
-            <div className="tentang-benefit-item">
-
-              <div className="tentang-benefit-icon red">
-                <Leaf size={17} />
-              </div>
-
-              <strong>
-                Tanpa Pengawet
-              </strong>
-
-              <span>
-                Sehat untuk seluruh keluarga
-              </span>
-
-            </div>
-
           </div>
-
         </div>
-
       </section>
-
-
-      {/* =========================
-          KONTAK
-      ========================== */}
-      <section className="tentang-contact-section">
-
-        <div className="tentang-contact-heading">
-
-          <span>
-            INFORMASI LAYANAN
-          </span>
-
-          <h2>
-            Kontak & Operasional
-          </h2>
-
-          <p>
-            Kami siap menyambut kedatangan Anda dan melayani
-            pemesanan setiap hari.
-          </p>
-
-        </div>
-
-
-        <div className="tentang-contact-grid">
-
-          {/* LOKASI */}
-          <article className="tentang-contact-card">
-
-            <div className="tentang-contact-icon location">
-              <MapPin size={18} />
-            </div>
-
-            <span className="tentang-contact-label">
-              LOKASI TOKO
-            </span>
-
-            <h3>
-              Jl. Roti Sejahtera No. 123
-            </h3>
-
-            <p>
-              RT 02 / RW 05, Kota Kuliner
-            </p>
-
-            <div className="tentang-contact-note">
-              <span>🅿</span>
-
-              <span>
-                Tersedia area dine-in hangat & parkir luas
-              </span>
-            </div>
-
-          </article>
-
-
-          {/* KONTAK */}
-          <article className="tentang-contact-card">
-
-            <div className="tentang-contact-icon whatsapp">
-              ▤
-            </div>
-
-            <span className="tentang-contact-label">
-              KONTAK PEMESANAN
-            </span>
-
-            <h3>
-              0812–3456–7890
-            </h3>
-
-            <p>
-              WhatsApp & Telepon Toko
-            </p>
-
-            <div className="tentang-contact-note">
-              <span>🎧</span>
-
-              <span>
-                Langsung terhubung dengan customer service kami
-              </span>
-            </div>
-
-          </article>
-
-
-          {/* JAM */}
-          <article className="tentang-contact-card">
-
-            <div className="tentang-contact-icon time">
-              <Clock size={18} />
-            </div>
-
-            <span className="tentang-contact-label">
-              JAM OPERASIONAL
-            </span>
-
-            <h3>
-              Senin – Sabtu
-            </h3>
-
-            <p className="tentang-hours">
-              07:00 – 21:00 WIB
-            </p>
-
-            <div className="tentang-contact-note tentang-open-note">
-
-              <span>
-                ☀️ Minggu: 08:00 – 18:00 WIB
-              </span>
-
-              <strong>
-                BUKA
-              </strong>
-
-            </div>
-
-          </article>
-
-        </div>
-
-      </section>
-
-
-      {/* =========================
-          VISIT STORE
-      ========================== */}
-      <section className="tentang-visit-container">
-
-        <div className="tentang-visit-card">
-
-          <div className="tentang-visit-copy">
-
-            <span className="tentang-visit-label">
-              ▦ SUASANA HANGAT TOKO
-            </span>
-
-            <h2>
-              Kunjungi Toko Fisik Kami atau Pesan
-              <br />
-              Online Tanpa Ribet
-            </h2>
-
-            <p>
-              Nikmati semerbak wangi roti yang baru matang, segelas kopi
-              arabika hangat, dan keramahan barista kami di toko langsung,
-              atau pesan paket roti dan hampers kesukaan Anda langsung
-              ke rumah.
-            </p>
-
-
-            <div className="tentang-visit-buttons">
-
-              <Link
-                to="/pesanan"
-                className="tentang-menu-button"
-              >
-                Lihat Menu & Mulai Pesan
-                <ArrowRight size={15} />
-              </Link>
-
-              <Link
-                to="/pesanan"
-                className="tentang-recommend-button"
-              >
-                <span>▤</span>
-                Tanya Rekomendasi
-              </Link>
-
-            </div>
-
-          </div>
-
-
-          <div className="tentang-store-image">
-
-            <img
-              src={storeImage}
-              alt="Suasana Erles Bakery"
-            />
-
-            <div className="tentang-warm-badge">
-              <span className="tentang-online-dot"></span>
-              Tersedia Roti Hangat Setiap Jam
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      {/* =========================
-          MAP
-      ========================== */}
-      <section className="tentang-map-container">
-
-        <div className="tentang-map-card">
-
-          <div className="tentang-map-heading">
-
-            <div>
-              <span>
-                NAVIGASI PETA
-              </span>
-
-              <h2>
-                Panduan Menuju Lokasi
-              </h2>
-            </div>
-
-            <p>
-              ◇ Akses mudah dari pusat kota & halte transportasi
-            </p>
-
-          </div>
-
-
-          <div className="tentang-map-frame">
-
-            <iframe
-              title="Lokasi Erles Bakery"
-              src="https://www.google.com/maps?q=Kediri%20Jawa%20Timur&output=embed"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-
-          </div>
-
-        </div>
-
-      </section>
-
     </div>
   );
 }

@@ -1,122 +1,123 @@
 import {
   MapPin,
   Phone,
+  Clock,
+  MessageCircle,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import InstagramIcon from './InstagramIcon';
 
 export default function Footer() {
   return (
     <footer className="erles-footer">
       <div className="erles-footer-container">
-
         <div className="erles-footer-grid">
-
-          {/* KOLOM 1 */}
+          {/* KOLOM 1: Tentang Erles Bakery */}
           <div className="footer-column footer-about">
             <div className="footer-logo-title">
               <span>Erles Bakery</span>
-              <span>🍞</span>
             </div>
-
             <p>
-              Menyajikan roti artisan, kue spesial, donat, dan hampers
-              premium yang dipanggang segar setiap hari dengan bahan-bahan
-              pilihan berkualitas tinggi.
+              Produksi rumahan roti manis, donat lembut aneka topping, dan hampers spesial. Dibuat langsung dari dapur kami di Malang dengan bahan berkualitas untuk keluarga Anda.
             </p>
           </div>
 
-          {/* KOLOM 2 */}
+          {/* KOLOM 2: Waktu Operasional & Pemesanan */}
           <div className="footer-column">
-            <h4>Jam Buka</h4>
-
+            <h4>
+              <Clock size={16} className="footer-heading-icon" />
+              Pemesanan &amp; Pengambilan
+            </h4>
             <p>
               <strong>Senin - Sabtu:</strong>
               <br />
-              07.00 - 21.00 WIB
+              07.00 - 17.00 WIB
             </p>
-
-            <p>
-              <strong>Minggu:</strong>
-              <br />
-              08.00 - 18.00 WIB
+            <p className="footer-note-text">
+              *Sebaiknya pesan H-1 untuk pesanan donat bervolume banyak dan hampers perayaan.
             </p>
           </div>
 
-          {/* KOLOM 3 */}
+          {/* KOLOM 3: Alamat & Kontak Asli */}
           <div className="footer-column">
-            <h4>Lokasi & Kontak</h4>
+            <h4>
+              <MapPin size={16} className="footer-heading-icon" />
+              Dapur &amp; Kontak
+            </h4>
 
             <div className="footer-contact-item">
-              <MapPin size={17} />
-
-              <span>
-                Jl. Roti Sejahtera No. 123,
+              <MapPin size={16} className="footer-item-icon" />
+              <a
+                href="https://maps.google.com/?q=Jl.+Ikan+Gurami+No.+7,+Malang"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-link"
+              >
+                Jl. Ikan Gurami No. 7,
                 <br />
-                Kota Bakery
-              </span>
+                Malang, Jawa Timur 65142
+              </a>
             </div>
 
             <div className="footer-contact-item">
-              <Phone size={17} />
-
-              <span>
-                0812-3456-7890 (WhatsApp)
-              </span>
+              <Phone size={16} className="footer-item-icon" />
+              <a
+                href="https://wa.me/6282145345270"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-link"
+              >
+                0821-4534-5270 (WhatsApp)
+              </a>
             </div>
           </div>
 
-          {/* KOLOM 4 */}
+          {/* KOLOM 4: Media Sosial & Menu Cepat */}
           <div className="footer-column">
             <h4>Ikuti Kami</h4>
-
             <p>
-              Dapatkan informasi promo, varian roti mingguan,
-              dan hampers eksklusif.
+              Lihat update menu donat harian, promo spesial, dan katalog hampers terbaru.
             </p>
 
             <div className="footer-socials">
-
               <a
-                href="#"
-                aria-label="Bagikan"
-                onClick={(e) => e.preventDefault()}
+                href="https://www.instagram.com/erles_donut.mlg/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram @erles_donut.mlg"
+                className="footer-social-btn"
               >
-                <span>↗</span>
+                <InstagramIcon size={18} />
               </a>
 
               <a
-                href="#"
-                aria-label="WhatsApp"
-                onClick={(e) => e.preventDefault()}
+                href="https://wa.me/6282145345270"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Chat WhatsApp 0821-4534-5270"
+                className="footer-social-btn"
               >
-                <span>💬</span>
+                <MessageCircle size={18} />
               </a>
+            </div>
 
-              <a
-                href="#"
-                aria-label="Instagram"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span>◎</span>
-              </a>
-
+            <div className="footer-quick-links">
+              <Link to="/pesanan" className="footer-text-link">Pesan Donat &amp; Roti</Link>
+              <span className="footer-link-divider">•</span>
+              <Link to="/tentang" className="footer-text-link">Cerita Kami</Link>
             </div>
           </div>
-
         </div>
 
         {/* BAGIAN BAWAH FOOTER */}
         <div className="footer-bottom">
-
           <p>
-            © 2026 Erles Bakery. Hak Cipta Dilindungi.
+            &copy; 2026 Erles Bakery Malang. Dikelola langsung dari dapur rumah tangga.
           </p>
-
-          <p>
-            Freshly Baked with Artisan Passion Daily
+          <p className="footer-tagline">
+            Donat lembut dan roti manis hangat untuk setiap senyum di meja Anda.
           </p>
-
         </div>
-
       </div>
     </footer>
   );

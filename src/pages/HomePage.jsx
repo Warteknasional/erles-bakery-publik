@@ -1,535 +1,246 @@
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
-import {
-  BadgeCheck,
-  Leaf,
-  AlarmClock,
-  Star,
-  CheckCircle2,
-  ArrowRight,
-  BookOpen,
-  Zap,
-  ShoppingCart,
-  Award,
-} from 'lucide-react';
-
-const heroImage =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuBsi8Gqqc4jzcGezqGJu2_CoK5KyQBAZ6J-L0Yb4OIL-O3UQcDIP8AY1cBXGy6T1RvlKY9P6rx7PsW05YLLeRCfjBOTeM_uV42qi49J6qL9oUUFQxgnzjOfkNnx0d8dboomdh7pE4e2DjXq_aqkXsVW7BjcIZQbfWJ0UJE17IXqCo-BWLYjI1to8X949HL4LP4C9YFAlAvpyKG48YibFReYpAg7IipDNsnTXTL5ck2YmnogYEJNT-48sw';
-
-const features = [
-  {
-    emoji: '🎂',
-    type: 'green',
-    label: 'KUALITAS TERJAMIN',
-    title: 'Roti & Kue Segar',
-    description:
-      'Dipanggang setiap hari langsung dari oven kami dengan bahan alami pilihan tanpa bahan pengawet sintesis, menjaga rasa asli gandum.',
-    bottom: 'Fresh From The Oven',
-  },
-  {
-    emoji: '🎁',
-    type: 'red',
-    label: 'GIFTING & ACARA',
-    title: 'Hampers Eksklusif',
-    description:
-      'Paket hadiah dan bingkisan spesial yang dikemas elegan untuk momen berharga Anda seperti hari raya, ulang tahun, dan corporate gift.',
-    bottom: 'Custom Pita & Kartu Ucapan',
-  },
-  {
-    emoji: '⭐',
-    type: 'yellow',
-    label: 'ARTISAN BAKERY',
-    title: 'Rasa Premium',
-    description:
-      'Dibuat dengan resep rahasia turun-temurun dan mentega berkualitas tinggi untuk cita rasa autentik, lembut, dan wangi yang memikat.',
-    bottom: '100% Pure Butter Blend',
-  },
-];
-
-const products = [
-  {
-    id: 1,
-    name: 'Roti Tawar Premium',
-    description:
-      'Tekstur sangat lembut dan wangi susu segar, cocok untuk santapan keluarga setiap hari.',
-    price: 'Rp 25.000',
-    category: 'Roti 🍞',
-    categoryClass: 'bread',
-    emoji: '🍞',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCD_uknovKEHZ9EoHPpe-xkLdcsADeFVDG0knPyxCM1PvQOY8jFARPun8nTd7afhy_H01n0XPOr5EwBK2VmE41YSUJRys-B9NGyVHlK_dM_ZBqnwlgtvVJNIvqrVYEtCneLaIPBiAdj7peXbDxu30svoCxnuQIGrIEWhZ8_QwbfpN_wJl0KdiNaVxqOSgAVEwpxM0_-fwZyXpf3RBjGVl6ZtQnXeRGDbbawSRWcv-VBxHHoaLxqsbpI4g',
-  },
-  {
-    id: 2,
-    name: 'Butter Croissant',
-    description:
-      'Flaky, buttery dengan lapisan renyah khas Prancis dan aroma mentega murni yang menggoda.',
-    price: 'Rp 18.000',
-    category: 'Roti 🥐',
-    categoryClass: 'bread',
-    emoji: '🥐',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBAGsqjIfAEamDCqyscuQDII_wUjawjN597Ybf2qouDd9f9HTmVtBtePAAAylNWKSkz_BKsi5KI6Px7M_CEZLD-v1iXiCkyE40sq9wbkjCZJysyVljop5MtuMr-w-9OcR2OXww3luQYwLdTC3p_Hc8DPuoh6JYdsyN_sPgPMTn9EgXjfCX_d9vE3ovl3V-1QOKugjvUXS3KZrI3CzYQlon2Ot5VG2cs9G7SVjl3Lnlo__Ay30kynNCcLg',
-  },
-  {
-    id: 3,
-    name: 'Red Velvet Cake',
-    description:
-      'Kue lembut dilapisi cream cheese frosting mewah dengan keseimbangan rasa manis dan segar.',
-    price: 'Rp 150.000',
-    category: 'Kue 🎂',
-    categoryClass: 'cake',
-    emoji: '🎂',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDcapKvZmb2_DRCqVo4cYbOPMpf4ne9PwvSXN68WwJ-Mlj1XTFh4zt_eGVrqMypyu3j_v0_PbOov5yyi-tRisd2MS09cofgxIsNzFd0bblJeDas-zm9UPXoyT0KrDbD__HMSjJrfLqrSZg6FYvdY5k1Qt35SbHLc7qvjxcCxiglgF731I7nxmPiOO10-toTKIb-W17OQyGARmJteqXwYB0I00MD729CVp2IRTU8rQ-Yqw7HmyqH-3qGDw',
-  },
-  {
-    id: 4,
-    name: 'Hampers Deluxe Spesial',
-    description:
-      'Paket lengkap aneka kue kering dan cookies premium dalam kotak mewah berpita satin emas.',
-    price: 'Rp 350.000',
-    category: 'Hampers 🎁',
-    categoryClass: 'hamper',
-    emoji: '🎁',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuA699ixzAfxDLv2kn9VG6y1inXtUwNodFyNwvoyY7dNs9vkyQ6UHfQdU0m6UxhD-E-AottAqOgCpw1kE20Vp7ti4qaTo2Jz-bRmobWHdcP8JfE6QDKnaUh_YRvY5XpIRcIvIj2tK7r4gxYeBdQEeAnXL9yN664dSlI0q4GrYrpbxoMS7mF6g7vqjd-KLLivygHgboOPIK0VO17q8QySmmy9k0iSjA7ax8DV6nSwQsCq2ob8QnPCgp5hbw',
-  },
-];
+const showcaseDonutImg =
+  'https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=900&q=80';
+const donutSectionImg =
+  'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=900&q=80';
+const sweetBreadImg =
+  'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80';
+const hamperImg =
+  'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=900&q=80';
 
 export default function HomePage() {
   return (
     <div className="home-page">
+      {/* 1. KITCHEN NOTICE BANNER (Sederhana & Bersahaja) */}
+      <aside className="home-kitchen-banner" aria-label="Informasi Pemesanan">
+        <div className="home-kitchen-banner-content">
+          <span className="kitchen-status-text">
+            Pesanan donat kentang, roti manis, dan hampers dibuat segar setiap hari dari dapur kami di Jl. Ikan Gurami No. 7, Malang.
+          </span>
+        </div>
+      </aside>
 
-      {/* TOP INFO */}
-      <div className="bakery-info-bar">
-        <span>♨</span>
-
-        <span>
-          DIPANGGANG SEGAR SETIAP HARI PUKUL 05.00 WIB • 100% BAHAN ALAMI
-          BEBAS PENGAWET
-        </span>
-
-        <span>♨</span>
-      </div>
-
-      {/* HERO */}
-      <section className="home-container hero-section">
-        <div className="hero-card">
-
-          <div className="hero-light hero-light-top"></div>
-          <div className="hero-light hero-light-bottom"></div>
-
-          <div className="hero-grid">
-
-            <div className="hero-copy">
-
-              <div className="hero-pill">
-                <span className="hero-pill-dot"></span>
-                <span>✨ Roti & Kue Artisan</span>
-              </div>
-
-              <h1>
-                Selamat Datang di
-                <br />
-
-                <em>Erles Bakery</em>
+      {/* 2. HERO SECTION ASIMETRIS (Headline + 1 CTA Primer + Catatan Tipografi Sederhana) */}
+      <section className="home-hero-section">
+        <div className="home-container">
+          <div className="home-hero-layout">
+            <div className="home-hero-text">
+              <h1 className="home-hero-title">
+                Donat Empuk, Roti Manis, dan Hampers Penuh Kehangatan
               </h1>
 
-              <p className="hero-description">
-                Nikmati kehangatan dan kelezatan aneka roti artisan, donat
-                lembut, kue istimewa, serta hampers elegan yang dipanggang
-                segar dengan bahan berkualitas tinggi setiap hari.
+              <p className="home-hero-desc">
+                Setiap adonan kami uleni dan panggang langsung dari dapur rumahan di Malang. Tanpa pengawet sintetis, dengan tekstur lembut yang pas menemani waktu santai keluarga.
               </p>
 
-              <div className="hero-buttons">
-                <Link
-                  to="/pesanan"
-                  className="button-primary"
-                >
-                  <span>Pesan Sekarang</span>
-                  <span>🍞</span>
-                </Link>
-
-                <Link
-                  to="/tentang"
-                  className="button-secondary"
-                >
-                  <span>Lihat Cerita Kami</span>
-                  <span>✨</span>
+              <div className="home-hero-actions">
+                <Link to="/pesanan" className="btn-primary-terracotta">
+                  <span>Lihat Menu &amp; Pesan</span>
+                  <ArrowRight size={18} />
                 </Link>
               </div>
 
-              <div className="trust-row">
-
-                <div>
-                  <BadgeCheck size={17} />
-                  <span>Mentega New Zealand</span>
-                </div>
-
-                <div>
-                  <Leaf size={17} />
-                  <span>Ragi Alami Sourdough</span>
-                </div>
-
-                <div>
-                  <AlarmClock size={17} />
-                  <span>Siap Kirim Pagi</span>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div className="hero-visual">
-
-              <div className="hero-fresh-badge">
-                <span>🚀</span>
-                <span>Dipanggang Segar Setiap Pagi</span>
-              </div>
-
-              <div className="hero-showcase">
-
-                <div className="hero-showcase-image">
-
-                  <img
-                    src={heroImage}
-                    alt="Country Sourdough Erles Bakery"
-                  />
-
-                  <div className="hero-product-floating">
-
-                    <div className="floating-left">
-
-                      <span className="floating-emoji">
-                        🍞
-                      </span>
-
-                      <div>
-                        <strong>
-                          Country Sourdough
-                        </strong>
-
-                        <small>
-                          Fermentasi 24 Jam
-                        </small>
-                      </div>
-
-                    </div>
-
-                    <strong className="floating-price">
-                      Rp 38.000
-                    </strong>
-
-                  </div>
-
-                </div>
-
-                <div className="hero-showcase-bottom">
-
-                  <div className="breakfast-text">
-                    <span>🥐</span>
-                    <span>☕</span>
-                    <span>Pilihan Sarapan Hangat</span>
-                  </div>
-
-                  <div className="showcase-rating">
-                    <Star
-                      size={15}
-                      fill="currentColor"
-                    />
-
-                    <strong>4.9</strong>
-
-                    <span>(1.2k ulasan)</span>
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-
-      {/* WHY US */}
-      <section className="home-container why-section">
-
-        <div className="section-title-center">
-
-          <div className="section-label">
-            <Award size={14} />
-            <span>Keunggulan Kami</span>
-          </div>
-
-          <h2>
-            Kenapa Memilih Erles Bakery?
-          </h2>
-
-          <p>
-            Dedikasi rasa dan kesempurnaan di setiap gigitan untuk menghadirkan
-            momen manis bagi Anda dan keluarga.
-          </p>
-
-        </div>
-
-        <div className="feature-grid">
-
-          {features.map((feature) => (
-            <article
-              key={feature.title}
-              className="feature-card"
-            >
-
-              <div
-                className={`feature-emoji ${feature.type}`}
-              >
-                {feature.emoji}
-              </div>
-
-              <span
-                className={`feature-label ${feature.type}`}
-              >
-                {feature.label}
-              </span>
-
-              <h3>
-                {feature.title}
-              </h3>
-
-              <p>
-                {feature.description}
+              <p className="hero-handcrafted-note">
+                100% dibuat dengan tangan setiap hari dari dapur rumahan kami.
               </p>
-
-              <div className="feature-bottom">
-
-                <span>
-                  {feature.bottom}
-                </span>
-
-                <CheckCircle2 size={17} />
-
-              </div>
-
-            </article>
-          ))}
-
-        </div>
-
-      </section>
-
-
-      {/* POPULAR PRODUCTS */}
-      <section className="home-container product-section">
-
-        <div className="product-heading">
-
-          <div>
-
-            <div className="popular-label">
-              <span>🔥</span>
-              <span>Paling Diminati</span>
             </div>
 
-            <h2>
-              Produk Terpopuler Minggu Ini
-            </h2>
-
-            <p>
-              Pilihan favorit para pelanggan setia kami yang selalu habis
-              terjual sebelum sore hari.
-            </p>
-
-          </div>
-
-          <Link
-            to="/pesanan"
-            className="all-product-link"
-          >
-            <span>
-              Lihat Semua Produk di Katalog
-            </span>
-
-            <ArrowRight size={17} />
-          </Link>
-
-        </div>
-
-        <div className="home-product-grid">
-
-          {products.map((product) => (
-            <article
-              key={product.id}
-              className="home-product-card"
-            >
-
-              <div className="product-image-wrapper">
-
+            <div className="home-hero-showcase reveal-on-scroll">
+              <div className="showcase-photo-frame">
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={showcaseDonutImg}
+                  alt="Sajian donat empuk dari dapur Erles Bakery"
+                  className="showcase-img"
+                  loading="lazy"
                 />
-
-                <span
-                  className={`product-category ${product.categoryClass}`}
-                >
-                  {product.category}
-                </span>
-
-                <span className="product-corner-emoji">
-                  {product.emoji}
-                </span>
-
               </div>
-
-              <div className="home-product-content">
-
-                <div>
-
-                  <h3>
-                    {product.name}
-                  </h3>
-
-                  <p>
-                    {product.description}
-                  </p>
-
-                </div>
-
-                <div className="product-card-bottom">
-
-                  <div className="product-price">
-
-                    <small>
-                      Harga
-                    </small>
-
-                    <strong>
-                      {product.price}
-                    </strong>
-
-                  </div>
-
-                  <Link
-                    to="/pesanan"
-                    className="product-order"
-                  >
-                    Pesan Sekarang
-                  </Link>
-
-                </div>
-
-              </div>
-
-            </article>
-          ))}
-
+            </div>
+          </div>
         </div>
-
-        <div className="catalog-center">
-
-          <Link
-            to="/pesanan"
-            className="catalog-button"
-          >
-            <span>
-              Buka Katalog Lengkap Roti & Kue
-            </span>
-
-            <BookOpen size={19} />
-          </Link>
-
-        </div>
-
       </section>
 
-
-      {/* QUICK ORDER */}
-      <section className="home-container quick-section">
-
-        <div className="quick-banner">
-
-          <div className="quick-decoration quick-decoration-right"></div>
-          <div className="quick-decoration quick-decoration-left"></div>
-
-          <div className="quick-text">
-
-            <div className="quick-label">
-              <Zap
-                size={15}
-                fill="currentColor"
+      {/* 3. SPESIALISASI 1: DONAT ANEKA TOPPING (Foto + Judul + Paragraf Pendek + Tautan Teks) */}
+      <section className="home-donuts-section reveal-on-scroll">
+        <div className="home-container">
+          <div className="donuts-feature-layout">
+            <div className="donuts-feature-media">
+              <img
+                src={donutSectionImg}
+                alt="Donat kentang empuk Erles Bakery dengan topping pilihan"
+                className="donuts-feature-img"
+                loading="lazy"
               />
-
-              <span>
-                Instan • Tanpa Ribet
-              </span>
             </div>
 
-            <h2>
-              Pesan Langsung Tanpa Perlu Daftar Akun!
-            </h2>
+            <div className="donuts-feature-content">
+              <h2 className="section-feature-title">
+                Donat Kentang Aneka Topping
+              </h2>
+              <p className="section-feature-body">
+                Adonan kentang asli yang empuk alami seharian tanpa pelembut kimiawi, berpadu taburan almond panggang, cokelat glaze pekat, dan keju gurih. Tersedia satuan maupun box isi 6 dan 12.
+              </p>
+              <div className="feature-link-wrap">
+                <Link to="/pesanan" className="editorial-text-link">
+                  <span>Lihat varian donat</span>
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <p>
-              Cukup pilih produk favorit Anda, masukkan nama dan nomor WhatsApp,
-              pesanan langsung kami siapkan dengan cepat dan diantar dalam
-              kondisi hangat.
+      {/* 4. SPESIALISASI 2: ROTI MANIS KLASIK (Judul + Paragraf Pendek + Tautan Teks + Foto) */}
+      <section className="home-bread-section reveal-on-scroll">
+        <div className="home-container">
+          <div className="bread-editorial-panel">
+            <div className="bread-editorial-text">
+              <h2 className="section-feature-title">
+                Roti Manis Tradisional Teman Kopi
+              </h2>
+              <p className="section-feature-body">
+                Resep klasik beraroma mentega wangi sejak pagi hari dengan serat halus dan isian padat — mulai dari cokelat lumer, keju, hingga roti sisir mentega tempo dulu.
+              </p>
+              <div className="feature-link-wrap">
+                <Link to="/pesanan" className="editorial-text-link">
+                  <span>Lihat pilihan roti manis</span>
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            </div>
+
+            <div className="bread-editorial-media">
+              <img
+                src={sweetBreadImg}
+                alt="Roti manis klasik rumahan yang baru dipanggang"
+                className="bread-editorial-img"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. SPESIALISASI 3: HAMPERS (Decorative Frame Emas Pudar: Foto + Judul + Paragraf + Tautan Aksen) */}
+      <section className="home-hampers-section reveal-on-scroll">
+        <div className="home-container">
+          <div className="hampers-decorative-frame">
+            <div className="hampers-frame-inner">
+              <div className="hampers-media-side">
+                <img
+                  src={hamperImg}
+                  alt="Paket hampers bingkisan kue dan donat terikat pita satin elegan"
+                  className="hampers-frame-img"
+                  loading="lazy"
+                />
+              </div>
+
+              <div className="hampers-text-side">
+                <h2 className="hampers-title">
+                  Hantaran Manis yang Dirangkai Personal
+                </h2>
+                <p className="hampers-desc">
+                  Kombinasi donat dan roti pilihan dalam kotak kaku eksklusif berpita satin dan kartu ucapan kustom untuk syukuran atau hari raya. Pemesanan disarankan H-2 agar kemasan disiapkan optimal.
+                </p>
+                <div className="hampers-action-wrap">
+                  <Link to="/pesanan" className="hampers-link-accent">
+                    <span>Pilih paket hampers</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. BANNER PROMO KOTAK (3 Elemen: Judul + Paragraf Pendek + Tautan Teks Katalog) */}
+      <section className="home-promo-section reveal-on-scroll">
+        <div className="home-container">
+          <div className="promo-box-warm">
+            <div className="promo-box-content">
+              <h2 className="promo-title">
+                Pesanan Kotak untuk Acara &amp; Kumpul Keluarga
+              </h2>
+              <p className="promo-desc">
+                Bebas pilih kombinasi rasa donat dan roti dalam kotak isi 6 atau 12 untuk kebutuhan arisan, syukuran, kantor, atau hantaran kerabat.
+              </p>
+              <div className="promo-link-wrap">
+                <Link to="/pesanan" className="promo-catalog-link">
+                  <span>Lihat daftar harga box di katalog</span>
+                  <ArrowRight size={15} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. DAPUR RUMAHAN & ALUR PESAN (Satu Section Terpadu yang Lega) */}
+      <section className="home-kitchen-flow-section reveal-on-scroll">
+        <div className="home-container">
+          <div className="section-centered-header">
+            <h2 className="section-main-heading">Dari Dapur Rumah Kami ke Meja Anda</h2>
+            <p className="section-main-sub">
+              Dibuat dengan kejujuran rasa dan proses pemesanan langsung ke pemilik.
             </p>
-
-            <div className="quick-steps">
-
-              <div>
-                <span className="step-number">
-                  1
-                </span>
-
-                <span>
-                  Pilih Roti Favorit
-                </span>
-              </div>
-
-              <div>
-                <span className="step-number">
-                  2
-                </span>
-
-                <span>
-                  Isi WhatsApp & Alamat
-                </span>
-              </div>
-
-              <div>
-                <span className="step-number">
-                  3
-                </span>
-
-                <span>
-                  Kurir Siap Meluncur
-                </span>
-              </div>
-
-            </div>
-
           </div>
 
-          <Link
-            to="/pesanan"
-            className="quick-main-button"
-          >
-            <ShoppingCart size={20} />
+          <div className="kitchen-flow-grid">
+            {/* Sisi Kiri: Nilai Dapur Rumahan (Judul + Paragraf Ringkas + Tautan) */}
+            <div className="kitchen-story-card">
+              <h3 className="story-heading">Dikelola Sendiri Tanpa Kompromi Rasa</h3>
+              <p className="story-paragraph">
+                Erles Bakery beroperasi langsung dari dapur rumah tangga di Kota Malang. Kami tidak memproduksi massal di pabrik; setiap adonan diuleni, dibentuk, dan dipanggang di bawah pengawasan langsung pemilik demi menjaga mutu dan kebersihan.
+              </p>
+              <div className="story-link-wrap">
+                <Link to="/tentang" className="editorial-text-link">
+                  <span>Baca kisah dapur kami</span>
+                  <ArrowRight size={15} />
+                </Link>
+              </div>
+            </div>
 
-            <strong>
-              Buka Menu & Pesan
-            </strong>
-          </Link>
+            {/* Sisi Kanan: 3 Langkah Pemesanan (Nomor + Judul + Penjelasan Ringkas) */}
+            <div className="order-steps-card">
+              <h3 className="steps-heading">Alur Pemesanan Mudah</h3>
+              <ol className="steps-list">
+                <li className="step-item">
+                  <span className="step-number">1</span>
+                  <div className="step-desc">
+                    <strong>Pilih Menu</strong>
+                    <p>Buka katalog untuk memilih donat kentang, roti manis, atau paket hampers.</p>
+                  </div>
+                </li>
+                <li className="step-item">
+                  <span className="step-number">2</span>
+                  <div className="step-desc">
+                    <strong>Kirim ke WhatsApp</strong>
+                    <p>Rincian pesanan tersusun otomatis untuk diteruskan langsung ke pemilik.</p>
+                  </div>
+                </li>
+                <li className="step-item">
+                  <span className="step-number">3</span>
+                  <div className="step-desc">
+                    <strong>Ambil atau Kirim</strong>
+                    <p>Ambil pesanan di Jl. Ikan Gurami No. 7 atau gunakan kurir se-Malang.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
 
+          {/* Penutup: CTA Primer Kedua di Akhir Halaman */}
+          <div className="home-closing-cta-wrap">
+            <Link to="/pesanan" className="btn-primary-terracotta">
+              <span>Lihat Menu &amp; Pesan Sekarang</span>
+              <ArrowRight size={18} />
+            </Link>
+          </div>
         </div>
-
       </section>
-
     </div>
   );
 }
