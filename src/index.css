@@ -1413,3 +1413,433 @@ body {
 }
 
 
+
+
+/* =========================================================
+   12. TENTANG KAMI / ABOUT PAGE (DEUX BAKERY STYLE)
+========================================================= */
+
+.deux-about-page {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--deux-bg);
+}
+
+.deux-about-hero {
+  padding: 40px 0 60px;
+}
+
+.deux-about-hero-center {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.deux-about-mini-brand {
+  font-family: 'Erica One', cursive;
+  font-size: 18px;
+  color: var(--deux-red);
+  display: block;
+  margin: 8px 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.deux-about-title {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 96px;
+  line-height: 0.95;
+  color: var(--deux-dark);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.deux-about-lead {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--deux-text-muted);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* MISSION & FOUNDER NOTE */
+.deux-mission-section {
+  padding: 30px 0 80px;
+}
+
+.deux-mission-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.deux-founder-visual {
+  position: relative;
+}
+
+.deux-tape-decor {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 130px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  border: 1px dashed rgba(74, 46, 23, 0.25);
+  box-shadow: 0 4px 10px rgba(74, 46, 23, 0.08);
+  z-index: 2;
+}
+
+.deux-portrait-frame {
+  position: relative;
+  border-radius: 40px;
+  border: 3.5px solid #FFFFFF;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(74, 46, 23, 0.18);
+  background: var(--deux-wheat);
+}
+
+.deux-portrait-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.deux-portrait-badge {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: var(--deux-yellow);
+  color: var(--deux-dark);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(74, 46, 23, 0.15);
+}
+
+.deux-founder-card {
+  background: var(--deux-card-bg);
+  border: 2px solid var(--deux-border);
+  border-radius: 36px;
+  padding: 44px;
+  box-shadow: 0 16px 40px rgba(74, 46, 23, 0.08);
+}
+
+.founder-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.founder-note-pill {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--deux-red);
+  background: var(--deux-soft-yellow);
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 46, 23, 0.1);
+}
+
+.founder-quote {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 32px;
+  line-height: 1.25;
+  color: var(--deux-dark);
+  margin-bottom: 20px;
+}
+
+.founder-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--deux-text-muted);
+  margin-bottom: 28px;
+}
+
+.founder-signature-box {
+  margin-bottom: 24px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--deux-border);
+}
+
+.founder-name {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 26px;
+  color: var(--deux-dark);
+  display: block;
+}
+
+.founder-role {
+  font-size: 12px;
+  color: var(--deux-text-muted);
+}
+
+.founder-proof-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--deux-dark);
+  flex-wrap: wrap;
+}
+
+.founder-proof-strip .dot {
+  color: var(--deux-red);
+}
+
+/* WHY ERLES (3 PHOTO CARDS) */
+.deux-why-section {
+  padding: 80px 0;
+  background: var(--deux-wheat);
+  border-top: 1.5px solid var(--deux-border);
+  border-bottom: 1.5px solid var(--deux-border);
+}
+
+.deux-why-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.deux-why-card {
+  background: var(--deux-card-bg);
+  border: 1.5px solid var(--deux-border);
+  border-radius: 28px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.deux-why-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(74, 46, 23, 0.12);
+  border-color: var(--deux-dark);
+}
+
+.why-card-image {
+  position: relative;
+  height: 230px;
+  background: var(--deux-wheat);
+  overflow: hidden;
+}
+
+.why-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.deux-why-card:hover .why-card-image img {
+  transform: scale(1.05);
+}
+
+.why-card-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--deux-yellow);
+  color: var(--deux-dark);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(74, 46, 23, 0.1);
+}
+
+.why-card-body {
+  padding: 24px;
+}
+
+.why-card-title {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 28px;
+  color: var(--deux-dark);
+  margin-bottom: 8px;
+}
+
+.why-card-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--deux-text-muted);
+}
+
+/* STATS IN NUMBERS */
+.deux-numbers-section {
+  padding: 80px 0;
+}
+
+.deux-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.deux-stat-item {
+  background: var(--deux-card-bg);
+  border: 1.5px solid var(--deux-border);
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.deux-stat-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--deux-dark);
+  box-shadow: 0 12px 28px rgba(74, 46, 23, 0.08);
+}
+
+.stat-big-num {
+  font-family: 'Erica One', cursive;
+  font-size: 48px;
+  color: var(--deux-red);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 24px;
+  color: var(--deux-dark);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.stat-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--deux-text-muted);
+}
+
+/* TEAM MEMBERS */
+.deux-team-section {
+  padding: 80px 0;
+  background: rgba(247, 226, 205, 0.35);
+  border-top: 1.5px solid var(--deux-border);
+}
+
+.deux-team-subtitle {
+  font-size: 14px;
+  color: var(--deux-text-muted);
+  max-width: 500px;
+  margin: 8px auto 0;
+}
+
+.deux-team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 44px;
+}
+
+.deux-team-card {
+  background: var(--deux-card-bg);
+  border: 1.5px solid var(--deux-border);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.deux-team-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--deux-dark);
+  box-shadow: 0 16px 36px rgba(74, 46, 23, 0.1);
+}
+
+.team-photo-wrap {
+  height: 260px;
+  background: var(--deux-wheat);
+  overflow: hidden;
+}
+
+.team-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.deux-team-card:hover .team-photo-wrap img {
+  transform: scale(1.05);
+}
+
+.team-info {
+  padding: 20px;
+}
+
+.team-name {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 26px;
+  color: var(--deux-dark);
+  margin-bottom: 2px;
+}
+
+.team-role {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--deux-red);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.team-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--deux-text-muted);
+}
+
+/* RESPONSIVE ABOUT */
+@media (max-width: 1024px) {
+  .deux-about-title {
+    font-size: 72px;
+  }
+  .deux-mission-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .deux-portrait-img {
+    height: 380px;
+  }
+  .deux-why-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .deux-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .deux-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .deux-about-title {
+    font-size: 54px;
+  }
+  .founder-quote {
+    font-size: 24px;
+  }
+  .deux-founder-card {
+    padding: 28px 20px;
+  }
+  .deux-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .deux-team-grid {
+    grid-template-columns: 1fr;
+  }
+}
