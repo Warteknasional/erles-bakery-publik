@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 
 /* =========================================================
@@ -8,8 +8,8 @@
 :root {
   font-family: 'Plus Jakarta Sans', sans-serif;
 
-  --primary: #592100;
-  --primary-container: #78350f;
+  --primary: #4A2E17;
+  --primary-container: #331F0F;
   --primary-hover: #92400e;
 
   --secondary: #795900;
@@ -17,11 +17,11 @@
 
   --secondary-soft: #ffdf9f;
 
-  --background: #f9f9ff;
+  --background: #FFF0E0;
   --cream: #fdfbf7;
   --white: #ffffff;
 
-  --text: #111c2d;
+  --text: #4A2E17;
   --text-soft: #54433c;
   --text-gray: #64748b;
 
@@ -6008,4 +6008,1234 @@ p {
   color: #94a3b8;
   font-size: 12px;
   padding: 30px 0;
+}
+
+/* =========================================================
+   DEUX BAKERY DESIGN SYSTEM (WARM ARTISAN PALETTE)
+========================================================= */
+
+:root {
+  --deux-bg: #FFF0E0;
+  --deux-dark: #4A2E17;
+  --deux-dark-hover: #331F0F;
+  --deux-card-bg: #FFFDF9;
+  --deux-butter: #FFE480;
+  --deux-butter-soft: #FCEDB4;
+  --deux-terracotta: #CC4A3B;
+  --deux-wheat: #F7E3CD;
+  --deux-text-muted: #7C5D44;
+  --deux-border: rgba(74, 46, 23, 0.14);
+}
+
+/* NAVBAR (DEUX STYLE) */
+.deux-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 76px;
+  background: rgba(255, 240, 224, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1.5px solid var(--deux-border);
+  transition: all 0.25s ease;
+}
+
+.deux-navbar {
+  width: 100%;
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.deux-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.deux-logo-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--deux-dark);
+}
+
+.deux-brand-text {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--deux-dark);
+  text-transform: lowercase;
+}
+
+.deux-nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(247, 227, 205, 0.65);
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--deux-border);
+}
+
+.deux-nav-link {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--deux-text-muted);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.deux-nav-link:hover {
+  color: var(--deux-dark);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.deux-nav-link.active {
+  color: var(--deux-dark);
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(74, 46, 23, 0.1);
+}
+
+.deux-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.deux-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: var(--deux-dark);
+  color: #FFFFFF !important;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(74, 46, 23, 0.2);
+}
+
+.deux-cta-button:hover {
+  background: var(--deux-terracotta);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(204, 74, 59, 0.25);
+}
+
+.deux-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--deux-dark);
+  cursor: pointer;
+  padding: 6px;
+}
+
+.deux-mobile-drawer {
+  position: fixed;
+  top: 76px;
+  left: 0;
+  width: 100%;
+  background: var(--deux-bg);
+  border-bottom: 2px solid var(--deux-border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 12px 30px rgba(74, 46, 23, 0.12);
+}
+
+.deux-mobile-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--deux-butter);
+  color: var(--deux-dark);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.deux-mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deux-mobile-link {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--deux-dark);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.deux-mobile-link.active {
+  background: var(--deux-dark);
+  color: #FFFFFF;
+}
+
+.deux-mobile-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--deux-terracotta);
+  color: #FFFFFF !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* HERO SECTION (DEUX STYLE) */
+.deux-home {
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--deux-bg);
+}
+
+.deux-hero-section {
+  padding: 40px 0 60px;
+}
+
+.deux-hero-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.deux-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--deux-butter);
+  color: var(--deux-dark);
+  border: 1px solid rgba(74, 46, 23, 0.15);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.deux-hero-title {
+  font-family: 'Fraunces', serif;
+  font-size: 60px;
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--deux-dark);
+  margin-bottom: 20px;
+}
+
+.deux-hero-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--deux-terracotta);
+}
+
+.deux-hero-subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--deux-text-muted);
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+.deux-hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.deux-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--deux-dark);
+  color: #FFFFFF !important;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(74, 46, 23, 0.2);
+}
+
+.deux-btn-primary:hover {
+  background: var(--deux-terracotta);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(204, 74, 59, 0.3);
+}
+
+.deux-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 26px;
+  background: transparent;
+  color: var(--deux-dark);
+  border: 1.5px solid var(--deux-dark);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.deux-btn-secondary:hover {
+  background: rgba(74, 46, 23, 0.08);
+}
+
+.deux-trust-pills {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px dashed var(--deux-border);
+}
+
+.deux-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--deux-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.deux-hero-visual {
+  position: relative;
+}
+
+.deux-image-frame {
+  position: relative;
+  border-radius: 36px;
+  overflow: hidden;
+  background: var(--deux-wheat);
+  box-shadow: 0 20px 50px -15px rgba(74, 46, 23, 0.25);
+  border: 3px solid #FFFFFF;
+}
+
+.deux-hero-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.deux-image-frame:hover .deux-hero-img {
+  transform: scale(1.03);
+}
+
+.deux-floating-badge {
+  position: absolute;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--deux-terracotta);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 20px rgba(204, 74, 59, 0.35);
+}
+
+.deux-floating-badge.top-right {
+  top: 24px;
+  right: 24px;
+}
+
+.badge-discount {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.badge-sub {
+  font-size: 9px;
+  opacity: 0.9;
+}
+
+.deux-floating-card {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 12px 18px;
+  box-shadow: 0 10px 30px rgba(74, 46, 23, 0.15);
+  border: 1px solid var(--deux-border);
+}
+
+.card-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--deux-dark);
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.deux-floating-card p {
+  font-size: 10px;
+  color: var(--deux-text-muted);
+  margin: 0;
+}
+
+/* MARQUEE TICKER */
+.deux-marquee-bar {
+  width: 100%;
+  background: var(--deux-butter);
+  border-top: 1.5px solid var(--deux-dark);
+  border-bottom: 1.5px solid var(--deux-dark);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.deux-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-anim 25s linear infinite;
+}
+
+.deux-marquee-bar:hover .deux-marquee-track {
+  animation-play-state: paused;
+}
+
+.deux-marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-right: 20px;
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--deux-dark);
+}
+
+.deux-marquee-content .sep {
+  color: var(--deux-terracotta);
+  font-size: 12px;
+}
+
+@keyframes marquee-anim {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* SECTIONS */
+.deux-section {
+  padding: 80px 0;
+}
+
+.deux-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.deux-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+.deux-section-header.center {
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deux-pretitle {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--deux-terracotta);
+  margin-bottom: 8px;
+}
+
+.deux-pretitle.light {
+  color: var(--deux-butter);
+}
+
+.deux-section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--deux-dark);
+  line-height: 1.15;
+}
+
+.deux-section-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--deux-terracotta);
+}
+
+.deux-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--deux-dark);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--deux-dark);
+  padding-bottom: 3px;
+  transition: all 0.2s ease;
+}
+
+.deux-view-all-link:hover {
+  color: var(--deux-terracotta);
+  border-color: var(--deux-terracotta);
+}
+
+/* PRODUCT GRID */
+.deux-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.deux-product-card {
+  background: var(--deux-card-bg);
+  border: 1.5px solid var(--deux-border);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.deux-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -10px rgba(74, 46, 23, 0.15);
+  border-color: var(--deux-dark);
+}
+
+.deux-card-media {
+  position: relative;
+  height: 220px;
+  background: var(--deux-wheat);
+  overflow: hidden;
+}
+
+.deux-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.deux-product-card:hover .deux-card-media img {
+  transform: scale(1.06);
+}
+
+.deux-card-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--deux-butter);
+  color: var(--deux-dark);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(74, 46, 23, 0.1);
+}
+
+.deux-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.deux-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.deux-card-category {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--deux-terracotta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.deux-card-price {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--deux-dark);
+}
+
+.deux-card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--deux-dark);
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.deux-card-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--deux-text-muted);
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.deux-card-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  background: var(--deux-bg);
+  border: 1.5px solid var(--deux-border);
+  border-radius: 999px;
+  color: var(--deux-dark);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.deux-card-button:hover {
+  background: var(--deux-dark);
+  color: #FFFFFF !important;
+  border-color: var(--deux-dark);
+}
+
+/* STORY SECTION */
+.deux-story-section {
+  background: var(--deux-wheat);
+  border-top: 1.5px solid var(--deux-border);
+  border-bottom: 1.5px solid var(--deux-border);
+}
+
+.deux-story-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.deux-story-image-wrap {
+  position: relative;
+  border-radius: 36px;
+  overflow: hidden;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 20px 45px -10px rgba(74, 46, 23, 0.2);
+}
+
+.deux-story-img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+}
+
+.deux-story-stamp {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  background: var(--deux-butter);
+  color: var(--deux-dark);
+  padding: 12px 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  box-shadow: 0 6px 18px rgba(74, 46, 23, 0.15);
+}
+
+.deux-story-lead {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 600;
+  color: var(--deux-dark);
+  margin-bottom: 16px;
+}
+
+.deux-story-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--deux-text-muted);
+  margin-bottom: 30px;
+}
+
+.deux-story-features {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.story-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 16px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--deux-border);
+}
+
+.feature-num {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--deux-terracotta);
+}
+
+.story-feature-item h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--deux-dark);
+  margin-bottom: 4px;
+}
+
+.story-feature-item p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--deux-text-muted);
+  margin: 0;
+}
+
+.story-btn {
+  margin-top: 8px;
+}
+
+/* HAMPERS SPOTLIGHT */
+.deux-hampers-spotlight {
+  background: linear-gradient(135deg, #FCEDB4 0%, #FCE3A2 100%);
+  border: 2px solid #F5C542;
+  border-radius: 36px;
+  padding: 60px 48px;
+  text-align: center;
+  box-shadow: 0 16px 40px -10px rgba(217, 119, 6, 0.2);
+}
+
+.hampers-spotlight-content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.hampers-spotlight-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: var(--deux-dark);
+  color: var(--deux-butter);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
+}
+
+.hampers-spotlight-content h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--deux-dark);
+  margin-bottom: 16px;
+}
+
+.hampers-spotlight-content p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--deux-text-muted);
+  margin-bottom: 28px;
+}
+
+.deux-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: var(--deux-dark);
+  color: #FFFFFF !important;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(74, 46, 23, 0.2);
+}
+
+.deux-btn-gold:hover {
+  background: var(--deux-terracotta);
+  transform: translateY(-2px);
+}
+
+/* TESTIMONIALS */
+.deux-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.deux-testimonial-card {
+  background: var(--deux-card-bg);
+  border: 1.5px solid var(--deux-border);
+  border-radius: 24px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.deux-testimonial-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--deux-dark);
+  box-shadow: 0 12px 30px rgba(74, 46, 23, 0.08);
+}
+
+.testi-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+
+.testi-quote {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--deux-dark);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testi-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--deux-butter);
+  color: var(--deux-dark);
+  font-weight: 800;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--deux-dark);
+}
+
+.testi-author strong {
+  display: block;
+  font-size: 13px;
+  color: var(--deux-dark);
+}
+
+.testi-author small {
+  font-size: 11px;
+  color: var(--deux-text-muted);
+}
+
+/* VISIT STORE & CONTACT */
+.deux-visit-box {
+  background: var(--deux-dark);
+  color: #FFFFFF;
+  border-radius: 36px;
+  padding: 56px 48px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.deux-visit-box h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 34px;
+  font-weight: 800;
+  color: #FFF0E0;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.visit-info-list {
+  display: grid;
+  gap: 14px;
+}
+
+.visit-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #F7E3CD;
+}
+
+.visit-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.deux-btn-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #25D366;
+  color: #FFFFFF !important;
+  padding: 15px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+}
+
+.deux-btn-whatsapp:hover {
+  background: #1EB855;
+  transform: translateY(-2px);
+}
+
+.deux-btn-white {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #FFFFFF;
+  color: var(--deux-dark) !important;
+  padding: 15px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.deux-btn-white:hover {
+  background: var(--deux-butter);
+  transform: translateY(-2px);
+}
+
+/* FOOTER (DEUX STYLE) */
+.deux-footer {
+  background: var(--deux-dark);
+  color: #FFF0E0;
+  padding: 70px 0 30px;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.deux-footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.deux-footer-top {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 240, 224, 0.15);
+  margin-bottom: 48px;
+}
+
+.deux-footer-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--deux-butter);
+  letter-spacing: -0.03em;
+  display: block;
+  margin-bottom: 12px;
+  text-transform: lowercase;
+}
+
+.deux-footer-tagline {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #E8D5C4;
+  max-width: 440px;
+}
+
+.deux-footer-newsletter h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+}
+
+.deux-footer-newsletter p {
+  font-size: 12px;
+  color: #E8D5C4;
+  margin-bottom: 16px;
+}
+
+.deux-newsletter-form {
+  display: flex;
+  gap: 8px;
+}
+
+.deux-newsletter-form input {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 240, 224, 0.2);
+  background: rgba(255, 240, 224, 0.08);
+  color: #FFFFFF;
+  outline: none;
+  font-size: 12px;
+}
+
+.deux-newsletter-form input:focus {
+  border-color: var(--deux-butter);
+}
+
+.deux-newsletter-form button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--deux-butter);
+  color: var(--deux-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.deux-newsletter-form button:hover {
+  background: #FFFFFF;
+}
+
+.deux-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 240, 224, 0.1);
+}
+
+.deux-footer-col h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--deux-butter);
+  margin-bottom: 18px;
+}
+
+.deux-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.deux-footer-col a {
+  color: #E8D5C4;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.deux-footer-col a:hover {
+  color: #FFFFFF;
+}
+
+.deux-footer-col p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #E8D5C4;
+  margin-bottom: 10px;
+}
+
+.deux-footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #E8D5C4;
+  margin-bottom: 12px;
+}
+
+.footer-wa-link {
+  color: #25D366 !important;
+  font-weight: 700;
+}
+
+.deux-footer-socials {
+  margin-top: 8px;
+}
+
+.deux-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 240, 224, 0.1);
+  color: #FFFFFF !important;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.deux-social-btn:hover {
+  background: var(--deux-terracotta);
+}
+
+.deux-footer-bottom {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #CBB4A1;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.deux-footer-credit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* RESPONSIVE (DEUX STYLE) */
+@media (max-width: 1024px) {
+  .deux-navbar {
+    padding: 0 24px;
+  }
+  .deux-hero-container {
+    padding: 0 24px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .deux-hero-title {
+    font-size: 46px;
+  }
+  .deux-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .deux-story-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .deux-story-img {
+    height: 380px;
+  }
+  .deux-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  .deux-visit-box {
+    grid-template-columns: 1fr;
+    padding: 36px 28px;
+  }
+  .deux-footer-top {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .deux-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .deux-header {
+    height: 68px;
+  }
+  .deux-mobile-drawer {
+    top: 68px;
+  }
+  .deux-nav-desktop {
+    display: none;
+  }
+  .deux-mobile-toggle {
+    display: block;
+  }
+  .deux-hero-section {
+    padding: 24px 0 40px;
+  }
+  .deux-hero-container {
+    padding: 0 16px;
+  }
+  .deux-hero-title {
+    font-size: 36px;
+  }
+  .deux-hero-img {
+    height: 320px;
+  }
+  .deux-container {
+    padding: 0 16px;
+  }
+  .deux-section-title {
+    font-size: 28px;
+  }
+  .deux-product-grid {
+    grid-template-columns: 1fr;
+  }
+  .deux-footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .deux-footer-container {
+    padding: 0 20px;
+  }
+  .deux-cta-button {
+    display: none;
+  }
 }

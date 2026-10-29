@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, UserRound } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 
 const logoUrl =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuAVlyEgWtpuj1LwQbi_XQd5fu4Ii2nGknZ1Qm2LKybnrrj6McmJqNPPfExWhH4GO8pCr5NOmQBF1F5GS7hZgpj6Qr-e3ZWa12E43XKiu3o3UEaoEGviBsj7h1OJVAkcm9SafHYCPUyku7u-IQbsTbWPxL4dAQDvGU5M200jaP_xDk6J_BG6lRlBxBvAe0yMRcQ-ci4518oKZrVIWrYpWYRF2uCHjRCxiuOCEd5WqBh9V0zt343tqVxoOg';
 
 const navItems = [
   { to: '/', label: 'Beranda' },
-  { to: '/pesanan', label: 'Pesan Sekarang' },
+  { to: '/pesanan', label: 'Katalog & Pesan' },
   { to: '/tentang', label: 'Tentang Kami' },
 ];
 
@@ -15,27 +15,26 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="erles-header">
-      <div className="erles-navbar">
-        <Link to="/" className="erles-brand">
+    <header className="deux-header">
+      <div className="deux-navbar">
+        {/* BRAND LOGO */}
+        <Link to="/" className="deux-brand">
           <img
             src={logoUrl}
             alt="Erles Bakery"
-            className="erles-logo"
+            className="deux-logo-img"
           />
-
-          <span className="erles-brand-name">
-            Erles Bakery
-          </span>
+          <span className="deux-brand-text">erles bakery</span>
         </Link>
 
-        <nav className="erles-nav-desktop">
+        {/* DESKTOP NAVIGATION */}
+        <nav className="deux-nav-desktop">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `erles-nav-link ${isActive ? 'active' : ''}`
+                `deux-nav-link ${isActive ? 'active' : ''}`
               }
             >
               {item.label}
@@ -43,41 +42,56 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="erles-nav-actions">
-          <Link to="/pesanan" className="erles-quick-button">
-            Pesan Cepat
+        {/* ACTIONS */}
+        <div className="deux-nav-actions">
+          <Link to="/pesanan" className="deux-cta-button">
+            <span>Pesan Sekarang</span>
+            <ArrowUpRight size={15} />
           </Link>
-
-          <div className="erles-user-circle">
-            <UserRound size={17} />
-          </div>
 
           <button
             type="button"
-            className="erles-mobile-button"
+            className="deux-mobile-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Buka menu"
+            aria-label="Toggle menu navigasi"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
+      {/* MOBILE DRAWER */}
       {mobileOpen && (
-        <nav className="erles-mobile-nav">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              onClick={() => setMobileOpen(false)}
-              className={({ isActive }) =>
-                `erles-mobile-link ${isActive ? 'active' : ''}`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+        <div className="deux-mobile-drawer">
+          <div className="deux-mobile-badge">
+            <Sparkles size={13} />
+            <span>Freshly Baked Every Morning in Malang</span>
+          </div>
+
+          <nav className="deux-mobile-links">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `deux-mobile-link ${isActive ? 'active' : ''}`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+
+          <Link
+            to="/pesanan"
+            onClick={() => setMobileOpen(false)}
+            className="deux-mobile-cta"
+          >
+            <span>Pesan Roti & Hampers Sekarang</span>
+            <ArrowUpRight size={16} />
+          </Link>
+        </div>
       )}
     </header>
   );
