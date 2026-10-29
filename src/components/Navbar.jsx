@@ -1,96 +1,145 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
-
-const logoUrl =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuAVlyEgWtpuj1LwQbi_XQd5fu4Ii2nGknZ1Qm2LKybnrrj6McmJqNPPfExWhH4GO8pCr5NOmQBF1F5GS7hZgpj6Qr-e3ZWa12E43XKiu3o3UEaoEGviBsj7h1OJVAkcm9SafHYCPUyku7u-IQbsTbWPxL4dAQDvGU5M200jaP_xDk6J_BG6lRlBxBvAe0yMRcQ-ci4518oKZrVIWrYpWYRF2uCHjRCxiuOCEd5WqBh9V0zt343tqVxoOg';
-
-const navItems = [
-  { to: '/', label: 'Beranda' },
-  { to: '/pesanan', label: 'Katalog & Pesan' },
-  { to: '/tentang', label: 'Tentang Kami' },
-];
+import { Menu, X, ShoppingBag, ArrowRight } from 'lucide-react';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="deux-header">
-      <div className="deux-navbar">
-        {/* BRAND LOGO */}
-        <Link to="/" className="deux-brand">
-          <img
-            src={logoUrl}
-            alt="Erles Bakery"
-            className="deux-logo-img"
-          />
-          <span className="deux-brand-text">erles bakery</span>
-        </Link>
-
-        {/* DESKTOP NAVIGATION */}
-        <nav className="deux-nav-desktop">
-          {navItems.map((item) => (
+    <header className="deux-top-bar">
+      <div className="deux-nav-wrapper">
+        {/* DESKTOP CENTERED PILL NAVBAR */}
+        <nav className="deux-nav-pill">
+          {/* LEFT LINKS */}
+          <div className="deux-nav-side left">
             <NavLink
-              key={item.to}
-              to={item.to}
+              to="/tentang"
               className={({ isActive }) =>
-                `deux-nav-link ${isActive ? 'active' : ''}`
+                `deux-nav-item ${isActive ? 'active' : ''}`
               }
             >
-              {item.label}
+              TENTANG
             </NavLink>
-          ))}
-        </nav>
+            <NavLink
+              to="/pesanan"
+              className={({ isActive }) =>
+                `deux-nav-item ${isActive ? 'active' : ''}`
+              }
+            >
+              MENU
+            </NavLink>
+          </div>
 
-        {/* ACTIONS */}
-        <div className="deux-nav-actions">
-          <Link to="/pesanan" className="deux-cta-button">
-            <span>Pesan Sekarang</span>
-            <ArrowUpRight size={15} />
+          {/* CENTER BRAND LOGO */}
+          <Link to="/" className="deux-nav-logo" aria-label="Erles Bakery Beranda">
+            <span className="deux-logo-text">erles</span>
           </Link>
 
+          {/* RIGHT LINKS */}
+          <div className="deux-nav-side right">
+            <NavLink
+              to="/pesanan?kategori=Hampers"
+              className={({ isActive }) =>
+                `deux-nav-item ${isActive ? 'active' : ''}`
+              }
+            >
+              HAMPERS
+            </NavLink>
+            <a
+              href="https://wa.me/6285717224420"
+              target="_blank"
+              rel="noreferrer"
+              className="deux-nav-item highlight"
+            >
+              KONTAK
+            </a>
+          </div>
+
+          {/* MOBILE TOGGLE (INSIDE PILL ON SMALL SCREENS) */}
           <button
             type="button"
-            className="deux-mobile-toggle"
+            className="deux-burger-btn"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu navigasi"
+            aria-label="Toggle navigasi"
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-        </div>
+        </nav>
       </div>
 
       {/* MOBILE DRAWER */}
       {mobileOpen && (
-        <div className="deux-mobile-drawer">
-          <div className="deux-mobile-badge">
-            <Sparkles size={13} />
-            <span>Freshly Baked Every Morning in Malang</span>
-          </div>
+        <div className="deux-drawer-overlay" onClick={() => setMobileOpen(false)}>
+          <div
+            className="deux-drawer-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="deux-drawer-header">
+              <span className="deux-drawer-brand">erles</span>
+              <button
+                type="button"
+                className="deux-drawer-close"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Tutup menu"
+              >
+                <X size={22} />
+              </button>
+            </div>
 
-          <nav className="deux-mobile-links">
-            {navItems.map((item) => (
+            <div className="deux-drawer-links">
               <NavLink
-                key={item.to}
-                to={item.to}
+                to="/"
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
-                  `deux-mobile-link ${isActive ? 'active' : ''}`
+                  `deux-drawer-link ${isActive ? 'active' : ''}`
                 }
               >
-                {item.label}
+                BERANDA
               </NavLink>
-            ))}
-          </nav>
+              <NavLink
+                to="/pesanan"
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `deux-drawer-link ${isActive ? 'active' : ''}`
+                }
+              >
+                MENU & KATALOG
+              </NavLink>
+              <NavLink
+                to="/pesanan?kategori=Hampers"
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `deux-drawer-link ${isActive ? 'active' : ''}`
+                }
+              >
+                HAMPERS SPESIAL
+              </NavLink>
+              <NavLink
+                to="/tentang"
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `deux-drawer-link ${isActive ? 'active' : ''}`
+                }
+              >
+                TENTANG KAMI
+              </NavLink>
+            </div>
 
-          <Link
-            to="/pesanan"
-            onClick={() => setMobileOpen(false)}
-            className="deux-mobile-cta"
-          >
-            <span>Pesan Roti & Hampers Sekarang</span>
-            <ArrowUpRight size={16} />
-          </Link>
+            <div className="deux-drawer-footer">
+              <Link
+                to="/pesanan"
+                onClick={() => setMobileOpen(false)}
+                className="deux-drawer-cta"
+              >
+                <ShoppingBag size={18} />
+                <span>Pesan Online Sekarang</span>
+                <ArrowRight size={16} />
+              </Link>
+              <p className="deux-drawer-phone">
+                WhatsApp: <strong>+62 857-1722-4420</strong>
+              </p>
+            </div>
+          </div>
         </div>
       )}
     </header>
