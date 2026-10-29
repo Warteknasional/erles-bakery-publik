@@ -14,7 +14,6 @@ export default function Footer() {
           <div className="footer-column footer-about">
             <div className="footer-logo-title">
               <span>Erles Bakery</span>
-              <span>🍞</span>
             </div>
 
             <p>
@@ -59,7 +58,7 @@ export default function Footer() {
               <Phone size={17} />
 
               <span>
-                0812-3456-7890 (WhatsApp)
+                +62 857-1722-4420 (WhatsApp)
               </span>
             </div>
           </div>
@@ -84,9 +83,10 @@ export default function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://wa.me/6285717224420"
+                target="_blank"
+                rel="noreferrer"
                 aria-label="WhatsApp"
-                onClick={(e) => e.preventDefault()}
               >
                 <span>💬</span>
               </a>

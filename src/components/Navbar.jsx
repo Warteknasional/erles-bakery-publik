@@ -25,7 +25,7 @@ export default function Navbar() {
           />
 
           <span className="erles-brand-name">
-            Erles Bakery <span>🍞</span>
+            Erles Bakery
           </span>
         </Link>
 

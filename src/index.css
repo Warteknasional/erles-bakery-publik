@@ -5274,3 +5274,738 @@ p {
   }
 
 }
+
+
+/* =========================================================
+   ENHANCED PESANAN PAGE: HAMPERS, SIMULATION & RECEIPT STYLES
+========================================================= */
+
+.order-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.order-history-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #fff8f0;
+  border: 1.5px solid #d97748;
+  color: #92400e;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.order-history-btn:hover {
+  background: #fef3c7;
+  transform: translateY(-1px);
+}
+
+.order-sort-wrapper {
+  margin-left: auto;
+}
+
+.order-sort-select {
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  color: #54433c;
+  font-size: 11px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.order-sort-select:focus {
+  border-color: #d97748;
+}
+
+/* Hampers category tab highlight */
+.order-category.hampers-tab {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+}
+
+.order-category.hampers-tab-inactive {
+  border-color: #fcd34d !important;
+  color: #92400e !important;
+  background: #fffdf5 !important;
+}
+
+/* Hampers Special Notice Banner */
+.hampers-special-banner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 24px;
+  margin-bottom: 28px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1.5px solid #fcd34d;
+  box-shadow: 0 4px 14px -3px rgba(180, 83, 9, 0.08);
+}
+
+.hampers-banner-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #78350f;
+  color: #fef3c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hampers-special-banner h4 {
+  margin-bottom: 4px;
+  color: #78350f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.hampers-special-banner p {
+  color: #54433c;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Hampers Card Enhancements */
+.order-product-card.is-hampers-card {
+  border: 1.5px solid #fcd34d;
+  box-shadow: 0 4px 16px -2px rgba(217, 119, 6, 0.12);
+}
+
+.hampers-card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #78350f;
+  color: #fef3c7;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.order-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.hampers-tag-mini {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.hampers-package-items {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #fffbeb;
+  border: 1px dashed #fde68a;
+  border-radius: 8px;
+}
+
+.hampers-package-items .package-title {
+  display: block;
+  font-weight: 700;
+  font-size: 9px;
+  color: #92400e;
+  margin-bottom: 4px;
+}
+
+.hampers-package-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.hampers-package-items li {
+  font-size: 9px;
+  color: #54433c;
+}
+
+.add-hampers-button {
+  background: linear-gradient(135deg, #b45309, #78350f) !important;
+  color: #ffffff !important;
+}
+
+.add-hampers-button:hover {
+  background: #592100 !important;
+}
+
+/* Floating Cart Extra */
+.floating-cart-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fbbf24;
+  color: #78350f;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+/* Checkout Form Enhancements */
+.checkout-modal {
+  max-width: 600px !important;
+}
+
+.order-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(120, 53, 15, 0.12);
+}
+
+.order-badge-simulation {
+  background: #fef08a;
+  color: #854d0e;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 9px;
+}
+
+.order-summary-items-list {
+  max-height: 160px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.order-summary-breakdown {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(120, 53, 15, 0.15);
+  display: grid;
+  gap: 4px;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #54433c;
+}
+
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #78350f;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 2px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.req {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.opt {
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.delivery-method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.delivery-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.delivery-card input[type="radio"] {
+  width: auto;
+  margin-top: 3px;
+  accent-color: #d97748;
+}
+
+.delivery-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.delivery-card-content strong {
+  font-size: 11px;
+  color: #592100;
+}
+
+.delivery-card-content small {
+  font-size: 9px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.delivery-card.selected {
+  border-color: #d97748;
+  background: #fffaf5;
+  box-shadow: 0 0 0 2px rgba(217, 119, 72, 0.15);
+}
+
+.form-row-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Hampers Greeting Card Form Section */
+.hampers-form-section {
+  background: linear-gradient(135deg, #fffbeb 0%, #fff8e8 100%);
+  border: 1.5px dashed #fcd34d;
+  border-radius: 14px;
+  padding: 16px;
+  margin: 10px 0;
+}
+
+.hampers-form-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #78350f;
+}
+
+.hampers-form-title strong {
+  display: block;
+  font-size: 11px;
+}
+
+.hampers-form-title small {
+  font-size: 9px;
+  color: #92400e;
+}
+
+/* Payment Method Choices */
+.payment-method-selector {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.payment-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #ffffff;
+  font-size: 11px;
+  color: #334155;
+  transition: all 0.2s ease;
+}
+
+.payment-choice input[type="radio"] {
+  width: auto;
+  accent-color: #78350f;
+}
+
+.payment-choice.active {
+  border-color: #78350f;
+  background: #fef3c7;
+  font-weight: 600;
+  color: #78350f;
+}
+
+/* =========================================================
+   SIMULATION RECEIPT MODAL
+========================================================= */
+.receipt-modal {
+  max-width: 560px !important;
+  max-height: 90vh !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.receipt-banner-success {
+  position: relative;
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  color: #ffffff;
+  padding: 20px 24px 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.receipt-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.receipt-close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(90deg);
+}
+
+.receipt-scrollable-body {
+  overflow-y: auto;
+  max-height: calc(90vh - 160px);
+  padding-bottom: 8px;
+}
+
+.receipt-success-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.receipt-banner-success h3 {
+  font-size: 20px;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.receipt-banner-success p {
+  font-size: 11px;
+  color: #bbf7d0;
+  margin-bottom: 12px;
+}
+
+.receipt-code-pill {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.receipt-info-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 10px 18px;
+  font-size: 10px;
+  color: #1e40af;
+  line-height: 1.5;
+}
+
+.receipt-card {
+  padding: 20px 24px;
+  display: grid;
+  gap: 6px;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 5px 0;
+  font-size: 11px;
+  border-bottom: 1px dashed #f1f5f9;
+}
+
+.receipt-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.receipt-val {
+  color: #1e293b;
+  font-weight: 600;
+  text-align: right;
+  max-width: 65%;
+}
+
+.receipt-val.address-val {
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.receipt-val.badge-pay {
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  color: #475569;
+}
+
+.receipt-hampers-preview {
+  background: #fffbeb;
+  border: 1.5px dashed #fcd34d;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 10px 0;
+}
+
+.hampers-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #92400e;
+  margin-bottom: 4px;
+}
+
+.receipt-hampers-preview p {
+  font-size: 10px;
+  color: #54433c;
+  margin-bottom: 6px;
+}
+
+.hampers-quote {
+  font-style: italic;
+  font-size: 11px;
+  color: #78350f;
+  margin: 0;
+  padding-left: 8px;
+  border-left: 3px solid #d97748;
+}
+
+.receipt-items-list {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 8px 0;
+}
+
+.receipt-items-heading {
+  font-size: 10px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.receipt-item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #334155;
+  padding: 4px 0;
+}
+
+.receipt-total-breakdown {
+  padding-top: 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.receipt-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.receipt-grand-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  margin-top: 6px;
+  border-top: 2px solid #e2e8f0;
+  font-size: 14px;
+  color: #592100;
+}
+
+.receipt-grand-total strong {
+  font-size: 16px;
+  color: #78350f;
+}
+
+.receipt-actions {
+  padding: 0 24px 24px;
+  display: grid;
+  gap: 10px;
+}
+
+.receipt-btn-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25d366;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+}
+
+.receipt-btn-whatsapp:hover {
+  background: #1eb757;
+  transform: translateY(-1px);
+}
+
+.receipt-btn-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.receipt-btn-copy:hover {
+  background: #f1f5f9;
+}
+
+.receipt-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  padding: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* History Modal */
+.history-modal {
+  max-width: 520px !important;
+}
+
+.history-list {
+  display: grid;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.history-item-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.history-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.history-card-header strong {
+  font-size: 12px;
+  color: #592100;
+}
+
+.history-date {
+  font-size: 9px;
+  color: #94a3b8;
+}
+
+.history-card-body {
+  font-size: 10px;
+  color: #54433c;
+}
+
+.history-total strong {
+  color: #78350f;
+}
+
+.history-reopen-btn {
+  padding: 6px 12px;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  color: #78350f;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.history-reopen-btn:hover {
+  background: #fde68a;
+}
+
+.empty-history {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 12px;
+  padding: 30px 0;
+}

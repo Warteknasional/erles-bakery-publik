@@ -250,7 +250,14 @@ export default function TentangPage() {
             </span>
 
             <h3>
-              0812–3456–7890
+              <a
+                href="https://wa.me/6285717224420"
+                target="_blank"
+                rel="noreferrer"
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                +62 857-1722-4420
+              </a>
             </h3>
 
             <p>
