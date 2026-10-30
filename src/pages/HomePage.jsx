@@ -11,9 +11,7 @@ import {
   ChevronUp,
   ArrowUpRight,
 } from 'lucide-react';
-
-const heroCroissantImg =
-  'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=500&q=80';
+import { SITE_CONFIG } from '../config/site';
 
 const heroCenterImg =
   'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=85';
@@ -143,11 +141,6 @@ export default function HomePage() {
       ========================================================= */}
       <section className="deux-exact-hero">
         <div className="deux-exact-container">
-          {/* TOP FLOATING PASTRY IMAGE */}
-          <div className="deux-hero-top-cutout">
-            <img src={heroCroissantImg} alt="Croissant" />
-          </div>
-
           {/* GIANT CENTERED TITLE & TILTED STAMP */}
           <div className="deux-hero-title-group">
             <h1 className="deux-exact-h1">
@@ -419,7 +412,7 @@ export default function HomePage() {
                   <Clock size={20} className="icon-gold" />
                   <div>
                     <strong>Malang Kitchen & Store</strong>
-                    <span>Senin - Minggu: 07.00 - 21.00 WIB</span>
+                    <span>{SITE_CONFIG.hours}</span>
                   </div>
                 </div>
 
@@ -427,20 +420,20 @@ export default function HomePage() {
                   <MapPin size={20} className="icon-gold" />
                   <div>
                     <strong>Lokasi Dapur</strong>
-                    <span>Jl. Vinolia No. 25B, Lowokwaru, Kota Malang, Jawa Timur 65142</span>
+                    <span>{SITE_CONFIG.address}</span>
                   </div>
                 </div>
               </div>
 
               <div className="store-buttons-row">
                 <a
-                  href="https://wa.me/6285717224420"
+                  href={SITE_CONFIG.whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="deux-whatsapp-btn"
                 >
                   <MessageCircle size={18} />
-                  <span>Chat WhatsApp (+62 857-1722-4420)</span>
+                  <span>Chat WhatsApp ({SITE_CONFIG.phone})</span>
                 </a>
                 <Link to="/pesanan" className="deux-white-pill-btn">
                   <span>Lihat Katalog Online</span>
@@ -515,7 +508,7 @@ export default function HomePage() {
                   <h3 className="blog-title">{art.title}</h3>
                   <p className="blog-desc">{art.desc}</p>
                   <Link to="/pesanan" className="blog-read-more">
-                    <span>Baca Selengkapnya</span>
+                    <span>Lihat di Katalog Menu</span>
                     <ArrowUpRight size={14} />
                   </Link>
                 </div>
@@ -544,14 +537,19 @@ export default function HomePage() {
               <div
                 key={idx}
                 className={`deux-exact-faq-item ${openFaq === idx ? 'open' : ''}`}
-                onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
               >
-                <div className="faq-question-bar">
+                <button
+                  type="button"
+                  className="faq-question-bar"
+                  onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
+                  aria-expanded={openFaq === idx}
+                  aria-controls={`faq-answer-${idx}`}
+                >
                   <span>{item.q}</span>
                   {openFaq === idx ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                </div>
+                </button>
                 {openFaq === idx && (
-                  <div className="faq-answer-bar">
+                  <div className="faq-answer-bar" id={`faq-answer-${idx}`}>
                     <p>{item.a}</p>
                   </div>
                 )}
@@ -592,7 +590,7 @@ export default function HomePage() {
                   <ArrowRight size={18} />
                 </Link>
                 <a
-                  href="https://wa.me/6285717224420"
+                  href={SITE_CONFIG.whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="deux-banner-secondary-btn"

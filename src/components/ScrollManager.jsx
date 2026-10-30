@@ -51,8 +51,9 @@ export default function ScrollManager() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 3. Intersection Observer: Animasi berulang (Repeatable Scroll Reveal)
+  // 3. Intersection Observer: Silky & stable reveal without flicker/leaks
   useEffect(() => {
+    let observer;
     const timer = setTimeout(() => {
       const revealElements = document.querySelectorAll(
         '.reveal-up, .reveal-scale, .reveal-left, .reveal-right, .reveal-fade'
@@ -63,34 +64,38 @@ export default function ScrollManager() {
         return;
       }
 
-      const observer = new IntersectionObserver(
+      observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-revealed');
-            } else {
-              // Reset status ketika keluar layar agar animasi berulang kembali saat di-scroll
-              entry.target.classList.remove('is-revealed');
+              // Unobserve setelah tampil agar hemat memori & bebas flicker
+              observer.unobserve(entry.target);
             }
           });
         },
         {
-          threshold: 0.1,
-          rootMargin: '0px 0px -30px 0px',
+          threshold: 0.08,
+          rootMargin: '0px 0px -20px 0px',
         }
       );
 
       revealElements.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        // Jika elemen sudah masuk di viewport layar awal, langsung tampilkan
         if (rect.top < window.innerHeight && rect.bottom > 0) {
           el.classList.add('is-revealed');
+        } else {
+          observer.observe(el);
         }
-        observer.observe(el);
       });
     }, 50);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (observer) {
+        observer.disconnect();
+      }
+    };
   }, [location.pathname, location.search]);
 
   return (

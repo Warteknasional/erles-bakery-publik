@@ -1,5 +1,6 @@
 import { Send, Heart, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SITE_CONFIG } from '../config/site';
 
 function InstagramIcon({ size = 18, ...props }) {
   return (
@@ -29,7 +30,7 @@ export default function Footer() {
         <div className="deux-footer-top-grid">
           <div className="footer-intro-col">
             <div className="footer-brand-header">
-              <img src="/logo.jpg" alt="Erles Bakery" className="footer-logo-badge" />
+              <img src="/logo.jpg" alt={SITE_CONFIG.name} className="footer-logo-badge" />
               <span className="footer-mini-brand">erles bakery</span>
             </div>
             <p className="footer-intro-desc">
@@ -37,18 +38,18 @@ export default function Footer() {
               donat kentang, dan hampers spesial yang dibuat dengan bahan jujur dan penuh ketulusan.
             </p>
             <div className="footer-contact-links">
-              <a href="https://wa.me/6285717224420" target="_blank" rel="noreferrer">
-                WA: +62 857-1722-4420
+              <a href={SITE_CONFIG.whatsappUrl} target="_blank" rel="noreferrer">
+                WA: {SITE_CONFIG.phone}
               </a>
               <span className="sep">•</span>
               <a
-                href="https://www.instagram.com/erles_donut.mlg"
+                href={SITE_CONFIG.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="insta-link"
               >
                 <InstagramIcon size={14} />
-                <span>@erles_donut.mlg</span>
+                <span>{SITE_CONFIG.instagramHandle}</span>
               </a>
             </div>
           </div>
@@ -57,7 +58,12 @@ export default function Footer() {
             <h4>Subscribe Newsletter</h4>
             <p>Dapatkan kabar roti mingguan, varian hampers terbatas, dan promo spesial.</p>
             <form className="deux-footer-news-form" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="Alamat email Anda..." />
+              <input
+                type="email"
+                placeholder="Alamat email Anda..."
+                aria-label="Alamat email untuk newsletter"
+                required
+              />
               <button type="submit" aria-label="Kirim langganan">
                 <Send size={15} />
               </button>
@@ -88,45 +94,39 @@ export default function Footer() {
           <div className="footer-links-col">
             <h5>Jam Operasional</h5>
             <p className="hours-text">
-              <strong>Senin - Minggu:</strong>
+              <strong>{SITE_CONFIG.hours.split(':')[0]}:</strong>
               <br />
-              07.00 - 21.00 WIB
+              {SITE_CONFIG.hours.split(': ').slice(1).join(': ')}
             </p>
             <p className="fresh-note">
-              <em>*Panggangan pertama siap pukul 06.30 WIB setiap pagi</em>
+              <em>{SITE_CONFIG.freshNote}</em>
             </p>
           </div>
 
           <div className="footer-links-col">
-            <h5>Alamat Dapur</h5>
-            <p className="address-text">
-              Jl. Vinolia No. 25B, Lowokwaru,
-              <br />
-              Kota Malang, Jawa Timur 65142
-            </p>
-            <a
-              href="https://maps.google.com/?q=Jl.+Vinolia+No.+25B+Lowokwaru+Malang"
-              target="_blank"
-              rel="noreferrer"
-              className="footer-map-link"
-            >
-              <span>Petunjuk Arah Google Maps</span>
-              <ArrowUpRight size={13} />
-            </a>
+            <h5>Lokasi & Kontak</h5>
+            <p className="address-text">{SITE_CONFIG.address}</p>
+            <div className="footer-links-sub">
+              <a href={SITE_CONFIG.whatsappUrl} target="_blank" rel="noreferrer">
+                <span>Chat Admin WhatsApp</span>
+                <ArrowUpRight size={13} />
+              </a>
+              <a href={SITE_CONFIG.instagramUrl} target="_blank" rel="noreferrer">
+                <span>Instagram Resmi</span>
+                <ArrowUpRight size={13} />
+              </a>
+            </div>
           </div>
         </div>
 
         {/* BOTTOM ROW: COPYRIGHT */}
-        <div className="deux-footer-legal-row">
-          <p>© 2026 ERLES BAKERY. Seluruh hak cipta dilindungi.</p>
-          <p className="deux-footer-baked">
-            Baked with <Heart size={13} fill="#CC4A3B" color="#CC4A3B" /> in Malang, Indonesia
-          </p>
-        </div>
-
-        {/* GIANT ICONIC BRAND TITLE (DEUX BAKERY SIGNATURE) */}
-        <div className="deux-giant-footer-title">
-          <span>erles bakery</span>
+        <div className="deux-footer-bottom">
+          <p>© {new Date().getFullYear()} Erles Bakery. Homemade in Malang. Seluruh hak cipta dilindungi.</p>
+          <div className="made-with-love">
+            <span>Dipanggang dengan</span>
+            <Heart size={13} fill="#CC4A3B" color="#CC4A3B" />
+            <span>untuk keluarga Indonesia</span>
+          </div>
         </div>
       </div>
     </footer>

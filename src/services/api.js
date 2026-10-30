@@ -9,4 +9,26 @@ const api = axios.create({
   withCredentials: true,
 });
 
+export const productService = {
+  async getAll(params = {}) {
+    const res = await api.get('/products', { params: { all: true, ...params } });
+    return res.data;
+  },
+  async getCategories() {
+    const res = await api.get('/categories');
+    return res.data;
+  },
+};
+
+export const orderService = {
+  async create(orderData) {
+    const res = await api.post('/orders', orderData);
+    return res.data;
+  },
+  async track(idOrCode) {
+    const res = await api.get(`/orders/track/${idOrCode}`);
+    return res.data;
+  },
+};
+
 export default api;

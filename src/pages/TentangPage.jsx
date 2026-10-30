@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Heart } from 'lucide-react';
+import { SITE_CONFIG } from '../config/site';
 
 const bakerPortrait =
   'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=85';
@@ -267,7 +268,7 @@ export default function TentangPage() {
                   <ArrowRight size={18} />
                 </Link>
                 <a
-                  href="https://wa.me/6285717224420"
+                  href={SITE_CONFIG.whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="deux-banner-secondary-btn"

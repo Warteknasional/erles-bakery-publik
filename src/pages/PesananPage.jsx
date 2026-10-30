@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   X,
@@ -18,10 +18,17 @@ import {
   Info,
   QrCode,
   ExternalLink,
+  AlertCircle,
+  Loader2,
+  Landmark,
+  Banknote,
 } from 'lucide-react';
+import { useCart } from '../context/useCart';
+import { productService, orderService } from '../services/api';
+import { SITE_CONFIG } from '../config/site';
 
-const dummyProducts = [
-  // 1. SOURDOUGH & ARTISAN BREADS (SIGNATURE UTAMA)
+const fallbackProducts = [
+  // 1. SOURDOUGH & ARTISAN BREADS
   {
     id: 5,
     nama: 'Sourdough Country Boule',
@@ -45,7 +52,7 @@ const dummyProducts = [
       'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=700&q=80',
   },
 
-  // 2. DONAT KENTANG KHAS MALANG (FAVORIT HARIAN)
+  // 2. DONAT KENTANG KHAS MALANG
   {
     id: 11,
     nama: 'Donat Gula Halus Klasik',
@@ -161,7 +168,7 @@ const dummyProducts = [
       'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80',
   },
 
-  // 5. HAMPERS & GIFT SET SPESIAL (PAKET KOTAK BINGKISAN)
+  // 5. HAMPERS & GIFT SET SPESIAL
   {
     id: 1,
     nama: 'Hampers Lebaran Deluxe',
@@ -232,32 +239,45 @@ export default function PesananPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const kategoriFromUrl = searchParams.get('kategori');
 
+  const {
+    cart,
+    cartCount,
+    subtotalCart,
+    hasHampersInCart,
+    addToCart,
+    removeFromCart,
+    clearCart,
+    isCheckoutOpen,
+    setIsCheckoutOpen,
+  } = useCart();
+
   const selectedCategory =
     kategoriFromUrl && categories.includes(kategoriFromUrl)
       ? kategoriFromUrl
       : 'Semua';
 
   const handleCategoryChange = (cat) => {
+    const nextParams = new URLSearchParams(searchParams);
     if (cat === 'Semua') {
-      const nextParams = new URLSearchParams(searchParams);
       nextParams.delete('kategori');
-      setSearchParams(nextParams);
     } else {
-      const nextParams = new URLSearchParams(searchParams);
       nextParams.set('kategori', cat);
-      setSearchParams(nextParams);
     }
+    setSearchParams(nextParams);
   };
+
+  const [products, setProducts] = useState(fallbackProducts);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+  const [apiError, setApiError] = useState(null);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('default');
-  const [cart, setCart] = useState([]);
 
   // Modal States
-  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
   const [showReceiptModal, setShowReceiptModal] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
 
   // Form State
@@ -278,17 +298,82 @@ export default function PesananPage() {
   const [latestOrder, setLatestOrder] = useState(null);
   const [orderHistory, setOrderHistory] = useState(() => {
     try {
-      const saved = localStorage.getItem('erles_simulasi_orders');
+      const saved = localStorage.getItem('erles_orders_history');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
     }
   });
 
-  const hasHampersInCart = cart.some((item) => item.kategori === 'Hampers');
+  // Check query param to auto-open checkout
+  useEffect(() => {
+    if (searchParams.get('openCart') === 'true') {
+      setIsCheckoutOpen(true);
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.delete('openCart');
+      setSearchParams(nextParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams, setIsCheckoutOpen]);
+
+  // Fetch real products from Laravel Backend API
+  useEffect(() => {
+    let isMounted = true;
+    async function loadProducts() {
+      setIsLoadingProducts(true);
+      setApiError(null);
+      try {
+        const response = await productService.getAll();
+        if (isMounted && response?.data && Array.isArray(response.data) && response.data.length > 0) {
+          // Map backend products and merge with fallback metadata if missing
+          const mapped = response.data.map((item) => {
+            const fallback = fallbackProducts.find((f) => f.id === item.id) || {};
+            return {
+              id: item.id,
+              nama: item.nama,
+              harga: Number(item.harga),
+              stok: Number(item.stok ?? 20),
+              kategori: item.kategori || fallback.kategori || 'Roti',
+              deskripsi: item.deskripsi || fallback.deskripsi || '',
+              image: item.gambar || fallback.image || 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80',
+              isHampers: item.kategori === 'Hampers' || fallback.isHampers,
+              hampersBadge: fallback.hampersBadge,
+              isiPaket: fallback.isiPaket,
+            };
+          });
+          setProducts(mapped);
+        }
+      } catch (err) {
+        if (isMounted) {
+          // If backend is offline or returns error, use fallback gracefully
+          console.warn('API backend belum terhubung, menggunakan katalog lokal:', err.message);
+          setApiError('Menggunakan katalog lokal sementara (Backend belum tersambung).');
+        }
+      } finally {
+        if (isMounted) setIsLoadingProducts(false);
+      }
+    }
+
+    loadProducts();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Keyboard Escape listener for modals
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsCheckoutOpen(false);
+        setShowReceiptModal(false);
+        setShowHistoryModal(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [setIsCheckoutOpen]);
 
   // Filter & Sort
-  const filteredProducts = dummyProducts
+  const filteredProducts = products
     .filter((product) => {
       const matchCategory =
         selectedCategory === 'Semua' || product.kategori === selectedCategory;
@@ -312,89 +397,100 @@ export default function PesananPage() {
       minimumFractionDigits: 0,
     }).format(value);
 
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
-        );
-      }
-      return [...prevCart, { ...product, qty: 1 }];
-    });
-  };
-
-  const removeFromCart = (productId) => {
-    setCart((prevCart) =>
-      prevCart
-        .map((item) =>
-          item.id === productId ? { ...item, qty: item.qty - 1 } : item
-        )
-        .filter((item) => item.qty > 0)
-    );
-  };
-
-  const cartCount = cart.reduce((total, item) => total + item.qty, 0);
-  const subtotalCart = cart.reduce(
-    (total, item) => total + item.harga * item.qty,
-    0
-  );
   const deliveryFee =
-    form.deliveryMethod === 'delivery' && subtotalCart > 0 ? 12000 : 0;
+    form.deliveryMethod === 'delivery' && subtotalCart > 0 ? SITE_CONFIG.deliveryFee : 0;
   const totalCart = subtotalCart + deliveryFee;
 
-  const handleSubmitOrder = (event) => {
+  const handleSubmitOrder = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    setTimeout(() => {
-      const orderCode = `ERL-${new Date()
-        .toISOString()
-        .slice(0, 10)
-        .replace(/-/g, '')}-${Math.floor(1000 + Math.random() * 9000)}`;
+    // Payload formatted for Laravel backend OrderStoreRequest
+    const orderPayload = {
+      customer_name: form.name.trim(),
+      customer_phone: form.phone.trim(),
+      alamat:
+        form.deliveryMethod === 'delivery'
+          ? form.address.trim()
+          : `Ambil di Toko (${SITE_CONFIG.addressShort})`,
+      catatan: [
+        form.notes ? `Catatan: ${form.notes.trim()}` : '',
+        form.deliveryTime ? `Waktu: ${form.deliveryTime} WIB` : '',
+        hasHampersInCart && form.greetingMessage
+          ? `[Ucapan] To: ${form.greetingTo || 'Penerima'} | From: ${form.greetingFrom || form.name} | Pesan: "${form.greetingMessage}"`
+          : '',
+        `Bayar: ${form.paymentMethod.toUpperCase()}`,
+      ]
+        .filter(Boolean)
+        .join(' • '),
+      tanggal_ambil: form.deliveryDate || null,
+      items: cart.map((item) => ({
+        product_id: item.id,
+        qty: item.qty,
+      })),
+    };
 
-      const newOrder = {
-        code: orderCode,
-        createdAt: new Date().toLocaleString('id-ID', {
-          dateStyle: 'medium',
-          timeStyle: 'short',
-        }),
-        customer: {
-          name: form.name,
-          phone: form.phone,
-          deliveryMethod: form.deliveryMethod,
-          address:
-            form.deliveryMethod === 'delivery'
-              ? form.address
-              : 'Ambil di Toko (Jl. Vinolia No. 25B, Lowokwaru, Malang)',
-          deliveryDate: form.deliveryDate,
-          deliveryTime: form.deliveryTime,
-          paymentMethod: form.paymentMethod,
-          notes: form.notes,
-        },
-        items: [...cart],
-        subtotal: subtotalCart,
-        deliveryFee,
-        total: totalCart,
-        greetingCard: hasHampersInCart
-          ? {
-              to: form.greetingTo || 'Penerima Terkasih',
-              from: form.greetingFrom || form.name,
-              message: form.greetingMessage || 'Semoga hari Anda menyenangkan bersama sajian hangat Erles Bakery.',
-            }
-          : null,
-      };
+    let orderCode = `ERL-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.floor(1000 + Math.random() * 9000)}`;
+    let isRealApiSuccess = false;
 
-      setLatestOrder(newOrder);
-      const updatedHistory = [newOrder, ...orderHistory].slice(0, 10);
-      setOrderHistory(updatedHistory);
-      localStorage.setItem('erles_simulasi_orders', JSON.stringify(updatedHistory));
+    try {
+      const res = await orderService.create(orderPayload);
+      if (res?.data?.kode_pesanan) {
+        orderCode = res.data.kode_pesanan;
+        isRealApiSuccess = true;
+      }
+    } catch (err) {
+      console.warn('Order API backend belum aktif, melanjutkan dengan struk lokal:', err.message);
+      // Still allow order completion locally so user can confirm via WhatsApp
+    }
 
-      setIsSubmitting(false);
-      setShowCheckoutModal(false);
-      setShowReceiptModal(true);
-      setCart([]);
-    }, 700);
+    const newOrder = {
+      code: orderCode,
+      isSynced: isRealApiSuccess,
+      createdAt: new Date().toLocaleString('id-ID', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      }),
+      customer: {
+        name: form.name,
+        phone: form.phone,
+        deliveryMethod: form.deliveryMethod,
+        address:
+          form.deliveryMethod === 'delivery'
+            ? form.address
+            : `Ambil di Toko (${SITE_CONFIG.address})`,
+        deliveryDate: form.deliveryDate,
+        deliveryTime: form.deliveryTime,
+        paymentMethod: form.paymentMethod,
+        notes: form.notes,
+      },
+      items: [...cart],
+      subtotal: subtotalCart,
+      deliveryFee,
+      total: totalCart,
+      greetingCard: hasHampersInCart
+        ? {
+            to: form.greetingTo || 'Penerima Terkasih',
+            from: form.greetingFrom || form.name,
+            message: form.greetingMessage || 'Semoga hari Anda menyenangkan bersama sajian hangat Erles Bakery.',
+          }
+        : null,
+    };
+
+    setLatestOrder(newOrder);
+    const updatedHistory = [newOrder, ...orderHistory].slice(0, 15);
+    setOrderHistory(updatedHistory);
+    try {
+      localStorage.setItem('erles_orders_history', JSON.stringify(updatedHistory));
+    } catch {
+      // Ignore storage errors
+    }
+
+    setIsSubmitting(false);
+    setIsCheckoutOpen(false);
+    setShowReceiptModal(true);
+    clearCart();
   };
 
   const handleCopyOrderText = () => {
@@ -441,7 +537,7 @@ ${
         : ''
     }`;
 
-    window.open(`https://wa.me/6285717224420?text=${waText}`, '_blank');
+    window.open(`${SITE_CONFIG.whatsappUrl}?text=${waText}`, '_blank');
   };
 
   return (
@@ -457,6 +553,7 @@ ${
                 viewBox="0 0 100 100"
                 width="80"
                 height="80"
+                aria-hidden="true"
               >
                 <defs>
                   <path
@@ -504,12 +601,14 @@ ${
           {/* SEARCH & SORT & HISTORY */}
           <div className="deux-toolbar-top">
             <div className="deux-search-box">
-              <Search size={18} color="#7C5D44" />
+              <Search size={18} color="#7C5D44" aria-hidden="true" />
               <input
+                id="product-search-input"
                 type="text"
                 placeholder="Cari sourdough, donat kentang, hampers..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                aria-label="Cari produk pada menu"
               />
             </div>
 
@@ -519,18 +618,21 @@ ${
                   type="button"
                   className="deux-history-pill"
                   onClick={() => setShowHistoryModal(true)}
+                  aria-label="Buka riwayat pesanan"
                 >
                   <FileText size={15} />
-                  <span>Riwayat Simulasi ({orderHistory.length})</span>
+                  <span>Riwayat Pesanan ({orderHistory.length})</span>
                 </button>
               )}
 
               <select
+                id="product-sort-select"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="deux-sort-select"
+                aria-label="Urutkan produk berdasarkan harga"
               >
-                <option value="default">Urutkan: Pilihan</option>
+                <option value="default">Urutkan: Rekomendasi</option>
                 <option value="price-low">Harga: Termurah</option>
                 <option value="price-high">Harga: Tertinggi</option>
               </select>
@@ -538,11 +640,13 @@ ${
           </div>
 
           {/* CATEGORY TABS PILL BAR */}
-          <div className="deux-category-tabs-bar">
+          <div className="deux-category-tabs-bar" role="tablist" aria-label="Kategori Produk">
             {categories.map((category) => (
               <button
                 type="button"
                 key={category}
+                role="tab"
+                aria-selected={selectedCategory === category}
                 onClick={() => handleCategoryChange(category)}
                 className={`deux-cat-pill ${
                   selectedCategory === category ? 'active' : ''
@@ -562,13 +666,28 @@ ${
               <Gift size={28} color="#4A2E17" />
             </div>
             <div>
-              <h4 style={{ fontFamily: 'Mouse Memoirs, sans-serif', fontSize: '26px', color: '#4A2E17', marginBottom: '4px' }}>
+              <h4 className="hampers-banner-title">
                 Koleksi Hampers & Bingkisan Eksklusif Erles Bakery
               </h4>
-              <p style={{ fontSize: '13px', color: '#664223', lineHeight: '1.6', margin: 0 }}>
+              <p className="hampers-banner-text">
                 Setiap box hampers dikemas elegan dengan pita satin, box kokoh estetik, dan <strong>GRATIS kustom kartu ucapan</strong> langsung pada formulir pemesanan. Siap dikirim ke seluruh Malang & sekitarnya.
               </p>
             </div>
+          </div>
+        )}
+
+        {/* LOADING & FALLBACK INDICATOR */}
+        {isLoadingProducts && (
+          <div className="deux-loading-state">
+            <Loader2 size={24} className="spin-animate" />
+            <span>Memuat katalog segar dari dapur...</span>
+          </div>
+        )}
+
+        {apiError && !isLoadingProducts && (
+          <div className="deux-api-notice">
+            <Info size={15} />
+            <span>{apiError}</span>
           </div>
         )}
 
@@ -598,8 +717,8 @@ ${
                     <div className="deux-prod-package">
                       <strong>Paket termasuk:</strong>
                       <ul>
-                        {product.isiPaket.map((item, idx) => (
-                          <li key={idx}>✓ {item}</li>
+                        {product.isiPaket.map((item, pIdx) => (
+                          <li key={pIdx}>✓ {item}</li>
                         ))}
                       </ul>
                     </div>
@@ -614,7 +733,7 @@ ${
                           type="button"
                           className="deux-qty-btn"
                           onClick={() => removeFromCart(product.id)}
-                          aria-label="Kurang"
+                          aria-label={`Kurangi ${product.nama}`}
                         >
                           <Minus size={13} />
                         </button>
@@ -623,7 +742,7 @@ ${
                           type="button"
                           className="deux-qty-btn"
                           onClick={() => addToCart(product)}
-                          aria-label="Tambah"
+                          aria-label={`Tambah ${product.nama}`}
                         >
                           <Plus size={13} />
                         </button>
@@ -633,6 +752,7 @@ ${
                         type="button"
                         className="deux-prod-add-btn"
                         onClick={() => addToCart(product)}
+                        aria-label={`Tambahkan ${product.nama} ke keranjang`}
                       >
                         <Plus size={14} />
                         <span>{product.isHampers ? 'PILIH HAMPERS' : 'TAMBAH'}</span>
@@ -645,12 +765,10 @@ ${
           })}
         </div>
 
-        {filteredProducts.length === 0 && (
+        {filteredProducts.length === 0 && !isLoadingProducts && (
           <div className="deux-empty-box">
-            <h3 style={{ fontFamily: 'Mouse Memoirs, sans-serif', fontSize: '36px', color: '#4A2E17' }}>
-              Produk Tidak Ditemukan
-            </h3>
-            <p style={{ fontSize: '14px', color: '#7C5D44' }}>
+            <h3 className="empty-box-title">Produk Tidak Ditemukan</h3>
+            <p className="empty-box-desc">
               Coba gunakan kata pencarian lain atau pilih kategori di atas.
             </p>
           </div>
@@ -662,7 +780,8 @@ ${
         <button
           type="button"
           className="deux-floating-cart"
-          onClick={() => setShowCheckoutModal(true)}
+          onClick={() => setIsCheckoutOpen(true)}
+          aria-label={`Buka Keranjang: ${cartCount} item, total ${formatRupiah(subtotalCart)}`}
         >
           <div className="floating-cart-badge">
             <ShoppingCart size={18} />
@@ -676,9 +795,15 @@ ${
         </button>
       )}
 
-      {/* 5. CHECKOUT SIMULATION MODAL (DEUX STYLED) */}
-      {showCheckoutModal && (
-        <div className="modal-backdrop-custom" onClick={() => setShowCheckoutModal(false)}>
+      {/* 5. CHECKOUT MODAL (DEUX STYLED) */}
+      {isCheckoutOpen && (
+        <div
+          className="modal-backdrop-custom"
+          onClick={() => setIsCheckoutOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="checkout-modal-title"
+        >
           <div className="modal-card-custom" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header-custom">
               <div className="modal-title-with-icon">
@@ -686,14 +811,15 @@ ${
                   <ShoppingCart size={20} />
                 </div>
                 <div>
-                  <h3>Simulasi Checkout Pesanan</h3>
-                  <p>Isi formulir simulasi untuk melihat rincian kalkulasi struk belanja.</p>
+                  <h3 id="checkout-modal-title">Formulir Pesanan Online</h3>
+                  <p>Lengkapi detail pemesanan untuk konfirmasi ke dapur Erles Bakery.</p>
                 </div>
               </div>
               <button
                 type="button"
                 className="modal-close-btn"
-                onClick={() => setShowCheckoutModal(false)}
+                onClick={() => setIsCheckoutOpen(false)}
+                aria-label="Tutup form pesanan"
               >
                 <X size={20} />
               </button>
@@ -704,8 +830,9 @@ ${
                 {/* KOLOM KIRI: FORM DATA */}
                 <div className="modal-left-column">
                   <div className="form-group-custom">
-                    <label>Nama Pemesan *</label>
+                    <label htmlFor="order-customer-name">Nama Pemesan *</label>
                     <input
+                      id="order-customer-name"
                       type="text"
                       required
                       placeholder="Contoh: Budi Santoso"
@@ -715,8 +842,9 @@ ${
                   </div>
 
                   <div className="form-group-custom">
-                    <label>Nomor WhatsApp *</label>
+                    <label htmlFor="order-customer-phone">Nomor WhatsApp *</label>
                     <input
+                      id="order-customer-phone"
                       type="tel"
                       required
                       placeholder="Contoh: 08123456789"
@@ -726,29 +854,33 @@ ${
                   </div>
 
                   <div className="form-group-custom">
-                    <label>Metode Pengambilan *</label>
-                    <div className="delivery-method-grid">
+                    <span className="form-label-text">Metode Pengambilan *</span>
+                    <div className="delivery-method-grid" role="radiogroup" aria-label="Metode Pengambilan">
                       <button
                         type="button"
+                        role="radio"
+                        aria-checked={form.deliveryMethod === 'pickup'}
                         className={`method-select-btn ${form.deliveryMethod === 'pickup' ? 'active' : ''}`}
                         onClick={() => setForm({ ...form, deliveryMethod: 'pickup' })}
                       >
                         <Store size={18} />
                         <div>
                           <strong>Ambil di Toko</strong>
-                          <small>Gratis (Jl. Vinolia No. 25B Malang)</small>
+                          <small>Gratis ({SITE_CONFIG.addressShort})</small>
                         </div>
                       </button>
 
                       <button
                         type="button"
+                        role="radio"
+                        aria-checked={form.deliveryMethod === 'delivery'}
                         className={`method-select-btn ${form.deliveryMethod === 'delivery' ? 'active' : ''}`}
                         onClick={() => setForm({ ...form, deliveryMethod: 'delivery' })}
                       >
                         <Truck size={18} />
                         <div>
                           <strong>Kurir Antar</strong>
-                          <small>Kota Malang (+Rp 12.000)</small>
+                          <small>Kota Malang (+{formatRupiah(SITE_CONFIG.deliveryFee)})</small>
                         </div>
                       </button>
                     </div>
@@ -756,8 +888,9 @@ ${
 
                   {form.deliveryMethod === 'delivery' && (
                     <div className="form-group-custom">
-                      <label>Alamat Pengantaran Lengkap *</label>
+                      <label htmlFor="order-delivery-address">Alamat Pengantaran Lengkap *</label>
                       <textarea
+                        id="order-delivery-address"
                         required
                         rows="2"
                         placeholder="Nama jalan, nomor rumah, kelurahan/kecamatan di Malang..."
@@ -769,8 +902,9 @@ ${
 
                   <div className="form-row-custom">
                     <div className="form-group-custom">
-                      <label>Tanggal Diambil / Diantar</label>
+                      <label htmlFor="order-delivery-date">Tanggal Diambil / Diantar</label>
                       <input
+                        id="order-delivery-date"
                         type="date"
                         required
                         value={form.deliveryDate}
@@ -779,8 +913,9 @@ ${
                     </div>
 
                     <div className="form-group-custom">
-                      <label>Perkiraan Jam</label>
+                      <label htmlFor="order-delivery-time">Perkiraan Jam</label>
                       <input
+                        id="order-delivery-time"
                         type="time"
                         required
                         value={form.deliveryTime}
@@ -790,40 +925,49 @@ ${
                   </div>
 
                   <div className="form-group-custom">
-                    <label>Metode Pembayaran Simulasi</label>
-                    <div className="payment-options-grid">
-                      <label className={`payment-pill ${form.paymentMethod === 'qris' ? 'active' : ''}`}>
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="qris"
-                          checked={form.paymentMethod === 'qris'}
-                          onChange={(e) => setForm({ ...form, paymentMethod: e.target.value })}
-                        />
-                        <span>QRIS / E-Wallet</span>
-                      </label>
+                    <span className="form-label-text">Metode Pembayaran *</span>
+                    <div className="payment-options-grid" role="radiogroup" aria-label="Metode Pembayaran">
+                      <button
+                        type="button"
+                        role="radio"
+                        aria-checked={form.paymentMethod === 'qris'}
+                        className={`payment-select-card ${form.paymentMethod === 'qris' ? 'active' : ''}`}
+                        onClick={() => setForm({ ...form, paymentMethod: 'qris' })}
+                      >
+                        <QrCode size={18} />
+                        <div>
+                          <strong>QRIS / E-Wallet</strong>
+                          <small>Semua Bank & E-Wallet</small>
+                        </div>
+                      </button>
 
-                      <label className={`payment-pill ${form.paymentMethod === 'transfer' ? 'active' : ''}`}>
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="transfer"
-                          checked={form.paymentMethod === 'transfer'}
-                          onChange={(e) => setForm({ ...form, paymentMethod: e.target.value })}
-                        />
-                        <span>Transfer Bank (BCA)</span>
-                      </label>
+                      <button
+                        type="button"
+                        role="radio"
+                        aria-checked={form.paymentMethod === 'transfer'}
+                        className={`payment-select-card ${form.paymentMethod === 'transfer' ? 'active' : ''}`}
+                        onClick={() => setForm({ ...form, paymentMethod: 'transfer' })}
+                      >
+                        <Landmark size={18} />
+                        <div>
+                          <strong>Transfer Bank</strong>
+                          <small>BCA / Mandiri / BRI</small>
+                        </div>
+                      </button>
 
-                      <label className={`payment-pill ${form.paymentMethod === 'tunai' ? 'active' : ''}`}>
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="tunai"
-                          checked={form.paymentMethod === 'tunai'}
-                          onChange={(e) => setForm({ ...form, paymentMethod: e.target.value })}
-                        />
-                        <span>Bayar di Tempat (COD)</span>
-                      </label>
+                      <button
+                        type="button"
+                        role="radio"
+                        aria-checked={form.paymentMethod === 'tunai'}
+                        className={`payment-select-card ${form.paymentMethod === 'tunai' ? 'active' : ''}`}
+                        onClick={() => setForm({ ...form, paymentMethod: 'tunai' })}
+                      >
+                        <Banknote size={18} />
+                        <div>
+                          <strong>Bayar di Tempat</strong>
+                          <small>Tunai / COD saat terima</small>
+                        </div>
+                      </button>
                     </div>
 
                     {/* QRIS CHECKOUT PREVIEW JIKA QRIS DIPILIH */}
@@ -850,14 +994,14 @@ ${
                           <div className="checkout-qris-frame">
                             <img
                               src="/qris.jpg"
-                              alt="QRIS ERLES BAKERY"
+                              alt="Barcode QRIS Resmi Erles Bakery"
                               className="checkout-qris-img"
                             />
                           </div>
 
                           <div className="checkout-qris-info">
                             <strong className="qris-merchant-title">ERLES BAKERY</strong>
-                            <span className="qris-merchant-nmid">NMID: <strong>ID1024318497657</strong></span>
+                            <span className="qris-merchant-nmid">NMID: <strong>{SITE_CONFIG.qrisNmid}</strong></span>
                             <span className="qris-merchant-tag">A01 • SATU QRIS UNTUK SEMUA</span>
                             <p className="qris-merchant-guide">
                               Scan QR di atas menggunakan aplikasi <strong>BCA Mobile, Livin, BRImo, BNI, GoPay, OVO, Dana, ShopeePay</strong>, atau e-wallet lainnya.
@@ -878,8 +1022,9 @@ ${
 
                       <div className="form-row-custom">
                         <div className="form-group-custom">
-                          <label>Kepada (To):</label>
+                          <label htmlFor="order-greeting-to">Kepada (To):</label>
                           <input
+                            id="order-greeting-to"
                             type="text"
                             placeholder="Contoh: Keluarga Ibu Rina"
                             value={form.greetingTo}
@@ -888,8 +1033,9 @@ ${
                         </div>
 
                         <div className="form-group-custom">
-                          <label>Dari (From):</label>
+                          <label htmlFor="order-greeting-from">Dari (From):</label>
                           <input
+                            id="order-greeting-from"
                             type="text"
                             placeholder="Contoh: Keluarga Budi Santoso"
                             value={form.greetingFrom}
@@ -899,8 +1045,9 @@ ${
                       </div>
 
                       <div className="form-group-custom">
-                        <label>Pesan Ucapan Hangat:</label>
+                        <label htmlFor="order-greeting-msg">Pesan Ucapan Hangat:</label>
                         <textarea
+                          id="order-greeting-msg"
                           rows="2"
                           placeholder="Tulis ucapan selamat hari raya, ulang tahun, atau doa terbaik Anda..."
                           value={form.greetingMessage}
@@ -911,8 +1058,9 @@ ${
                   )}
 
                   <div className="form-group-custom">
-                    <label>Catatan Tambahan untuk Dapur</label>
+                    <label htmlFor="order-additional-notes">Catatan Tambahan untuk Dapur</label>
                     <input
+                      id="order-additional-notes"
                       type="text"
                       placeholder="Contoh: Roti jangan dipotong, minta dipisah..."
                       value={form.notes}
@@ -938,6 +1086,7 @@ ${
                               type="button"
                               onClick={() => removeFromCart(item.id)}
                               className="cart-mini-btn"
+                              aria-label={`Kurangi ${item.nama}`}
                             >
                               <Minus size={11} />
                             </button>
@@ -946,6 +1095,7 @@ ${
                               type="button"
                               onClick={() => addToCart(item)}
                               className="cart-mini-btn"
+                              aria-label={`Tambah ${item.nama}`}
                             >
                               <Plus size={11} />
                             </button>
@@ -974,10 +1124,17 @@ ${
                       </div>
                     </div>
 
+                    {submitError && (
+                      <div className="checkout-error-pill">
+                        <AlertCircle size={14} />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
                     <div className="simulation-notice-pill">
                       <Info size={14} />
                       <span>
-                        Simulasi ini tidak memotong saldo asli Anda. Struk belanja dapat dicetak atau dikirimkan ke WhatsApp resmi kami.
+                        Pesanan akan tercatat di sistem ERP dan struk belanja dapat langsung dikirimkan ke WhatsApp dapur kami.
                       </span>
                     </div>
 
@@ -987,11 +1144,14 @@ ${
                       className="submit-checkout-btn"
                     >
                       {isSubmitting ? (
-                        <span>Membuat Struk Pesanan...</span>
+                        <>
+                          <Loader2 size={18} className="spin-animate" />
+                          <span>Menyimpan Pesanan ke Sistem...</span>
+                        </>
                       ) : (
                         <>
                           <CheckCircle2 size={18} />
-                          <span>Buat Simulasi Struk Pesanan</span>
+                          <span>Konfirmasi & Buat Pesanan</span>
                         </>
                       )}
                     </button>
@@ -1005,10 +1165,15 @@ ${
 
       {/* 6. RECEIPT MODAL (DEUX STYLED STRUK BELANJA) */}
       {showReceiptModal && latestOrder && (
-        <div className="modal-backdrop-custom" onClick={() => setShowReceiptModal(false)}>
+        <div
+          className="modal-backdrop-custom"
+          onClick={() => setShowReceiptModal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="receipt-modal-title"
+        >
           <div className="receipt-modal-card" onClick={(e) => e.stopPropagation()}>
             <div className="receipt-scrollable-body">
-              {/* TOMBOL CLOSE X DI POJOK ATAS */}
               <button
                 type="button"
                 className="receipt-close-x-btn"
@@ -1022,7 +1187,9 @@ ${
               <div className="receipt-top-header">
                 <span className="receipt-brand-logo">erles bakery</span>
                 <p className="receipt-subtitle">Dapur Artisan Roti & Donat Malang</p>
-                <div className="receipt-stamp-badge">SIMULASI BERHASIL DISIAPKAN</div>
+                <div className="receipt-stamp-badge" id="receipt-modal-title">
+                  {latestOrder.isSynced ? 'PESANAN BERHASIL TERCATAT' : 'STRUK PESANAN DISIAPKAN'}
+                </div>
               </div>
 
               {/* ORDER CODE STRIP */}
@@ -1043,7 +1210,7 @@ ${
                   <span>Metode:</span>
                   <span>
                     {latestOrder.customer.deliveryMethod === 'delivery'
-                      ? 'Diantar Kurir (+Rp 12.000)'
+                      ? `Diantar Kurir (+${formatRupiah(SITE_CONFIG.deliveryFee)})`
                       : 'Ambil Sendiri di Dapur'}
                   </span>
                 </div>
@@ -1087,7 +1254,7 @@ ${
                   <span>{latestOrder.deliveryFee === 0 ? 'Rp 0' : formatRupiah(latestOrder.deliveryFee)}</span>
                 </div>
                 <div className="receipt-total-line grand-total">
-                  <span>TOTAL ESTIMASI</span>
+                  <span>TOTAL PEMBAYARAN</span>
                   <strong>{formatRupiah(latestOrder.total)}</strong>
                 </div>
               </div>
@@ -1100,7 +1267,7 @@ ${
                       <QrCode size={15} />
                       <span>PEMBAYARAN QRIS RESMI</span>
                     </div>
-                    <span className="receipt-qris-nmid">NMID: ID1024318497657</span>
+                    <span className="receipt-qris-nmid">NMID: {SITE_CONFIG.qrisNmid}</span>
                   </div>
 
                   <div className="receipt-qris-body">
@@ -1155,7 +1322,7 @@ ${
                   onClick={handleSendToWhatsApp}
                 >
                   <MessageCircle size={18} />
-                  <span>Kirim Pesanan ke WhatsApp Admin</span>
+                  <span>Kirim Konfirmasi ke WhatsApp Admin</span>
                 </button>
 
                 <div className="receipt-btn-duo">
@@ -1184,7 +1351,13 @@ ${
 
       {/* 7. ORDER HISTORY MODAL */}
       {showHistoryModal && (
-        <div className="modal-backdrop-custom" onClick={() => setShowHistoryModal(false)}>
+        <div
+          className="modal-backdrop-custom"
+          onClick={() => setShowHistoryModal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="history-modal-title"
+        >
           <div className="history-modal-card" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header-custom">
               <div className="modal-title-with-icon">
@@ -1192,14 +1365,15 @@ ${
                   <FileText size={20} />
                 </div>
                 <div>
-                  <h3>Riwayat Simulasi Pesanan</h3>
-                  <p>Daftar simulasi pesanan yang pernah Anda buat di browser ini.</p>
+                  <h3 id="history-modal-title">Riwayat Pesanan Anda</h3>
+                  <p>Daftar pesanan yang pernah Anda buat di browser ini.</p>
                 </div>
               </div>
               <button
                 type="button"
                 className="modal-close-btn"
                 onClick={() => setShowHistoryModal(false)}
+                aria-label="Tutup riwayat"
               >
                 <X size={20} />
               </button>
