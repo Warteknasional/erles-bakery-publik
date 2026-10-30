@@ -16,6 +16,8 @@ import {
   FileText,
   ArrowRight,
   Info,
+  QrCode,
+  ExternalLink,
 } from 'lucide-react';
 
 const dummyProducts = [
@@ -823,6 +825,47 @@ ${
                         <span>Bayar di Tempat (COD)</span>
                       </label>
                     </div>
+
+                    {/* QRIS CHECKOUT PREVIEW JIKA QRIS DIPILIH */}
+                    {form.paymentMethod === 'qris' && (
+                      <div className="checkout-qris-card">
+                        <div className="checkout-qris-header">
+                          <div className="qris-badge-tag">
+                            <QrCode size={16} />
+                            <span>QRIS PEMBAYARAN RESMI</span>
+                          </div>
+                          <a
+                            href="/qris.jpg"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="qris-zoom-btn"
+                            title="Buka QRIS Gambar Penuh"
+                          >
+                            <span>Perbesar QR</span>
+                            <ExternalLink size={13} />
+                          </a>
+                        </div>
+
+                        <div className="checkout-qris-body">
+                          <div className="checkout-qris-frame">
+                            <img
+                              src="/qris.jpg"
+                              alt="QRIS ERLES BAKERY"
+                              className="checkout-qris-img"
+                            />
+                          </div>
+
+                          <div className="checkout-qris-info">
+                            <strong className="qris-merchant-title">ERLES BAKERY</strong>
+                            <span className="qris-merchant-nmid">NMID: <strong>ID1024318497657</strong></span>
+                            <span className="qris-merchant-tag">A01 • SATU QRIS UNTUK SEMUA</span>
+                            <p className="qris-merchant-guide">
+                              Scan QR di atas menggunakan aplikasi <strong>BCA Mobile, Livin, BRImo, BNI, GoPay, OVO, Dana, ShopeePay</strong>, atau e-wallet lainnya.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* KUSTOM KARTU UCAPAN JIKA ADA HAMPERS */}
@@ -1048,6 +1091,48 @@ ${
                   <strong>{formatRupiah(latestOrder.total)}</strong>
                 </div>
               </div>
+
+              {/* QRIS OFFICIAL PAYMENT BOX */}
+              {latestOrder.customer.paymentMethod === 'qris' && (
+                <div className="receipt-qris-card">
+                  <div className="receipt-qris-top">
+                    <div className="receipt-qris-pill">
+                      <QrCode size={15} />
+                      <span>PEMBAYARAN QRIS RESMI</span>
+                    </div>
+                    <span className="receipt-qris-nmid">NMID: ID1024318497657</span>
+                  </div>
+
+                  <div className="receipt-qris-body">
+                    <div className="receipt-qris-img-wrap">
+                      <img
+                        src="/qris.jpg"
+                        alt="QRIS Pembayaran Erles Bakery"
+                        className="receipt-qris-img"
+                      />
+                    </div>
+                    <div className="receipt-qris-info">
+                      <strong className="receipt-merchant-name">ERLES BAKERY</strong>
+                      <div className="receipt-qris-amount-box">
+                        <span>Nominal Bayar:</span>
+                        <strong className="receipt-amount-val">{formatRupiah(latestOrder.total)}</strong>
+                      </div>
+                      <p className="receipt-qris-step-guide">
+                        Scan QRIS dengan aplikasi m-Banking atau e-wallet apa saja. Simpan bukti transfer dan sertakan saat mengirim pesanan ke WhatsApp admin.
+                      </p>
+                      <a
+                        href="/qris.jpg"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="receipt-qris-expand-link"
+                      >
+                        <ExternalLink size={13} />
+                        <span>Buka QRIS Layar Penuh</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* KARTU UCAPAN JIKA ADA */}
               {latestOrder.greetingCard && (
