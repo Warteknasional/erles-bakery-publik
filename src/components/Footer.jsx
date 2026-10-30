@@ -28,7 +28,10 @@ export default function Footer() {
         {/* TOP ROW: NEWSLETTER & INFO */}
         <div className="deux-footer-top-grid">
           <div className="footer-intro-col">
-            <span className="footer-mini-brand">erles bakery</span>
+            <div className="footer-brand-header">
+              <img src="/logo.jpg" alt="Erles Bakery" className="footer-logo-badge" />
+              <span className="footer-mini-brand">erles bakery</span>
+            </div>
             <p className="footer-intro-desc">
               Homemade bakery and artisan kitchen based in Malang. Menyajikan roti hangat,
               donat kentang, dan hampers spesial yang dibuat dengan bahan jujur dan penuh ketulusan.

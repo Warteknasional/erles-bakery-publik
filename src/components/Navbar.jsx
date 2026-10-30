@@ -30,8 +30,9 @@ export default function Navbar() {
             </NavLink>
           </div>
 
-          {/* CENTER BRAND LOGO */}
+          {/* CENTER BRAND LOGO WITH EMBLEM */}
           <Link to="/" className="deux-nav-logo" aria-label="Erles Bakery Beranda">
+            <img src="/logo.jpg" alt="Erles Bakery" className="deux-nav-logo-badge" />
             <span className="deux-logo-text">erles</span>
           </Link>
 
@@ -75,7 +76,10 @@ export default function Navbar() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="deux-drawer-header">
-              <span className="deux-drawer-brand">erles</span>
+              <Link to="/" onClick={() => setMobileOpen(false)} className="deux-drawer-brand-link">
+                <img src="/logo.jpg" alt="Erles Bakery" className="deux-drawer-logo-badge" />
+                <span className="deux-drawer-brand">erles</span>
+              </Link>
               <button
                 type="button"
                 className="deux-drawer-close"
