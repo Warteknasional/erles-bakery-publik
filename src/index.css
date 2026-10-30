@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Erica+One&family=Mouse+Memoirs&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 /* =========================================================
-   DEUX BAKERY DESIGN SYSTEM (100% FAITHFUL RECREATION)
+   DEUX BAKERY DESIGN SYSTEM (100% REFINED & TIED TO SPEC)
 ========================================================= */
 
 :root {
@@ -16,7 +16,7 @@
   --deux-text-muted: #7C5D44;
   --deux-border: rgba(74, 46, 23, 0.14);
 
-  /* Compatibility with existing pages */
+  /* Compatibility */
   --primary: #4A2E17;
   --primary-container: #331F0F;
   --secondary: #CC4A3B;
@@ -42,39 +42,58 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* GLOBAL CONTAINER */
+/* GLOBAL REUSABLE CONTAINER */
+.deux-exact-container,
 .deux-container {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 40px;
+}
+
+/* RETRO STICKER TAG (DEUX BAKERY SIGNATURE) */
+.deux-retro-sticker,
+.deux-scallop-tag {
+  display: inline-block;
+  padding: 6px 18px;
+  background: var(--deux-yellow);
+  color: var(--deux-dark);
+  border: 1.5px solid rgba(74, 46, 23, 0.2);
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(74, 46, 23, 0.08);
 }
 
 /* =========================================================
-   1. NAVBAR (DEUX CENTERED FLOATING PILL)
+   1. NAVBAR (CENTERED FLOATING PILL)
 ========================================================= */
 .deux-top-bar {
   position: sticky;
-  top: 16px;
+  top: 18px;
   left: 0;
   width: 100%;
   z-index: 1000;
   padding: 0 20px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .deux-nav-wrapper {
-  max-width: 880px;
+  max-width: 820px;
   margin: 0 auto;
 }
 
 .deux-nav-pill {
-  background: rgba(255, 240, 224, 0.92);
+  background: rgba(255, 240, 224, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1.5px solid var(--deux-border);
   border-radius: 9999px;
-  padding: 10px 32px;
+  padding: 10px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -83,13 +102,13 @@ body {
 }
 
 .deux-nav-pill:hover {
-  border-color: rgba(74, 46, 23, 0.28);
+  border-color: rgba(74, 46, 23, 0.3);
 }
 
 .deux-nav-side {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
   flex: 1;
 }
 
@@ -109,13 +128,9 @@ body {
   color: var(--deux-dark);
   text-decoration: none;
   transition: color 0.2s ease;
-  position: relative;
 }
 
-.deux-nav-item:hover {
-  color: var(--deux-red);
-}
-
+.deux-nav-item:hover,
 .deux-nav-item.active {
   color: var(--deux-red);
 }
@@ -126,7 +141,7 @@ body {
 
 .deux-nav-logo {
   text-decoration: none;
-  padding: 0 16px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,7 +149,7 @@ body {
 
 .deux-logo-text {
   font-family: 'Erica One', cursive;
-  font-size: 28px;
+  font-size: 32px;
   color: var(--deux-dark);
   letter-spacing: -0.04em;
   transition: transform 0.2s ease;
@@ -185,7 +200,7 @@ body {
 
 .deux-drawer-brand {
   font-family: 'Erica One', cursive;
-  font-size: 30px;
+  font-size: 32px;
   color: var(--deux-dark);
 }
 
@@ -204,14 +219,14 @@ body {
 }
 
 .deux-drawer-link {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.05em;
   color: var(--deux-dark);
   text-decoration: none;
-  padding: 12px 16px;
+  padding: 12px 18px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .deux-drawer-link.active {
@@ -222,7 +237,7 @@ body {
 .deux-drawer-footer {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .deux-drawer-cta {
@@ -246,97 +261,147 @@ body {
 }
 
 /* =========================================================
-   2. HERO SECTION (DEUX STYLE WITH MOUSE MEMOIRS)
+   2. HERO SECTION (EXACT DEUX BAKERY CENTERED STACK)
 ========================================================= */
-.deux-page {
+.deux-exact-page {
   width: 100%;
   overflow-x: hidden;
   background-color: var(--deux-bg);
 }
 
-.deux-hero-wrap {
-  padding: 24px 0 70px;
+.deux-exact-hero {
+  padding: 30px 0 70px;
+  position: relative;
 }
 
-.deux-hero-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 48px;
-  align-items: center;
+.deux-hero-top-cutout {
+  width: 90px;
+  height: 60px;
+  margin: 0 auto 10px;
 }
 
-/* ROTATING STAMP */
-.deux-stamp-badge {
-  display: inline-block;
-  margin-bottom: 18px;
-  animation: deux-spin 22s linear infinite;
-  transform-origin: center center;
+.deux-hero-top-cutout img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(74, 46, 23, 0.15));
 }
 
-@keyframes deux-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.deux-hero-title-group {
+  text-align: center;
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto 40px;
 }
 
-.deux-stamp-svg {
-  display: block;
-}
-
-/* MOUSE MEMOIRS GIANT HEADLINE */
-.deux-hero-headline {
+.deux-exact-h1 {
   font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 114px;
-  line-height: 0.92;
+  font-size: 136px;
+  line-height: 0.9;
   letter-spacing: -0.015em;
-  margin-bottom: 22px;
+  margin-bottom: 0;
 }
 
-.deux-hl-red {
+.deux-c-red {
   color: var(--deux-red);
 }
 
-.deux-hl-brown {
+.deux-c-brown {
   color: var(--deux-dark);
 }
 
-.deux-hero-desc {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--deux-text-muted);
-  max-width: 520px;
-  margin-bottom: 28px;
+/* TILTED BADGE AT -17 DEG NEXT TO EVERY DAY */
+.deux-tilted-stamp {
+  position: absolute;
+  bottom: 8px;
+  right: 40px;
+  transform: rotate(-17deg);
+  background: var(--deux-yellow);
+  color: var(--deux-dark);
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--deux-dark);
+  box-shadow: 0 4px 12px rgba(74, 46, 23, 0.15);
 }
 
-/* CATEGORY PILLS */
-.deux-category-pills {
+.stamp-text {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  display: block;
+  line-height: 1;
+}
+
+/* 3-PART HERO BOTTOM ROW: [LEFT TEXT] | [CENTER IMAGE] | [RIGHT CATEGORY & BUTTON] */
+.deux-hero-trio-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 36px;
+  justify-content: space-between;
+  gap: 36px;
+  margin-top: 20px;
 }
 
-.pill-item {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+.deux-hero-trio-left {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.deux-hero-trio-left p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--deux-text-muted);
+}
+
+.deux-hero-trio-center {
+  flex: 1;
+  max-width: 620px;
+}
+
+.deux-hero-showcase-box {
+  width: 100%;
+  height: 380px;
+  border-radius: 40px;
+  overflow: hidden;
+  border: 3.5px solid #FFFFFF;
+  box-shadow: 0 20px 50px rgba(74, 46, 23, 0.18);
+  background: var(--deux-wheat);
+}
+
+.deux-hero-showcase-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.deux-hero-showcase-box:hover img {
+  transform: scale(1.04);
+}
+
+.deux-hero-trio-right {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.deux-trio-pills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
   color: var(--deux-dark);
 }
 
-.pill-dot {
+.deux-trio-pills .dot {
   color: var(--deux-red);
-  font-size: 14px;
 }
 
-/* HERO BUTTONS */
-.deux-hero-action {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.deux-btn-dark {
+.deux-exact-primary-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -344,158 +409,52 @@ body {
   background: var(--deux-dark);
   color: #FFFFFF !important;
   border-radius: 9999px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-decoration: none;
   transition: all 0.25s ease;
   box-shadow: 0 6px 18px rgba(74, 46, 23, 0.2);
 }
 
-.deux-btn-dark:hover {
+.deux-exact-primary-btn:hover {
   background: var(--deux-red);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(204, 74, 59, 0.28);
-}
-
-.deux-btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 26px;
-  background: transparent;
-  color: var(--deux-dark);
-  border: 1.5px solid var(--deux-dark);
-  border-radius: 9999px;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.deux-btn-outline:hover {
-  background: rgba(74, 46, 23, 0.08);
-}
-
-/* HERO VISUAL BOX */
-.deux-hero-visual-col {
-  position: relative;
-}
-
-.deux-hero-image-box {
-  position: relative;
-  border-radius: 40px;
-  overflow: hidden;
-  border: 3.5px solid #FFFFFF;
-  background: var(--deux-wheat);
-  box-shadow: 0 24px 60px -15px rgba(74, 46, 23, 0.22);
-}
-
-.deux-hero-img-element {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.deux-hero-image-box:hover .deux-hero-img-element {
-  transform: scale(1.03);
-}
-
-.deux-float-pill {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  background: var(--deux-yellow);
-  color: var(--deux-dark);
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 6px 16px rgba(74, 46, 23, 0.15);
-  border: 1px solid var(--deux-border);
-}
-
-.deux-float-card {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(10px);
-  padding: 14px 20px;
-  border-radius: 20px;
-  border: 1px solid var(--deux-border);
-  box-shadow: 0 12px 30px rgba(74, 46, 23, 0.15);
-  max-width: 280px;
-}
-
-.stars-row {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  margin-bottom: 4px;
-}
-
-.rating-val {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--deux-dark);
-  margin-left: 6px;
-}
-
-.deux-float-card p {
-  font-size: 11px;
-  line-height: 1.5;
-  color: var(--deux-text-muted);
-  margin: 0;
+  box-shadow: 0 8px 24px rgba(204, 74, 59, 0.3);
 }
 
 /* =========================================================
-   3. MENU SHOWCASE ("A LITTLE TASTE OF EVERYTHING WE BAKE")
+   3. FEATURED SECTION ("A LITTLE TASTE OF EVERYTHING WE BAKE")
 ========================================================= */
-.deux-section-featured {
+.deux-exact-section {
   padding: 80px 0;
 }
 
-.deux-center-header {
-  text-align: center;
+.deux-exact-section-sm {
+  padding: 40px 0;
+}
+
+.deux-exact-header {
   margin-bottom: 36px;
 }
 
-.deux-scallop-tag {
-  display: inline-block;
-  padding: 6px 16px;
-  background: var(--deux-yellow);
-  color: var(--deux-dark);
-  border: 1px solid rgba(74, 46, 23, 0.2);
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
+.deux-exact-header.center {
+  text-align: center;
 }
 
-.deux-scallop-tag.light {
-  background: var(--deux-yellow);
-  color: var(--deux-dark);
-}
-
-.deux-display-title {
+.deux-exact-h2 {
   font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 58px;
+  font-size: 64px;
   line-height: 1.05;
   color: var(--deux-dark);
   letter-spacing: -0.01em;
 }
 
-/* CATEGORY TABS */
-.deux-tabs-row {
+.deux-exact-h2.light {
+  color: #FFF0E0;
+}
+
+.deux-exact-tabs {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -503,81 +462,80 @@ body {
   flex-wrap: wrap;
 }
 
-.deux-tab-btn {
+.deux-exact-tab {
   padding: 10px 24px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.65);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.7);
   border: 1.5px solid var(--deux-border);
-  color: var(--deux-dark);
-  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.06em;
+  color: var(--deux-dark);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.deux-tab-btn:hover {
+.deux-exact-tab:hover {
   background: #FFFFFF;
   border-color: var(--deux-dark);
 }
 
-.deux-tab-btn.active {
+.deux-exact-tab.active {
   background: var(--deux-dark);
   color: #FFFFFF;
   border-color: var(--deux-dark);
   box-shadow: 0 4px 14px rgba(74, 46, 23, 0.2);
 }
 
-/* CARDS GRID */
-.deux-cards-grid {
+/* 3-COLUMN CARDS GRID (DEUX STYLE) */
+.deux-exact-cards-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
   margin-bottom: 48px;
 }
 
-.deux-card-item {
-  background: var(--deux-card-bg);
+.deux-exact-card {
+  background: var(--deux-wheat);
   border: 1.5px solid var(--deux-border);
-  border-radius: 24px;
+  border-radius: 32px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
 }
 
-.deux-card-item:hover {
+.deux-exact-card:hover {
   transform: translateY(-5px);
   border-color: var(--deux-dark);
-  box-shadow: 0 16px 36px -8px rgba(74, 46, 23, 0.16);
+  box-shadow: 0 16px 36px rgba(74, 46, 23, 0.14);
 }
 
-.deux-card-thumb {
+.deux-exact-card-thumb {
   position: relative;
-  height: 220px;
-  background: var(--deux-wheat);
+  height: 250px;
   overflow: hidden;
+  background: var(--deux-soft-yellow);
 }
 
-.deux-card-thumb img {
+.deux-exact-card-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.deux-card-item:hover .deux-card-thumb img {
-  transform: scale(1.06);
+.deux-exact-card:hover .deux-exact-card-thumb img {
+  transform: scale(1.05);
 }
 
-.deux-thumb-badge {
+.card-badge-pill {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 14px;
+  left: 14px;
   background: var(--deux-yellow);
   color: var(--deux-dark);
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   font-size: 10px;
   font-weight: 800;
@@ -585,14 +543,14 @@ body {
   box-shadow: 0 2px 8px rgba(74, 46, 23, 0.1);
 }
 
-.deux-card-info {
-  padding: 20px;
+.deux-exact-card-content {
+  padding: 24px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.deux-card-type {
+.card-category-sub {
   font-size: 11px;
   font-weight: 800;
   color: var(--deux-red);
@@ -600,43 +558,43 @@ body {
   margin-bottom: 4px;
 }
 
-.deux-card-heading {
+.card-product-title {
   font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 26px;
+  font-size: 30px;
   line-height: 1.1;
   color: var(--deux-dark);
   margin-bottom: 8px;
 }
 
-.deux-card-snippet {
-  font-size: 12px;
+.card-product-desc {
+  font-size: 13px;
   line-height: 1.6;
   color: var(--deux-text-muted);
   margin-bottom: 20px;
   flex: 1;
 }
 
-.deux-card-price-row {
+.card-bottom-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 12px;
+  padding-top: 14px;
   border-top: 1px dashed var(--deux-border);
 }
 
-.deux-card-cost {
+.card-price-display {
   font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 24px;
+  font-size: 26px;
   color: var(--deux-dark);
 }
 
-.deux-shop-btn {
+.card-shop-pill {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 8px 16px;
+  padding: 9px 18px;
   border-radius: 999px;
-  background: var(--deux-bg);
+  background: #FFFFFF;
   border: 1.5px solid var(--deux-border);
   color: var(--deux-dark);
   font-size: 11px;
@@ -646,22 +604,22 @@ body {
   transition: all 0.2s ease;
 }
 
-.deux-shop-btn:hover {
+.card-shop-pill:hover {
   background: var(--deux-dark);
   color: #FFFFFF !important;
   border-color: var(--deux-dark);
 }
 
-.deux-center-cta {
+.deux-exact-view-all {
   text-align: center;
 }
 
-.deux-view-all-button {
+.deux-pill-outline-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 34px;
-  border-radius: 999px;
+  padding: 14px 36px;
+  border-radius: 9999px;
   background: transparent;
   border: 2px solid var(--deux-dark);
   color: var(--deux-dark);
@@ -672,7 +630,7 @@ body {
   transition: all 0.2s ease;
 }
 
-.deux-view-all-button:hover {
+.deux-pill-outline-btn:hover {
   background: var(--deux-dark);
   color: #FFFFFF;
 }
@@ -680,52 +638,42 @@ body {
 /* =========================================================
    4. TWIN PROMO CARDS (LIMITED OFFER & NEW ARRIVAL)
 ========================================================= */
-.deux-promo-section {
-  padding: 20px 0 70px;
-}
-
-.deux-promo-grid {
+.deux-twin-promo-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px;
+  gap: 32px;
 }
 
-.deux-promo-card {
-  padding: 48px;
+.deux-twin-card {
   border-radius: 36px;
   border: 2px solid var(--deux-border);
+  padding: 44px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 260px;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
   box-shadow: 0 12px 30px rgba(74, 46, 23, 0.08);
 }
 
-.deux-promo-card.yellow {
+.deux-twin-card.yellow {
   background: linear-gradient(135deg, #FCEDB4 0%, #FFE480 100%);
   border-color: #F3CA3E;
 }
 
-.deux-promo-card.wheat {
+.deux-twin-card.wheat {
   background: linear-gradient(135deg, #F9E7D4 0%, #F5DAC0 100%);
   border-color: #E2C2A2;
 }
 
-.promo-badge-tag {
-  display: inline-block;
-  padding: 4px 14px;
-  background: var(--deux-dark);
-  color: #FFFFFF;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  width: fit-content;
-  margin-bottom: 16px;
+.twin-top-content {
+  z-index: 2;
+  position: relative;
+  max-width: 320px;
 }
 
-.promo-big-title {
+.twin-headline {
   font-family: 'Erica One', cursive;
   font-size: 42px;
   line-height: 1.1;
@@ -734,14 +682,14 @@ body {
   letter-spacing: -0.03em;
 }
 
-.promo-sub {
+.twin-subheadline {
   font-size: 14px;
   font-weight: 600;
   color: var(--deux-text-muted);
   margin-bottom: 24px;
 }
 
-.promo-cta-btn {
+.twin-cta-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -753,72 +701,87 @@ body {
   font-weight: 800;
   letter-spacing: 0.05em;
   text-decoration: none;
-  width: fit-content;
   transition: all 0.2s ease;
 }
 
-.promo-cta-btn:hover {
+.twin-cta-btn:hover {
   background: var(--deux-red);
   transform: translateY(-2px);
 }
 
+.twin-image-wrap {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 0.85;
+}
+
+.twin-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* =========================================================
-   5. WHY ERLES / STORY SECTION
+   5. WHY ERLES (STORY & CRAFT)
 ========================================================= */
-.deux-story-section {
-  padding: 80px 0;
+.why-bg {
   background: var(--deux-wheat);
   border-top: 1.5px solid var(--deux-border);
   border-bottom: 1.5px solid var(--deux-border);
 }
 
-.deux-story-layout {
+.deux-why-exact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: center;
 }
 
-.deux-story-quote {
+.why-exact-quote {
   font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 28px;
+  font-size: 30px;
   line-height: 1.35;
   color: var(--deux-dark);
   margin-top: 24px;
   padding-left: 20px;
-  border-left: 3px solid var(--deux-red);
+  border-left: 3.5px solid var(--deux-red);
 }
 
-.deux-feature-stack {
+.why-right-features-col {
   display: grid;
-  gap: 20px;
+  gap: 18px;
 }
 
-.deux-feature-item {
+.why-feature-block {
   display: flex;
   align-items: flex-start;
   gap: 20px;
   background: rgba(255, 255, 255, 0.7);
   padding: 20px 24px;
   border-radius: 20px;
-  border: 1px solid var(--deux-border);
+  border: 1.5px solid var(--deux-border);
 }
 
-.feature-num {
+.f-num {
   font-family: 'Mouse Memoirs', sans-serif;
   font-size: 32px;
   color: var(--deux-red);
   line-height: 1;
 }
 
-.deux-feature-item h4 {
+.why-feature-block h4 {
   font-family: 'Mouse Memoirs', sans-serif;
   font-size: 24px;
   color: var(--deux-dark);
   margin-bottom: 4px;
 }
 
-.deux-feature-item p {
+.why-feature-block p {
   font-size: 13px;
   line-height: 1.6;
   color: var(--deux-text-muted);
@@ -826,9 +789,9 @@ body {
 }
 
 /* =========================================================
-   6. TICKER MARQUEE STRIP
+   6. TICKER MARQUEE BANNER
 ========================================================= */
-.deux-ticker-strip {
+.deux-marquee-exact {
   background: var(--deux-yellow);
   border-top: 1.5px solid var(--deux-dark);
   border-bottom: 1.5px solid var(--deux-dark);
@@ -837,17 +800,17 @@ body {
   white-space: nowrap;
 }
 
-.deux-ticker-runner {
+.deux-marquee-exact-track {
   display: inline-flex;
-  animation: deux-marquee 25s linear infinite;
+  animation: deux-marquee-anim 25s linear infinite;
 }
 
-@keyframes deux-marquee {
+@keyframes deux-marquee-anim {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-.deux-ticker-chunk {
+.deux-marquee-exact-item {
   display: inline-flex;
   align-items: center;
   gap: 24px;
@@ -858,172 +821,166 @@ body {
   color: var(--deux-dark);
 }
 
-.star-sep {
+.m-star {
   color: var(--deux-red);
   font-size: 16px;
 }
 
 /* =========================================================
-   7. STORE & VISIT HOURS
+   7. STORE & VISIT HOURS (DEUX STYLE)
 ========================================================= */
-.deux-store-section {
-  padding: 80px 0;
-}
-
-.deux-store-panel {
+.deux-exact-store-box {
   background: var(--deux-dark);
   color: #FFF0E0;
   border-radius: 40px;
-  padding: 56px 48px;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 48px;
-  align-items: center;
+  padding: 60px 50px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(74, 46, 23, 0.25);
 }
 
-.deux-store-title {
-  font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 52px;
-  line-height: 1.05;
-  color: #FFF0E0;
-  margin: 12px 0 16px;
+.store-content-panel {
+  max-width: 680px;
 }
 
-.deux-store-sub {
-  font-size: 14px;
+.store-lead {
+  font-size: 15px;
   line-height: 1.7;
   color: #E8D5C4;
-  margin-bottom: 28px;
-  max-width: 460px;
+  margin: 12px 0 32px;
 }
 
-.deux-store-details {
+.store-details-list {
   display: grid;
-  gap: 20px;
+  gap: 18px;
+  margin-bottom: 36px;
 }
 
-.store-detail-row {
+.store-info-row {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 16px;
 }
 
-.store-icon {
+.icon-gold {
   color: var(--deux-yellow);
   flex-shrink: 0;
   margin-top: 2px;
 }
 
-.store-detail-row strong {
+.store-info-row strong {
   display: block;
   font-size: 14px;
   color: var(--deux-yellow);
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
-.store-detail-row p {
+.store-info-row span {
   font-size: 13px;
   color: #F7E2CD;
-  margin: 0;
 }
 
-.store-cta-box {
-  background: rgba(255, 240, 224, 0.08);
-  border: 1px solid rgba(255, 240, 224, 0.18);
-  border-radius: 24px;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.store-cta-box h4 {
-  font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 26px;
-  color: #FFFFFF;
-}
-
-.store-cta-box p {
-  font-size: 12px;
-  color: #E8D5C4;
-  margin-bottom: 8px;
-}
-
-.deux-wa-big-btn {
+.store-buttons-row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.deux-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
   gap: 10px;
-  padding: 15px 24px;
+  padding: 15px 28px;
   background: #25D366;
   color: #FFFFFF !important;
-  border-radius: 999px;
+  border-radius: 9999px;
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.03em;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.25);
 }
 
-.deux-wa-big-btn:hover {
+.deux-whatsapp-btn:hover {
   background: #1EB855;
   transform: translateY(-2px);
 }
 
-.deux-menu-big-btn {
-  display: flex;
+.deux-white-pill-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  padding: 14px 24px;
+  padding: 15px 28px;
   background: #FFFFFF;
   color: var(--deux-dark) !important;
-  border-radius: 999px;
+  border-radius: 9999px;
   font-size: 13px;
   font-weight: 800;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
-.deux-menu-big-btn:hover {
+.deux-white-pill-btn:hover {
   background: var(--deux-yellow);
 }
 
 /* =========================================================
-   8. TESTIMONIALS (WORDS FROM OUR GUESTS)
+   8. TESTIMONIALS (DEUX 2-COL WITH BUTTER CARD)
 ========================================================= */
-.deux-section-testi {
-  padding: 80px 0;
+.deux-testi-exact-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 40px;
+  align-items: center;
 }
 
-.deux-testi-single {
-  max-width: 820px;
-  margin: 0 auto;
-  text-align: center;
-  background: var(--deux-card-bg);
-  border: 2px solid var(--deux-border);
-  border-radius: 36px;
+.testi-exact-image-col {
+  height: 480px;
+  border-radius: 40px;
+  overflow: hidden;
+  border: 3.5px solid #FFFFFF;
+  box-shadow: 0 20px 50px rgba(74, 46, 23, 0.15);
+}
+
+.testi-exact-image-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testi-exact-card-col {
+  background: var(--deux-soft-yellow);
+  border: 2px solid #F5C542;
+  border-radius: 48px;
   padding: 56px 48px;
   box-shadow: 0 16px 40px rgba(74, 46, 23, 0.08);
 }
 
-.testi-stars-center {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
+.testi-quote-mark {
+  font-family: 'Erica One', cursive;
+  font-size: 64px;
+  line-height: 0.5;
+  color: var(--deux-red);
   margin-bottom: 24px;
 }
 
-.deux-testi-quote-text {
+.testi-stars-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.testi-quote-phrase {
   font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 34px;
+  font-size: 32px;
   line-height: 1.35;
   color: var(--deux-dark);
   margin-bottom: 28px;
 }
 
-.deux-testi-author-info strong {
+.testi-author-exact strong {
   display: block;
   font-size: 14px;
   font-weight: 800;
@@ -1031,35 +988,120 @@ body {
   color: var(--deux-dark);
 }
 
-.deux-testi-author-info span {
+.testi-author-exact span {
   font-size: 12px;
   color: var(--deux-text-muted);
 }
 
 /* =========================================================
-   9. FAQ ACCORDION SECTION
+   9. BLOG / INSPIRATION SECTION
 ========================================================= */
-.deux-faq-section {
-  padding: 80px 0;
-  background: rgba(247, 226, 205, 0.4);
+.deux-blog-exact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.deux-blog-card {
+  background: var(--deux-card-bg);
+  border: 1.5px solid var(--deux-border);
+  border-radius: 28px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.deux-blog-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--deux-dark);
+  box-shadow: 0 16px 36px rgba(74, 46, 23, 0.12);
+}
+
+.blog-thumb {
+  height: 220px;
+  overflow: hidden;
+  background: var(--deux-wheat);
+}
+
+.blog-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.deux-blog-card:hover .blog-thumb img {
+  transform: scale(1.05);
+}
+
+.blog-body {
+  padding: 24px;
+}
+
+.blog-meta {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--deux-red);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.blog-title {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--deux-dark);
+  margin-bottom: 8px;
+}
+
+.blog-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--deux-text-muted);
+  margin-bottom: 18px;
+}
+
+.blog-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--deux-dark);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--deux-dark);
+  padding-bottom: 2px;
+  transition: all 0.2s;
+}
+
+.blog-read-more:hover {
+  color: var(--deux-red);
+  border-color: var(--deux-red);
+}
+
+/* =========================================================
+   10. FAQ ACCORDION SECTION
+========================================================= */
+.faq-bg {
+  background: rgba(247, 226, 205, 0.45);
   border-top: 1.5px solid var(--deux-border);
 }
 
-.deux-faq-intro {
+.faq-subtitle {
   font-size: 14px;
   color: var(--deux-text-muted);
-  max-width: 520px;
+  max-width: 540px;
   margin: 8px auto 0;
 }
 
-.deux-faq-accordion {
-  max-width: 820px;
+.deux-exact-faq-stack {
+  max-width: 840px;
   margin: 40px auto 0;
   display: grid;
   gap: 14px;
 }
 
-.deux-faq-item {
+.deux-exact-faq-item {
   background: var(--deux-card-bg);
   border: 1.5px solid var(--deux-border);
   border-radius: 20px;
@@ -1068,27 +1110,26 @@ body {
   transition: all 0.2s ease;
 }
 
-.deux-faq-item:hover {
+.deux-exact-faq-item:hover {
   border-color: var(--deux-dark);
 }
 
-.deux-faq-item.open {
+.deux-exact-faq-item.open {
   border-color: var(--deux-dark);
   box-shadow: 0 8px 24px rgba(74, 46, 23, 0.08);
 }
 
-.deux-faq-question {
+.faq-question-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 15px;
   font-weight: 800;
   color: var(--deux-dark);
 }
 
-.deux-faq-answer {
+.faq-answer-bar {
   margin-top: 14px;
   padding-top: 14px;
   border-top: 1px dashed var(--deux-border);
@@ -1098,13 +1139,13 @@ body {
 }
 
 /* =========================================================
-   10. BANNER CTA BEFORE FOOTER
+   11. PRE-FOOTER BANNER CTA
 ========================================================= */
-.deux-banner-cta {
+.deux-prefooter-banner {
   padding: 60px 0;
 }
 
-.deux-banner-inner {
+.prefooter-inner-box {
   background: linear-gradient(135deg, #FCEDB4 0%, #FFE480 100%);
   border: 2px solid #F3CA3E;
   border-radius: 36px;
@@ -1113,22 +1154,22 @@ body {
   box-shadow: 0 16px 40px -10px rgba(217, 119, 6, 0.2);
 }
 
-.deux-banner-heading {
+.prefooter-title {
   font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 56px;
+  font-size: 58px;
   color: var(--deux-dark);
   margin: 12px 0 24px;
 }
 
-.deux-banner-button {
+.prefooter-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 15px 36px;
   background: var(--deux-dark);
   color: #FFFFFF !important;
-  border-radius: 999px;
-  font-size: 14px;
+  border-radius: 9999px;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-decoration: none;
@@ -1136,13 +1177,13 @@ body {
   box-shadow: 0 6px 20px rgba(74, 46, 23, 0.25);
 }
 
-.deux-banner-button:hover {
+.prefooter-btn:hover {
   background: var(--deux-red);
   transform: translateY(-2px);
 }
 
 /* =========================================================
-   11. FOOTER & GIANT ERLES BAKERY TITLE
+   12. FOOTER & GIANT ERLES BAKERY TITLE
 ========================================================= */
 .deux-footer-actual {
   background: var(--deux-dark);
@@ -1320,7 +1361,7 @@ body {
   gap: 4px;
 }
 
-/* GIANT FOOTER BRAND (SIGNATURE DEUX BAKERY) */
+/* GIANT FOOTER BRAND */
 .deux-giant-footer-title {
   text-align: center;
   margin-top: 40px;
@@ -1338,87 +1379,8 @@ body {
 }
 
 /* =========================================================
-   RESPONSIVE QUERIES
+   13. TENTANG PAGE STYLES
 ========================================================= */
-@media (max-width: 1024px) {
-  .deux-hero-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .deux-hero-headline {
-    font-size: 88px;
-  }
-  .deux-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .deux-story-layout {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-  .deux-store-panel {
-    grid-template-columns: 1fr;
-    padding: 36px 28px;
-  }
-  .deux-footer-top-grid {
-    grid-template-columns: 1fr;
-  }
-  .deux-footer-mid-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .deux-nav-side {
-    display: none;
-  }
-  .deux-burger-btn {
-    display: block;
-  }
-  .deux-nav-pill {
-    padding: 8px 20px;
-  }
-  .deux-hero-headline {
-    font-size: 68px;
-  }
-  .deux-hero-img-element {
-    height: 340px;
-  }
-  .deux-display-title {
-    font-size: 42px;
-  }
-  .deux-cards-grid {
-    grid-template-columns: 1fr;
-  }
-  .deux-promo-grid {
-    grid-template-columns: 1fr;
-  }
-  .deux-promo-card {
-    padding: 32px 24px;
-  }
-  .promo-big-title {
-    font-size: 32px;
-  }
-  .deux-testi-single {
-    padding: 36px 20px;
-  }
-  .deux-testi-quote-text {
-    font-size: 24px;
-  }
-  .deux-footer-mid-grid {
-    grid-template-columns: 1fr;
-  }
-  .deux-giant-footer-title span {
-    font-size: 58px;
-  }
-}
-
-
-
-
-/* =========================================================
-   12. TENTANG KAMI / ABOUT PAGE (DEUX BAKERY STYLE)
-========================================================= */
-
 .deux-about-page {
   width: 100%;
   overflow-x: hidden;
@@ -1461,7 +1423,6 @@ body {
   margin: 0 auto;
 }
 
-/* MISSION & FOUNDER NOTE */
 .deux-mission-section {
   padding: 30px 0 80px;
 }
@@ -1597,7 +1558,6 @@ body {
   color: var(--deux-red);
 }
 
-/* WHY ERLES (3 PHOTO CARDS) */
 .deux-why-section {
   padding: 80px 0;
   background: var(--deux-wheat);
@@ -1675,7 +1635,6 @@ body {
   color: var(--deux-text-muted);
 }
 
-/* STATS IN NUMBERS */
 .deux-numbers-section {
   padding: 80px 0;
 }
@@ -1725,7 +1684,6 @@ body {
   color: var(--deux-text-muted);
 }
 
-/* TEAM MEMBERS */
 .deux-team-section {
   padding: 80px 0;
   background: rgba(247, 226, 205, 0.35);
@@ -1773,10 +1731,6 @@ body {
   transition: transform 0.5s ease;
 }
 
-.deux-team-card:hover .team-photo-wrap img {
-  transform: scale(1.05);
-}
-
 .team-info {
   padding: 20px;
 }
@@ -1803,52 +1757,9 @@ body {
   color: var(--deux-text-muted);
 }
 
-/* RESPONSIVE ABOUT */
-@media (max-width: 1024px) {
-  .deux-about-title {
-    font-size: 72px;
-  }
-  .deux-mission-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .deux-portrait-img {
-    height: 380px;
-  }
-  .deux-why-cards-grid {
-    grid-template-columns: 1fr;
-  }
-  .deux-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .deux-team-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .deux-about-title {
-    font-size: 54px;
-  }
-  .founder-quote {
-    font-size: 24px;
-  }
-  .deux-founder-card {
-    padding: 28px 20px;
-  }
-  .deux-stats-grid {
-    grid-template-columns: 1fr;
-  }
-  .deux-team-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
 /* =========================================================
-   13. MENU & CATALOG PAGE (DEUX BAKERY STYLE)
+   14. MENU & ORDER PAGE STYLES
 ========================================================= */
-
 .deux-menu-page {
   width: 100%;
   overflow-x: hidden;
@@ -1882,7 +1793,6 @@ body {
   margin: 0 auto 12px;
 }
 
-/* TOOLBAR & SEARCH */
 .deux-menu-toolbar {
   margin-bottom: 40px;
 }
@@ -1907,7 +1817,6 @@ body {
   flex: 1;
   max-width: 460px;
   box-shadow: 0 4px 14px rgba(74, 46, 23, 0.05);
-  transition: border-color 0.2s;
 }
 
 .deux-search-box:focus-within {
@@ -1962,7 +1871,6 @@ body {
   border-color: var(--deux-dark);
 }
 
-/* CATEGORY TABS PILL BAR */
 .deux-category-tabs-bar {
   display: flex;
   justify-content: center;
@@ -2006,7 +1914,6 @@ body {
   border-color: var(--deux-red);
 }
 
-/* HAMPERS HIGHLIGHT NOTIFICATION */
 .deux-hampers-banner-highlight {
   background: linear-gradient(135deg, #FCEDB4 0%, #FFE480 100%);
   border: 2px solid #F3CA3E;
@@ -2031,7 +1938,6 @@ body {
   box-shadow: 0 4px 12px rgba(74, 46, 23, 0.1);
 }
 
-/* PRODUCT GRID & CARDS */
 .deux-product-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2288,36 +2194,714 @@ body {
   color: #FFFFFF;
 }
 
-/* RESPONSIVE MENU */
+/* =========================================================
+   15. MODAL CHECKOUT & RECEIPT (DEUX BAKERY PALETTE)
+========================================================= */
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 46, 23, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal-card-custom {
+  background: var(--deux-card-bg);
+  border: 2px solid var(--deux-border);
+  border-radius: 36px;
+  width: 100%;
+  max-width: 980px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header-custom {
+  padding: 28px 36px;
+  border-bottom: 1.5px solid var(--deux-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--deux-wheat);
+}
+
+.modal-title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.modal-icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--deux-dark);
+  color: var(--deux-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-title-with-icon h3 {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 30px;
+  color: var(--deux-dark);
+  margin: 0;
+}
+
+.modal-title-with-icon p {
+  font-size: 13px;
+  color: var(--deux-text-muted);
+  margin: 0;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--deux-dark);
+  cursor: pointer;
+}
+
+.modal-form-custom {
+  padding: 32px 36px;
+}
+
+.modal-columns-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 36px;
+}
+
+.form-group-custom {
+  margin-bottom: 18px;
+}
+
+.form-group-custom label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--deux-dark);
+  margin-bottom: 6px;
+}
+
+.form-group-custom input,
+.form-group-custom textarea {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1.5px solid var(--deux-border);
+  background: #FFFFFF;
+  color: var(--deux-dark);
+  outline: none;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.form-group-custom input:focus,
+.form-group-custom textarea:focus {
+  border-color: var(--deux-dark);
+}
+
+.form-row-custom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.delivery-method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.method-select-btn {
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1.5px solid var(--deux-border);
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.method-select-btn strong {
+  display: block;
+  font-size: 13px;
+  color: var(--deux-dark);
+}
+
+.method-select-btn small {
+  font-size: 11px;
+  color: var(--deux-text-muted);
+}
+
+.method-select-btn.active {
+  background: var(--deux-soft-yellow);
+  border-color: var(--deux-dark);
+}
+
+.payment-options-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.payment-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--deux-border);
+  background: #FFFFFF;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--deux-dark);
+  cursor: pointer;
+}
+
+.payment-pill.active {
+  background: var(--deux-soft-yellow);
+  border-color: var(--deux-dark);
+}
+
+.hampers-card-form-box {
+  background: linear-gradient(135deg, #FCEDB4 0%, #FFE480 100%);
+  border: 1.5px solid #F3CA3E;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.hampers-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--deux-dark);
+  margin-bottom: 14px;
+}
+
+/* RIGHT SUMMARY COLUMN */
+.cart-summary-box {
+  background: var(--deux-wheat);
+  border-radius: 28px;
+  padding: 26px;
+  border: 1.5px solid var(--deux-border);
+}
+
+.cart-summary-box h4 {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 24px;
+  color: var(--deux-dark);
+  margin-bottom: 16px;
+}
+
+.cart-items-scroll {
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.cart-summary-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--deux-border);
+}
+
+.cart-item-title-col strong {
+  display: block;
+  font-size: 13px;
+  color: var(--deux-dark);
+}
+
+.cart-item-title-col small {
+  font-size: 11px;
+  color: var(--deux-text-muted);
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-mini-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--deux-border);
+  background: var(--deux-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-mini-qty {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.cart-item-subtotal {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--deux-dark);
+  margin-left: 8px;
+}
+
+.cart-calculation-rows {
+  border-top: 1px dashed var(--deux-border);
+  padding-top: 14px;
+  margin-bottom: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.calc-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--deux-text-muted);
+}
+
+.calc-row.total-row {
+  border-top: 1px solid var(--deux-border);
+  padding-top: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--deux-dark);
+}
+
+.total-accent {
+  color: var(--deux-red);
+  font-size: 18px;
+}
+
+.simulation-notice-pill {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--deux-text-muted);
+  margin-bottom: 18px;
+}
+
+.submit-checkout-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  background: var(--deux-dark);
+  color: #FFFFFF;
+  border: none;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.submit-checkout-btn:hover {
+  background: var(--deux-red);
+}
+
+/* RECEIPT MODAL */
+.receipt-modal-card {
+  background: var(--deux-card-bg);
+  border: 2px solid var(--deux-border);
+  border-radius: 36px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 92vh;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.receipt-scrollable-body {
+  padding: 36px 32px;
+  overflow-y: auto;
+  max-height: 92vh;
+}
+
+.receipt-close-x-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--deux-wheat);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--deux-dark);
+}
+
+.receipt-top-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.receipt-brand-logo {
+  font-family: 'Erica One', cursive;
+  font-size: 32px;
+  color: var(--deux-dark);
+}
+
+.receipt-subtitle {
+  font-size: 12px;
+  color: var(--deux-text-muted);
+  margin-bottom: 12px;
+}
+
+.receipt-stamp-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: var(--deux-yellow);
+  color: var(--deux-dark);
+  border: 1px solid var(--deux-dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.receipt-meta-box {
+  background: var(--deux-wheat);
+  border-radius: 20px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.receipt-meta-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.receipt-meta-row strong {
+  color: var(--deux-dark);
+}
+
+.receipt-items-section {
+  border-top: 1.5px dashed var(--deux-border);
+  border-bottom: 1.5px dashed var(--deux-border);
+  padding: 14px 0;
+  margin-bottom: 16px;
+}
+
+.receipt-items-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--deux-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.receipt-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.receipt-item-row strong {
+  display: block;
+}
+
+.receipt-item-row small {
+  color: var(--deux-text-muted);
+}
+
+.receipt-row-val {
+  font-weight: 700;
+  color: var(--deux-dark);
+}
+
+.receipt-totals-box {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.receipt-total-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.receipt-total-line.grand-total {
+  border-top: 1.5px solid var(--deux-dark);
+  padding-top: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--deux-red);
+}
+
+.receipt-greeting-box {
+  background: var(--deux-soft-yellow);
+  border: 1px dashed #F5C542;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  font-size: 12px;
+}
+
+.greeting-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+  color: var(--deux-dark);
+  margin-bottom: 6px;
+}
+
+.greeting-quote {
+  font-style: italic;
+  color: var(--deux-dark);
+  margin-top: 6px;
+}
+
+.receipt-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.receipt-btn-whatsapp {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  background: #25D366;
+  color: #FFFFFF;
+  border: none;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.receipt-btn-whatsapp:hover {
+  background: #1EB855;
+}
+
+.receipt-btn-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.receipt-btn-outline {
+  padding: 12px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1.5px solid var(--deux-dark);
+  color: var(--deux-dark);
+  font-weight: 800;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.receipt-btn-close {
+  padding: 12px;
+  border-radius: 999px;
+  background: var(--deux-wheat);
+  border: 1.5px solid var(--deux-border);
+  color: var(--deux-dark);
+  font-weight: 800;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* HISTORY MODAL */
+.history-modal-card {
+  background: var(--deux-card-bg);
+  border: 2px solid var(--deux-border);
+  border-radius: 36px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+.history-list-scroll {
+  padding: 24px 32px;
+  max-height: 60vh;
+  overflow-y: auto;
+  display: grid;
+  gap: 12px;
+}
+
+.history-item-card {
+  background: var(--deux-wheat);
+  border-radius: 18px;
+  padding: 16px 20px;
+  border: 1px solid var(--deux-border);
+}
+
+.history-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.history-item-top strong {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 20px;
+  color: var(--deux-dark);
+  margin-right: 8px;
+}
+
+.history-item-top small {
+  font-size: 11px;
+  color: var(--deux-text-muted);
+}
+
+.history-item-total {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 20px;
+  color: var(--deux-red);
+}
+
+.history-customer-info {
+  font-size: 12px;
+  color: var(--deux-text-muted);
+  margin-bottom: 10px;
+}
+
+.history-reopen-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--deux-dark);
+  color: #FFFFFF;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* =========================================================
+   RESPONSIVE QUERIES
+========================================================= */
 @media (max-width: 1024px) {
-  .deux-menu-hero-title {
-    font-size: 78px;
+  .deux-exact-h1 {
+    font-size: 96px;
   }
-  .deux-product-cards-grid {
+  .deux-hero-trio-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+  .deux-hero-trio-left,
+  .deux-hero-trio-right {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .deux-exact-cards-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .deux-why-exact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .deux-testi-exact-grid {
+    grid-template-columns: 1fr;
+  }
+  .testi-exact-image-col {
+    height: 340px;
+  }
+  .deux-blog-exact-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-columns-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  .deux-menu-hero-title {
-    font-size: 58px;
+  .deux-nav-side {
+    display: none;
+  }
+  .deux-burger-btn {
+    display: block;
+  }
+  .deux-nav-pill {
+    padding: 8px 20px;
+  }
+  .deux-exact-h1 {
+    font-size: 64px;
+  }
+  .deux-tilted-stamp {
+    position: static;
+    margin: 12px auto 0;
+    display: inline-block;
+  }
+  .deux-hero-showcase-box {
+    height: 280px;
+  }
+  .deux-exact-h2 {
+    font-size: 42px;
+  }
+  .deux-exact-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .deux-twin-promo-grid {
+    grid-template-columns: 1fr;
+  }
+  .deux-exact-store-box {
+    padding: 36px 24px;
+  }
+  .prefooter-title {
+    font-size: 40px;
   }
   .deux-product-cards-grid {
     grid-template-columns: 1fr;
   }
-  .deux-toolbar-top {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .deux-search-box {
-    max-width: 100%;
-  }
-  .deux-toolbar-actions {
-    justify-content: space-between;
-  }
-  .deux-floating-cart {
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 18px;
+  .deux-footer-top-grid,
+  .deux-footer-mid-grid {
+    grid-template-columns: 1fr;
   }
 }
