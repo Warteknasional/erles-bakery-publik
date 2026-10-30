@@ -3084,63 +3084,75 @@ html {
 .reveal-up {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.35s ease-out,
+              transform 0.35s ease-out;
+  transition-delay: 0s !important;
   will-change: opacity, transform;
 }
 
 .reveal-up.is-revealed {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* REVEAL SCALE: SOFT SCALE FROM 0.96 TO 1.0 FOR CARDS & BANNERS */
 .reveal-scale {
   opacity: 0;
   transform: scale(0.96) translateY(18px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.35s ease-out,
+              transform 0.35s ease-out;
+  transition-delay: 0s !important;
   will-change: opacity, transform;
 }
 
 .reveal-scale.is-revealed {
   opacity: 1;
   transform: scale(1) translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* REVEAL LEFT & RIGHT: 24PX SUBTLE LATERAL GLIDE */
 .reveal-left {
   opacity: 0;
   transform: translateX(-24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.35s ease-out,
+              transform 0.35s ease-out;
+  transition-delay: 0s !important;
   will-change: opacity, transform;
 }
 
 .reveal-left.is-revealed {
   opacity: 1;
   transform: translateX(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-right {
   opacity: 0;
   transform: translateX(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.35s ease-out,
+              transform 0.35s ease-out;
+  transition-delay: 0s !important;
   will-change: opacity, transform;
 }
 
 .reveal-right.is-revealed {
   opacity: 1;
   transform: translateX(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* NATURAL STAGGER DELAYS FOR CARDS & LISTS */
-.stagger-1 { transition-delay: 0.08s; }
-.stagger-2 { transition-delay: 0.16s; }
-.stagger-3 { transition-delay: 0.24s; }
-.stagger-4 { transition-delay: 0.32s; }
-.stagger-5 { transition-delay: 0.40s; }
+/* NATURAL STAGGER DELAYS ONLY ON ENTRANCE */
+.is-revealed.stagger-1 { transition-delay: 0.08s !important; }
+.is-revealed.stagger-2 { transition-delay: 0.16s !important; }
+.is-revealed.stagger-3 { transition-delay: 0.24s !important; }
+.is-revealed.stagger-4 { transition-delay: 0.32s !important; }
+.is-revealed.stagger-5 { transition-delay: 0.40s !important; }
 
 /* RETRO STICKER SUBTLE BREATHING FLOAT */
 @keyframes subtleFloat {
