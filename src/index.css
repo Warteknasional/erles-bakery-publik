@@ -3048,3 +3048,159 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================================
+   13. SILKY & ELEGANT SCROLL ANIMATIONS (DEUX BAKERY LUXURY)
+========================================================= */
+html {
+  scroll-behavior: smooth;
+}
+
+/* SLIM READING PROGRESS BAR */
+.deux-scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #CC4A3B 0%, #E6B830 50%, #CC4A3B 100%);
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.08s ease-out;
+  box-shadow: 0 1px 6px rgba(204, 74, 59, 0.35);
+}
+
+/* NAVBAR DYNAMIC SCROLLED STATE */
+.deux-nav-pill.is-scrolled {
+  background: rgba(255, 248, 240, 0.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-color: rgba(74, 46, 23, 0.22);
+  box-shadow: 0 14px 40px -8px rgba(74, 46, 23, 0.18), 0 0 0 1px rgba(74, 46, 23, 0.08);
+  padding: 8px 30px;
+  transform: translateY(-2px);
+}
+
+/* REVEAL UP: GENTLE 22PX ELEVATION WITH APPLE/FRAMER CURVE */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* REVEAL SCALE: SOFT SCALE FROM 0.96 TO 1.0 FOR CARDS & BANNERS */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.96) translateY(18px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.is-revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* REVEAL LEFT & RIGHT: 24PX SUBTLE LATERAL GLIDE */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-left.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-right.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* NATURAL STAGGER DELAYS FOR CARDS & LISTS */
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+.stagger-5 { transition-delay: 0.40s; }
+
+/* RETRO STICKER SUBTLE BREATHING FLOAT */
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: rotate(-17deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-15.5deg) translateY(-4px);
+  }
+}
+
+.deux-tilted-stamp {
+  animation: subtleFloat 5s ease-in-out infinite;
+}
+
+/* ROTATING ARTISAN STAMP ANIMATION */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.deux-stamp-circle,
+.hero-stamp-svg {
+  animation: spinSlow 28s linear infinite;
+}
+
+/* CARD MICRO-INTERACTIONS ON HOVER */
+.deux-prod-card,
+.deux-exact-card,
+.deux-twin-promo-card,
+.deux-blog-card,
+.deux-why-exact-item {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+
+.deux-prod-card:hover,
+.deux-exact-card:hover,
+.deux-blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -10px rgba(74, 46, 23, 0.16);
+}
+
+/* ACCESSIBILITY: RESPECT USER MOTION PREFERENCE */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal-up,
+  .reveal-scale,
+  .reveal-left,
+  .reveal-right,
+  .deux-scroll-progress-bar,
+  .deux-tilted-stamp,
+  .deux-stamp-circle,
+  .hero-stamp-svg {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

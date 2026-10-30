@@ -88,7 +88,7 @@ export default function TentangPage() {
       {/* 1. HERO ABOUT (DEUX STYLE) */}
       <section className="deux-about-hero">
         <div className="deux-container">
-          <div className="deux-about-hero-center">
+          <div className="deux-about-hero-center reveal-up">
             <span className="deux-scallop-tag">about</span>
             <span className="deux-about-mini-brand">erles bakery</span>
             <h1 className="deux-about-title">
@@ -109,7 +109,7 @@ export default function TentangPage() {
         <div className="deux-container">
           <div className="deux-mission-grid">
             {/* PORTRAIT WITH SCOTCH TAPE */}
-            <div className="deux-founder-visual">
+            <div className="deux-founder-visual reveal-left">
               <div className="deux-tape-decor"></div>
               <div className="deux-portrait-frame">
                 <img
@@ -125,7 +125,7 @@ export default function TentangPage() {
             </div>
 
             {/* FOUNDER NOTE JOURNAL CARD */}
-            <div className="deux-founder-card">
+            <div className="deux-founder-card reveal-right">
               <div className="founder-card-top">
                 <span className="founder-note-pill">FOUNDER NOTE</span>
                 <Heart size={16} fill="#CC4A3B" color="#CC4A3B" />
@@ -163,7 +163,7 @@ export default function TentangPage() {
       {/* 3. WHY ERLES (3 PHOTO CARDS) */}
       <section className="deux-why-section">
         <div className="deux-container">
-          <div className="deux-center-header">
+          <div className="deux-center-header reveal-up">
             <span className="deux-scallop-tag">why erles</span>
             <h2 className="deux-display-title">
               Freshly Made With Care For Everyday
@@ -172,7 +172,7 @@ export default function TentangPage() {
 
           <div className="deux-why-cards-grid">
             {cardsWhy.map((c, idx) => (
-              <div key={idx} className="deux-why-card">
+              <div key={idx} className={`deux-why-card reveal-scale stagger-${idx + 1}`}>
                 <div className="why-card-image">
                   <img src={c.image} alt={c.title} />
                   <span className="why-card-tag">{c.tag}</span>
@@ -190,7 +190,7 @@ export default function TentangPage() {
       {/* 4. IN NUMBERS SECTION */}
       <section className="deux-numbers-section">
         <div className="deux-container">
-          <div className="deux-center-header">
+          <div className="deux-center-header reveal-up">
             <span className="deux-scallop-tag light">in numbers</span>
             <h2 className="deux-display-title">
               The Numbers Behind Every Loaf We Bake
@@ -199,7 +199,7 @@ export default function TentangPage() {
 
           <div className="deux-stats-grid">
             {stats.map((s, idx) => (
-              <div key={idx} className="deux-stat-item">
+              <div key={idx} className={`deux-stat-item reveal-up stagger-${idx + 1}`}>
                 <span className="stat-big-num">{s.num}</span>
                 <strong className="stat-label">{s.label}</strong>
                 <p className="stat-desc">{s.desc}</p>
@@ -212,7 +212,7 @@ export default function TentangPage() {
       {/* 5. MEET OUR TEAM / BAKERS */}
       <section className="deux-team-section">
         <div className="deux-container">
-          <div className="deux-center-header">
+          <div className="deux-center-header reveal-up">
             <span className="deux-scallop-tag">team member</span>
             <h2 className="deux-display-title">THE HANDS BEHIND OUR OVEN</h2>
             <p className="deux-team-subtitle">
@@ -223,7 +223,7 @@ export default function TentangPage() {
 
           <div className="deux-team-grid">
             {teamMembers.map((m, idx) => (
-              <div key={idx} className="deux-team-card">
+              <div key={idx} className={`deux-team-card reveal-up stagger-${idx + 1}`}>
                 <div className="team-photo-wrap">
                   <img src={m.image} alt={m.name} />
                 </div>
@@ -241,7 +241,7 @@ export default function TentangPage() {
       {/* 6. BOTTOM BANNER CTA (DEUX BAKERY SIGNATURE SHOWCASE) */}
       <section className="deux-banner-cta">
         <div className="deux-container">
-          <div className="deux-banner-inner">
+          <div className="deux-banner-inner reveal-scale">
             {/* LEFT TILTED BREAD PHOTO */}
             <div className="banner-decor-photo left">
               <img

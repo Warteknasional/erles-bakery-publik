@@ -447,7 +447,7 @@ ${
       {/* 1. DEUX STYLE MENU HERO */}
       <section className="deux-menu-hero">
         <div className="deux-container">
-          <div className="deux-menu-hero-center">
+          <div className="deux-menu-hero-center reveal-up">
             {/* ROTATING BADGE */}
             <div className="deux-stamp-badge" title="Discover Our Fresh Bakes">
               <svg
@@ -498,7 +498,7 @@ ${
 
       {/* 2. TOOLBAR & CATEGORY PILLS */}
       <section className="deux-container">
-        <div className="deux-menu-toolbar">
+        <div className="deux-menu-toolbar reveal-up stagger-1">
           {/* SEARCH & SORT & HISTORY */}
           <div className="deux-toolbar-top">
             <div className="deux-search-box">
@@ -572,11 +572,11 @@ ${
 
         {/* 3. PRODUCT CARDS GRID */}
         <div className="deux-product-cards-grid">
-          {filteredProducts.map((product) => {
+          {filteredProducts.map((product, idx) => {
             const itemInCart = cart.find((item) => item.id === product.id);
 
             return (
-              <article key={product.id} className="deux-prod-card">
+              <article key={product.id} className={`deux-prod-card reveal-scale stagger-${(idx % 4) + 1}`}>
                 <div className="deux-prod-thumb">
                   <img src={product.image} alt={product.nama} loading="lazy" />
                   <span className="deux-prod-tag">{product.kategori}</span>

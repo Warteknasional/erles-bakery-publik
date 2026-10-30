@@ -164,7 +164,7 @@ export default function HomePage() {
           </div>
 
           {/* 3-PART HERO BOTTOM ROW: [LEFT TEXT] | [CENTER IMAGE] | [RIGHT CATEGORY & BUTTON] */}
-          <div className="deux-hero-trio-row">
+          <div className="deux-hero-trio-row reveal-up">
             {/* LEFT TEXT */}
             <div className="deux-hero-trio-left">
               <p>
@@ -204,7 +204,7 @@ export default function HomePage() {
       ========================================================= */}
       <section className="deux-exact-section">
         <div className="deux-exact-container">
-          <div className="deux-exact-header center">
+          <div className="deux-exact-header center reveal-up">
             <span className="deux-retro-sticker">featured</span>
             <h2 className="deux-exact-h2">
               A LITTLE TASTE OF
@@ -214,7 +214,7 @@ export default function HomePage() {
           </div>
 
           {/* CATEGORY TABS */}
-          <div className="deux-exact-tabs">
+          <div className="deux-exact-tabs reveal-up stagger-1">
             {['ALL', 'BREADS', 'PASTRIES', 'HAMPERS'].map((tab) => (
               <button
                 key={tab}
@@ -229,8 +229,8 @@ export default function HomePage() {
 
           {/* 3-COLUMN CARDS GRID (DEUX STYLE) */}
           <div className="deux-exact-cards-grid">
-            {displayedProducts.map((p) => (
-              <article key={p.id} className="deux-exact-card">
+            {displayedProducts.map((p, idx) => (
+              <article key={p.id} className={`deux-exact-card reveal-scale stagger-${(idx % 3) + 1}`}>
                 <div className="deux-exact-card-thumb">
                   <img src={p.image} alt={p.name} loading="lazy" />
                   <span className="card-badge-pill">{p.tag}</span>
@@ -254,7 +254,7 @@ export default function HomePage() {
           </div>
 
           {/* VIEW ALL MENU LINK */}
-          <div className="deux-exact-view-all">
+          <div className="deux-exact-view-all reveal-up stagger-2">
             <Link to="/pesanan" className="deux-pill-outline-btn">
               <span>VIEW ALL MENU</span>
               <ArrowRight size={16} />
@@ -270,7 +270,7 @@ export default function HomePage() {
         <div className="deux-exact-container">
           <div className="deux-twin-promo-grid">
             {/* PROMO CARD 1 */}
-            <div className="deux-twin-card yellow">
+            <div className="deux-twin-card yellow reveal-left">
               <div className="twin-top-content">
                 <span className="deux-retro-sticker">limited offer</span>
                 <h3 className="twin-headline">upto 20% OFF</h3>
@@ -289,7 +289,7 @@ export default function HomePage() {
             </div>
 
             {/* PROMO CARD 2 */}
-            <div className="deux-twin-card wheat">
+            <div className="deux-twin-card wheat reveal-right">
               <div className="twin-top-content">
                 <span className="deux-retro-sticker">new arrival</span>
                 <h3 className="twin-headline">FRESH DAILY</h3>
@@ -316,7 +316,7 @@ export default function HomePage() {
       <section className="deux-exact-section why-bg">
         <div className="deux-exact-container">
           <div className="deux-why-exact-grid">
-            <div className="why-left-quote-col">
+            <div className="why-left-quote-col reveal-left">
               <span className="deux-retro-sticker">why erles</span>
               <h2 className="deux-exact-h2">
                 Freshly Made With Care
@@ -331,8 +331,8 @@ export default function HomePage() {
               </blockquote>
             </div>
 
-            <div className="why-right-features-col">
-              <div className="why-feature-block">
+            <div className="why-right-features-col reveal-right">
+              <div className="why-feature-block reveal-up stagger-1">
                 <span className="f-num">01</span>
                 <div>
                   <h4>Made Fresh Daily</h4>
@@ -343,7 +343,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="why-feature-block">
+              <div className="why-feature-block reveal-up stagger-2">
                 <span className="f-num">02</span>
                 <div>
                   <h4>Quality Ingredients</h4>
@@ -354,7 +354,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="why-feature-block">
+              <div className="why-feature-block reveal-up stagger-3">
                 <span className="f-num">03</span>
                 <div>
                   <h4>Crafted By Hand</h4>
@@ -365,7 +365,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="why-feature-block">
+              <div className="why-feature-block reveal-up stagger-4">
                 <span className="f-num">04</span>
                 <div>
                   <h4>Made To Share</h4>
@@ -405,7 +405,7 @@ export default function HomePage() {
       ========================================================= */}
       <section className="deux-exact-section">
         <div className="deux-exact-container">
-          <div className="deux-exact-store-box">
+          <div className="deux-exact-store-box reveal-scale">
             <div className="store-content-panel">
               <span className="deux-retro-sticker">VISIT OUR STORE</span>
               <h2 className="deux-exact-h2 light">We are waiting for your visit</h2>
@@ -459,7 +459,7 @@ export default function HomePage() {
         <div className="deux-exact-container">
           <div className="deux-testi-exact-grid">
             {/* LEFT IMAGE */}
-            <div className="testi-exact-image-col">
+            <div className="testi-exact-image-col reveal-left">
               <img
                 src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=85"
                 alt="Bakery moment"
@@ -467,7 +467,7 @@ export default function HomePage() {
             </div>
 
             {/* RIGHT BUTTER GOLD CARD (RADIUS 48px) */}
-            <div className="testi-exact-card-col">
+            <div className="testi-exact-card-col reveal-right">
               <div className="testi-quote-mark">“</div>
               <div className="testi-stars-row">
                 {[...Array(5)].map((_, i) => (
@@ -493,7 +493,7 @@ export default function HomePage() {
       ========================================================= */}
       <section className="deux-exact-section">
         <div className="deux-exact-container">
-          <div className="deux-exact-header center">
+          <div className="deux-exact-header center reveal-up">
             <span className="deux-retro-sticker">blog</span>
             <h2 className="deux-exact-h2">
               STORIES, RECIPES & INSPIRATION
@@ -504,7 +504,7 @@ export default function HomePage() {
 
           <div className="deux-blog-exact-grid">
             {blogArticles.map((art, idx) => (
-              <article key={idx} className="deux-blog-card">
+              <article key={idx} className={`deux-blog-card reveal-up stagger-${idx + 1}`}>
                 <div className="blog-thumb">
                   <img src={art.image} alt={art.title} />
                 </div>
@@ -530,7 +530,7 @@ export default function HomePage() {
       ========================================================= */}
       <section className="deux-exact-section faq-bg">
         <div className="deux-exact-container">
-          <div className="deux-exact-header center">
+          <div className="deux-exact-header center reveal-up">
             <span className="deux-retro-sticker">faqs</span>
             <h2 className="deux-exact-h2">FREQUENTLY ASKED QUESTIONS</h2>
             <p className="faq-subtitle">
@@ -539,7 +539,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="deux-exact-faq-stack">
+          <div className="deux-exact-faq-stack reveal-up stagger-1">
             {faqData.map((item, idx) => (
               <div
                 key={idx}
@@ -566,7 +566,7 @@ export default function HomePage() {
       ========================================================= */}
       <section className="deux-banner-cta">
         <div className="deux-exact-container">
-          <div className="deux-banner-inner">
+          <div className="deux-banner-inner reveal-scale">
             {/* LEFT TILTED BREAD PHOTO */}
             <div className="banner-decor-photo left">
               <img
