@@ -562,19 +562,53 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================
-          10. PRE-FOOTER BANNER CTA
+          10. PRE-FOOTER BANNER CTA (DEUX BAKERY SIGNATURE SHOWCASE)
       ========================================================= */}
-      <section className="deux-prefooter-banner">
+      <section className="deux-banner-cta">
         <div className="deux-exact-container">
-          <div className="prefooter-inner-box">
-            <span className="deux-retro-sticker">VISIT THE NEAREST</span>
-            <h2 className="prefooter-title">
-              Let’s Get A Perfect Sourdough Loaf For Today
-            </h2>
-            <Link to="/pesanan" className="prefooter-btn">
-              <span>EXPLORE OUR MENU</span>
-              <ArrowRight size={18} />
-            </Link>
+          <div className="deux-banner-inner">
+            {/* LEFT TILTED BREAD PHOTO */}
+            <div className="banner-decor-photo left">
+              <img
+                src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=400&q=80"
+                alt="Artisan Sourdough"
+              />
+            </div>
+
+            {/* CENTER CONTENT */}
+            <div className="banner-center-content">
+              <span className="deux-retro-sticker">VISIT THE NEAREST</span>
+              <h2 className="deux-banner-heading">
+                Let’s Get A Perfect Sourdough Loaf For Today
+              </h2>
+              <p className="deux-banner-desc">
+                Dipanggang segar setiap subuh di dapur artisan kami di Kota Malang. Nikmati
+                kehangatan roti sourdough, donat kentang lembut, dan hampers istimewa hari ini.
+              </p>
+
+              <div className="deux-banner-btn-group">
+                <Link to="/pesanan" className="deux-banner-button">
+                  <span>EXPLORE OUR MENU</span>
+                  <ArrowRight size={18} />
+                </Link>
+                <a
+                  href="https://wa.me/6285717224420"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="deux-banner-secondary-btn"
+                >
+                  <span>Chat WhatsApp</span>
+                </a>
+              </div>
+            </div>
+
+            {/* RIGHT TILTED CROISSANT PHOTO */}
+            <div className="banner-decor-photo right">
+              <img
+                src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&q=80"
+                alt="Golden Croissant"
+              />
+            </div>
           </div>
         </div>
       </section>
