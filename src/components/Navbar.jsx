@@ -39,15 +39,17 @@ export default function Navbar() {
             <span className="deux-logo-text">erles</span>
           </Link>
 
-          {/* RIGHT LINKS */}
+          {/* RIGHT LINKS: LACAK PESANAN & KONTAK */}
           <div className="deux-nav-side right">
             <NavLink
-              to="/pesanan?kategori=Hampers"
+              to="/lacak-pesanan"
               className={({ isActive }) =>
                 `deux-nav-item ${isActive ? 'active' : ''}`
               }
+              title="Lacak Progres Pesanan Real-Time"
             >
-              HAMPERS
+              <span className="lacak-pill-text">LACAK PESANAN</span>
+              <span className="lacak-live-dot" title="Live Tracker Aktif" />
             </NavLink>
             <NavLink
               to="/kontak"
@@ -146,13 +148,14 @@ export default function Navbar() {
                 MENU & KATALOG
               </NavLink>
               <NavLink
-                to="/pesanan?kategori=Hampers"
+                to="/lacak-pesanan"
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
-                  `deux-drawer-link ${isActive ? 'active' : ''}`
+                  `deux-drawer-link drawer-highlight ${isActive ? 'active' : ''}`
                 }
               >
-                HAMPERS SPESIAL
+                <span>PELACAKAN PESANAN</span>
+                <span className="drawer-badge-pulse">LIVE</span>
               </NavLink>
               <NavLink
                 to="/tentang"

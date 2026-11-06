@@ -78,6 +78,11 @@ export default function Footer() {
                 <Link to="/pesanan">Menu & Katalog</Link>
               </li>
               <li>
+                <Link to="/lacak-pesanan" style={{ color: '#FFE480', fontWeight: 600 }}>
+                  Pelacakan Pesanan Live ⚡
+                </Link>
+              </li>
+              <li>
                 <Link to="/pesanan?kategori=Hampers">Hampers Spesial</Link>
               </li>
               <li>

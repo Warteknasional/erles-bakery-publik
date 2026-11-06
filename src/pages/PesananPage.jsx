@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import {
   X,
   Search,
@@ -22,6 +22,7 @@ import {
   Loader2,
   Landmark,
   Banknote,
+  Flame,
 } from 'lucide-react';
 import { useCart } from '../context/useCart';
 import { productService, orderService } from '../services/api';
@@ -1316,6 +1317,15 @@ ${
 
               {/* RECEIPT FOOTER ACTIONS */}
               <div className="receipt-action-buttons">
+                <Link
+                  to={`/lacak-pesanan?kode=${latestOrder.code}`}
+                  className="receipt-btn-track"
+                  onClick={() => setShowReceiptModal(false)}
+                >
+                  <Flame size={16} />
+                  <span>Lacak Progres Pesanan Ini Real-Time</span>
+                  <ArrowRight size={15} />
+                </Link>
                 <button
                   type="button"
                   className="receipt-btn-whatsapp"
@@ -1406,6 +1416,14 @@ ${
                     >
                       Buka Struk Lengkap
                     </button>
+                    <Link
+                      to={`/lacak-pesanan?kode=${item.code}`}
+                      className="history-track-btn"
+                      onClick={() => setShowHistoryModal(false)}
+                    >
+                      <span>Lacak Pesanan</span>
+                      <ArrowRight size={13} />
+                    </Link>
                   </div>
                 </div>
               ))}
