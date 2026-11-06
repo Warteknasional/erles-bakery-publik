@@ -3753,3 +3753,662 @@ button.faq-question-bar {
     top: 10px;
   }
 }
+
+
+/* =========================================================
+   15. PROFESSIONAL CONTACT DASHBOARD (DEUX BAKERY LUXURY)
+========================================================= */
+.deux-contact-page {
+  padding-bottom: 30px;
+}
+
+.deux-contact-hero {
+  padding: 30px 0 54px;
+}
+
+.deux-contact-hero-center {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.deux-contact-mini-brand {
+  display: block;
+  font-family: 'Erica One', cursive;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: #8C5A35;
+  text-transform: lowercase;
+  margin-bottom: 8px;
+}
+
+.deux-contact-title {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 86px;
+  line-height: 0.96;
+  color: var(--deux-dark);
+  margin: 12px 0 18px;
+  letter-spacing: 0.01em;
+}
+
+.deux-contact-lead {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #6B4F3B;
+  max-width: 680px;
+  margin: 0 auto 28px;
+}
+
+.deux-contact-status-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid var(--deux-border);
+  border-radius: 9999px;
+  padding: 8px 24px;
+  box-shadow: 0 4px 16px rgba(74, 46, 23, 0.06);
+}
+
+.status-live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25);
+  animation: pulseGreen 2.2s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.1);
+  }
+}
+
+.status-text {
+  font-size: 12.5px;
+  color: var(--deux-dark);
+}
+
+/* CHANNELS HUB GRID */
+.deux-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-bottom: 60px;
+}
+
+.deux-channel-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--deux-border);
+  border-radius: 28px;
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(74, 46, 23, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.deux-channel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.deux-channel-card.highlight-wa::before {
+  background: #25D366;
+}
+
+.deux-channel-card.highlight-ig::before {
+  background: linear-gradient(90deg, #F58529, #DD2A7B, #8134AF);
+}
+
+.deux-channel-card.highlight-store::before {
+  background: #EAB308;
+}
+
+.deux-channel-card.highlight-corp::before {
+  background: #8C5A35;
+}
+
+.deux-channel-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(74, 46, 23, 0.3);
+  box-shadow: 0 18px 40px -10px rgba(74, 46, 23, 0.14);
+}
+
+.channel-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.channel-icon-pill {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.channel-icon-pill.wa {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.channel-icon-pill.ig {
+  background: #FCE7F3;
+  color: #BE185D;
+}
+
+.channel-icon-pill.store {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+.channel-icon-pill.mail {
+  background: #FFEDD5;
+  color: #C2410C;
+}
+
+.channel-badge {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.channel-badge.green {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.channel-badge.purple {
+  background: #FCE7F3;
+  color: #9D174D;
+}
+
+.channel-badge.gold {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+.channel-badge.brown {
+  background: #F5EBE1;
+  color: #7C4F2B;
+}
+
+.channel-title {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 27px;
+  line-height: 1.1;
+  color: var(--deux-dark);
+  margin-bottom: 8px;
+}
+
+.channel-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6B4F3B;
+  margin-bottom: 16px;
+}
+
+.channel-contact-val {
+  background: var(--deux-wheat);
+  border: 1px solid var(--deux-border);
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--deux-dark);
+  margin-bottom: 20px;
+  word-break: break-word;
+}
+
+.channel-contact-val.small {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.channel-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.channel-primary-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: 999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.channel-primary-btn.wa {
+  background: #25D366;
+  color: #FFFFFF !important;
+}
+
+.channel-primary-btn.wa:hover {
+  background: #1eb857;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37, 211, 102, 0.35);
+}
+
+.channel-primary-btn.ig {
+  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF);
+  color: #FFFFFF !important;
+}
+
+.channel-primary-btn.ig:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(221, 42, 123, 0.35);
+}
+
+.channel-primary-btn.dark {
+  background: var(--deux-dark);
+  color: #FFFFFF !important;
+}
+
+.channel-primary-btn.dark:hover {
+  background: var(--deux-red);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(204, 74, 59, 0.35);
+}
+
+.channel-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--deux-border);
+  background: #FFFFFF;
+  color: var(--deux-dark);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.channel-secondary-btn:hover {
+  background: var(--deux-wheat);
+  border-color: var(--deux-dark);
+}
+
+/* SPLIT SECTION (INQUIRY FORM + MAP LOCATION) */
+.deux-contact-split-section {
+  margin-bottom: 70px;
+}
+
+.deux-split-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 36px;
+}
+
+.deux-inquiry-box {
+  background: #FFFFFF;
+  border: 2px solid var(--deux-border);
+  border-radius: 36px;
+  padding: 40px 36px;
+  box-shadow: 0 16px 44px -10px rgba(74, 46, 23, 0.08);
+}
+
+.inquiry-box-header,
+.location-box-header {
+  margin-bottom: 24px;
+}
+
+.deux-inquiry-title {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 38px;
+  color: var(--deux-dark);
+  margin: 8px 0 6px;
+}
+
+.deux-inquiry-sub {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6B4F3B;
+}
+
+.deux-inquiry-form {
+  display: grid;
+  gap: 16px;
+}
+
+.deux-contact-select {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1.5px solid var(--deux-border);
+  background: #FFFFFF;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--deux-dark);
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(74, 46, 23, 0.04);
+}
+
+.deux-contact-select:focus {
+  border-color: var(--deux-dark);
+}
+
+.form-privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--deux-text-muted);
+}
+
+.deux-inquiry-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 34px;
+  border-radius: 9999px;
+  background: var(--deux-dark);
+  color: #FFFFFF !important;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px rgba(74, 46, 23, 0.22);
+}
+
+.deux-inquiry-submit-btn:hover {
+  background: var(--deux-red);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(204, 74, 59, 0.35);
+}
+
+/* SUCCESS CARD INQUIRY */
+.inquiry-success-card {
+  background: #F0FDF4;
+  border: 2px solid #86EFAC;
+  border-radius: 26px;
+  padding: 36px 30px;
+  text-align: center;
+}
+
+.success-icon-badge {
+  display: inline-flex;
+  margin-bottom: 14px;
+}
+
+.inquiry-success-card h3 {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 32px;
+  color: #14532D;
+  margin-bottom: 8px;
+}
+
+.inquiry-success-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #166534;
+  margin-bottom: 8px;
+}
+
+.success-note {
+  font-size: 13px;
+  color: #15803D !important;
+  margin: 14px 0 24px !important;
+}
+
+.success-actions-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.success-wa-forward-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  background: #25D366;
+  color: #FFFFFF !important;
+  border: none;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 360px;
+}
+
+.success-wa-forward-btn:hover {
+  background: #1eb857;
+  transform: translateY(-2px);
+}
+
+.success-reset-btn {
+  background: transparent;
+  border: 1.5px solid var(--deux-dark);
+  color: var(--deux-dark);
+  border-radius: 9999px;
+  padding: 10px 22px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.success-reset-btn:hover {
+  background: #FFFFFF;
+}
+
+/* LOCATION BOX & GOOGLE MAPS */
+.deux-location-box {
+  background: var(--deux-wheat);
+  border: 2px solid var(--deux-border);
+  border-radius: 36px;
+  padding: 38px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.deux-maps-frame {
+  border-radius: 22px;
+  overflow: hidden;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 8px 24px rgba(74, 46, 23, 0.12);
+  margin-bottom: 24px;
+}
+
+.deux-maps-frame iframe {
+  display: block;
+}
+
+.store-specs-list {
+  display: grid;
+  gap: 16px;
+}
+
+.spec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.spec-icon {
+  color: var(--deux-red);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.spec-item strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--deux-dark);
+  margin-bottom: 2px;
+}
+
+.spec-item p {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #6B4F3B;
+  margin: 0;
+}
+
+.spec-item small {
+  font-size: 11px;
+  color: var(--deux-red);
+  font-weight: 600;
+}
+
+/* CONTACT FAQ ACCORDION */
+.deux-contact-faq-section {
+  margin-bottom: 70px;
+}
+
+.deux-contact-faq-stack {
+  max-width: 860px;
+  margin: 32px auto 0;
+  display: grid;
+  gap: 12px;
+}
+
+.deux-contact-faq-item {
+  background: #FFFFFF;
+  border: 1.5px solid var(--deux-border);
+  border-radius: 18px;
+  padding: 18px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(74, 46, 23, 0.04);
+}
+
+.deux-contact-faq-item:hover {
+  border-color: var(--deux-dark);
+}
+
+.deux-contact-faq-item.open {
+  border-color: var(--deux-dark);
+  box-shadow: 0 8px 24px rgba(74, 46, 23, 0.08);
+}
+
+.faq-q-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--deux-dark);
+}
+
+.faq-icon-accent {
+  color: var(--deux-red);
+  flex-shrink: 0;
+}
+
+/* FOOTER EXTRA HELPER LINKS */
+.footer-cs-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: rgba(255, 240, 224, 0.16);
+  border: 1px solid rgba(255, 240, 224, 0.25);
+  border-radius: 999px;
+  color: var(--deux-yellow) !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.footer-cs-pill:hover {
+  background: var(--deux-yellow);
+  color: var(--deux-dark) !important;
+}
+
+.footer-address-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.footer-detail-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--deux-yellow) !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-detail-link:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE QUERIES FOR CONTACT */
+@media (max-width: 1024px) {
+  .deux-channels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .deux-split-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .deux-contact-title {
+    font-size: 54px;
+  }
+  .deux-channels-grid {
+    grid-template-columns: 1fr;
+  }
+  .deux-inquiry-box,
+  .deux-location-box {
+    padding: 26px 20px;
+    border-radius: 26px;
+  }
+  .channel-actions {
+    flex-wrap: wrap;
+  }
+  .channel-secondary-btn {
+    width: 100%;
+  }
+}

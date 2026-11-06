@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/useCart';
@@ -8,22 +8,11 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { cartCount, setIsCheckoutOpen } = useCart();
 
-  // Close drawer on ESC key
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && mobileOpen) {
-        setMobileOpen(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [mobileOpen]);
-
   return (
     <header className="deux-top-bar">
       <div className="deux-nav-wrapper">
         {/* DESKTOP CENTERED PILL NAVBAR */}
-        <nav className="deux-nav-pill" aria-label="Navigasi Utama">
+        <nav className="deux-nav-pill">
           {/* LEFT LINKS */}
           <div className="deux-nav-side left">
             <NavLink
@@ -46,7 +35,7 @@ export default function Navbar() {
 
           {/* CENTER BRAND LOGO WITH EMBLEM */}
           <Link to="/" className="deux-nav-logo" aria-label="Erles Bakery Beranda">
-            <img src="/logo.jpg" alt={SITE_CONFIG.name} className="deux-nav-logo-badge" />
+            <img src="/logo.jpg" alt="Erles Bakery" className="deux-nav-logo-badge" />
             <span className="deux-logo-text">erles</span>
           </Link>
 
@@ -60,14 +49,14 @@ export default function Navbar() {
             >
               HAMPERS
             </NavLink>
-            <a
-              href={SITE_CONFIG.whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="deux-nav-item highlight"
+            <NavLink
+              to="/kontak"
+              className={({ isActive }) =>
+                `deux-nav-item highlight ${isActive ? 'active' : ''}`
+              }
             >
               KONTAK
-            </a>
+            </NavLink>
 
             {/* CART TRIGGER BUTTON (DEUX STYLE) */}
             <Link
@@ -117,20 +106,14 @@ export default function Navbar() {
 
       {/* MOBILE DRAWER */}
       {mobileOpen && (
-        <div
-          className="deux-drawer-overlay"
-          onClick={() => setMobileOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Menu Navigasi Mobile"
-        >
+        <div className="deux-drawer-overlay" onClick={() => setMobileOpen(false)}>
           <div
             className="deux-drawer-content"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="deux-drawer-header">
               <Link to="/" onClick={() => setMobileOpen(false)} className="deux-drawer-brand-link">
-                <img src="/logo.jpg" alt={SITE_CONFIG.name} className="deux-drawer-logo-badge" />
+                <img src="/logo.jpg" alt="Erles Bakery" className="deux-drawer-logo-badge" />
                 <span className="deux-drawer-brand">erles</span>
               </Link>
               <button
@@ -180,19 +163,25 @@ export default function Navbar() {
               >
                 TENTANG KAMI
               </NavLink>
+              <NavLink
+                to="/kontak"
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `deux-drawer-link ${isActive ? 'active' : ''}`
+                }
+              >
+                KONTAK & LAYANAN
+              </NavLink>
             </div>
 
             <div className="deux-drawer-footer">
               <Link
                 to="/pesanan"
-                onClick={() => {
-                  setMobileOpen(false);
-                  if (cartCount > 0) setIsCheckoutOpen(true);
-                }}
+                onClick={() => setMobileOpen(false)}
                 className="deux-drawer-cta"
               >
                 <ShoppingBag size={18} />
-                <span>Pesan Online {cartCount > 0 ? `(${cartCount} item)` : 'Sekarang'}</span>
+                <span>Pesan Online Sekarang</span>
                 <ArrowRight size={16} />
               </Link>
               <p className="deux-drawer-phone">
