@@ -20,6 +20,8 @@ import {
   User,
   Phone,
   RefreshCw,
+  ShoppingBag,
+  ArrowLeft,
 } from 'lucide-react';
 import { orderService } from '../services/api';
 import { SITE_CONFIG } from '../config/site';
@@ -48,7 +50,7 @@ const ORDER_STEPS = [
     sublabel: 'Artisan oven baking',
     icon: Flame,
     color: '#CC4A3B',
-    description: 'Adonan difermentasi dengan ragi alami dan dipanggang segar di oven dapur.',
+    description: 'Adonan difermentasi dengan ragi alami dan dipanggang segar di oven batu.',
   },
   {
     key: 'ready',
@@ -85,7 +87,7 @@ function getStepIndex(normalizedKey) {
   return idx >= 0 ? idx : 0;
 }
 
-// Built-in Demo Orders for instant testing
+// Built-in Demo Orders for lecturer / instant presentation testing
 const DEMO_ORDERS = {
   'ERL-LIVE-001': {
     code: 'ERL-LIVE-001',
@@ -328,28 +330,43 @@ export default function LacakPesananPage() {
     // Not found
     setLoading(false);
     setErrorMessage(
-      `Nomor pesanan "${cleanCode}" tidak ditemukan. Pastikan nomor yang dimasukkan sesuai dengan yang tertera pada struk belanja Anda.`
+      `Nomor pesanan "${cleanCode}" tidak ditemukan. Pastikan nomor yang dimasukkan sesuai dengan yang tertera pada struk belanja atau WhatsApp Anda.`
     );
   }, []);
 
-  // Sync with searchParams on change
+  // SMART CONDITIONAL LOGIC:
+  // 1. If URL has ?kode=..., search that code
+  // 2. Else if user has recent orders in this browser, load their latest order
+  // 3. Else, leave activeOrder as null (display friendly Empty State!)
   useEffect(() => {
     let ignore = false;
-    const code = searchParams.get('kode') || 'ERL-LIVE-001';
-    (async () => {
-      if (!ignore) {
-        await performSearch(code);
-      }
-    })();
+    const code = searchParams.get('kode');
+
+    if (code) {
+      (async () => {
+        if (!ignore) {
+          await performSearch(code);
+        }
+      })();
+    } else if (recentOrders.length > 0 && recentOrders[0]?.code) {
+      // Auto-load latest local order
+      (async () => {
+        if (!ignore) {
+          await performSearch(recentOrders[0].code);
+        }
+      })();
+    }
+
     return () => {
       ignore = true;
     };
-  }, [searchParams, performSearch]);
+  }, [searchParams, performSearch, recentOrders]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!searchQuery.trim()) return;
-    setSearchParams({ kode: searchQuery.trim().toUpperCase() });
+    const clean = searchQuery.trim().toUpperCase();
+    if (!clean) return;
+    setSearchParams({ kode: clean });
   };
 
   const handleCopyCode = (code) => {
@@ -389,12 +406,14 @@ export default function LacakPesananPage() {
             <span>LIVE ORDER TRACKER • DAPUR ARTISAN ERLES BAKERY</span>
           </div>
 
-          <h1 className="tracking-hero-title">Pelacakan Pesanan</h1>
+          <h1 className="tracking-hero-title">
+            {activeOrder ? 'Pelacakan Pesanan' : 'Lacak Status Pesanan'}
+          </h1>
 
           <p className="tracking-hero-subtitle">
-            Pantau setiap tahapan roti & donat Anda secara real-time. Mulai dari
-            proses pencampuran adonan, proofing ragi alami, pemanggangan di oven batu,
-            hingga siap dijemput atau diantar hangat ke pintu Anda.
+            {activeOrder
+              ? 'Pantau setiap tahapan roti & donat Anda secara real-time dari dapur batu ke tangan Anda.'
+              : 'Pantau setiap proses pembakaran roti hangat, donat kentang, dan hampers spesial Anda secara real-time.'}
           </p>
 
           {/* SEARCH INPUT BAR */}
@@ -403,7 +422,7 @@ export default function LacakPesananPage() {
               <Search size={20} className="tracking-search-icon" />
               <input
                 type="text"
-                placeholder="Masukkan Nomor Pesanan (misal: ERL-LIVE-001 atau dari struk)..."
+                placeholder="Masukkan Nomor Pesanan (cth: #ERL-20261106-1234)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 aria-label="Nomor Pesanan"
@@ -439,45 +458,6 @@ export default function LacakPesananPage() {
             </button>
           </form>
 
-          {/* DEMO SHORTCUTS & RECENT ORDERS PILLS */}
-          <div className="tracking-quick-demos">
-            <span className="quick-demos-label">
-              <Sparkles size={14} /> Coba Demo Status:
-            </span>
-            <div className="quick-demos-pills">
-              <button
-                type="button"
-                className={`demo-pill ${searchQuery === 'ERL-LIVE-001' ? 'active' : ''}`}
-                onClick={() => {
-                  setSearchQuery('ERL-LIVE-001');
-                  setSearchParams({ kode: 'ERL-LIVE-001' });
-                }}
-              >
-                🔥 Sedang Dipanggang (#ERL-001)
-              </button>
-              <button
-                type="button"
-                className={`demo-pill ${searchQuery === 'ERL-LIVE-002' ? 'active' : ''}`}
-                onClick={() => {
-                  setSearchQuery('ERL-LIVE-002');
-                  setSearchParams({ kode: 'ERL-LIVE-002' });
-                }}
-              >
-                📦 Siap Diambil (#ERL-002)
-              </button>
-              <button
-                type="button"
-                className={`demo-pill ${searchQuery === 'ERL-LIVE-003' ? 'active' : ''}`}
-                onClick={() => {
-                  setSearchQuery('ERL-LIVE-003');
-                  setSearchParams({ kode: 'ERL-LIVE-003' });
-                }}
-              >
-                ✨ Selesai Diterima (#ERL-003)
-              </button>
-            </div>
-          </div>
-
           {/* RECENT ORDERS PILLS IF ANY IN LOCALSTORAGE */}
           {recentOrders.length > 0 && (
             <div className="tracking-recent-strip">
@@ -489,7 +469,9 @@ export default function LacakPesananPage() {
                   <button
                     key={rec.code || i}
                     type="button"
-                    className="recent-order-chip"
+                    className={`recent-order-chip ${
+                      activeOrder?.code === rec.code ? 'active' : ''
+                    }`}
                     onClick={() => {
                       setSearchQuery(rec.code);
                       setSearchParams({ kode: rec.code });
@@ -507,7 +489,7 @@ export default function LacakPesananPage() {
         </div>
       </section>
 
-      {/* 2. ERROR STATE */}
+      {/* 2. ERROR STATE (IF SEARCH FAILED) */}
       {errorMessage && !loading && (
         <section className="tracking-error-section">
           <div className="deux-container">
@@ -519,7 +501,7 @@ export default function LacakPesananPage() {
                 <div className="error-actions">
                   <a
                     href={`https://wa.me/${SITE_CONFIG.whatsappRaw}?text=${encodeURIComponent(
-                      `Halo Admin Erles Bakery, saya ingin menanyakan pesanan dengan kode: ${searchQuery}`
+                      `Halo Admin Erles Bakery, saya ingin menanyakan pesanan dengan nomor: ${searchQuery}`
                     )}`}
                     target="_blank"
                     rel="noreferrer"
@@ -545,10 +527,168 @@ export default function LacakPesananPage() {
         </section>
       )}
 
-      {/* 3. ACTIVE ORDER DETAILS & STEPPER */}
+      {/* 3. CONDITIONAL RENDER: EMPTY STATE VS ACTIVE ORDER TRACKER */}
+
+      {/* STATE A: BELUM ADA PESANAN AKTIF (EMPTY STATE ELEGAN & PROFESIONAL) */}
+      {!activeOrder && !loading && (
+        <section className="tracking-empty-section">
+          <div className="deux-container">
+            <div className="tracking-empty-card">
+              <div className="empty-badge-artisan">
+                <ChefHat size={36} />
+              </div>
+
+              <h2 className="empty-heading">Belum Ada Pesanan yang Sedang Berjalan</h2>
+
+              <p className="empty-desc">
+                Status pesanan roti dan hampers Anda akan otomatis muncul di sini secara
+                real-time begitu Anda melakukan pemesanan di menu kami. Dapur artisan kami
+                memanggang roti segar setiap hari sesuai antrean.
+              </p>
+
+              <div className="empty-action-group">
+                <Link to="/pesanan" className="empty-order-cta">
+                  <ShoppingBag size={18} />
+                  <span>Jelajahi Menu & Pesan Sekarang</span>
+                  <ArrowRight size={16} />
+                </Link>
+
+                <a
+                  href={`https://wa.me/${SITE_CONFIG.whatsappRaw}?text=${encodeURIComponent(
+                    'Halo Erles Bakery, saya ingin menanyakan pemesanan roti.'
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="empty-wa-cta"
+                >
+                  <MessageCircle size={16} />
+                  <span>Konsultasi Dapur via WhatsApp</span>
+                </a>
+              </div>
+
+              {/* HOW IT WORKS MINI CARDS */}
+              <div className="tracking-steps-preview-grid">
+                <div className="step-preview-item">
+                  <span className="step-num">01</span>
+                  <strong>Pilih Menu Roti</strong>
+                  <p>Pilih sourdough, donat kentang, atau hampers favorit Anda.</p>
+                </div>
+                <div className="step-preview-item">
+                  <span className="step-num">02</span>
+                  <strong>Checkout & Dapatkan Kode</strong>
+                  <p>Struk resmi instan dengan nomor pesanan otomatis.</p>
+                </div>
+                <div className="step-preview-item">
+                  <span className="step-num">03</span>
+                  <strong>Pantau Status Dapur</strong>
+                  <p>Lacak tahap adonan, proses memanggang, hingga siap diantar.</p>
+                </div>
+              </div>
+
+              {/* DEMO SHORTCUTS FOR LECTURER / EVALUATION PRESENTATION */}
+              <div className="tracking-presentation-box">
+                <div className="pres-head">
+                  <Sparkles size={14} />
+                  <span>Mode Presentasi / Evaluasi Dosen</span>
+                </div>
+                <p className="pres-note">
+                  Klik tombol di bawah untuk melihat simulasi tampilan live tracker saat ada pesanan aktif:
+                </p>
+                <div className="pres-pills">
+                  <button
+                    type="button"
+                    className="pres-pill"
+                    onClick={() => {
+                      setSearchQuery('ERL-LIVE-001');
+                      setSearchParams({ kode: 'ERL-LIVE-001' });
+                    }}
+                  >
+                    🔥 Contoh 1: Sedang Dipanggang
+                  </button>
+                  <button
+                    type="button"
+                    className="pres-pill"
+                    onClick={() => {
+                      setSearchQuery('ERL-LIVE-002');
+                      setSearchParams({ kode: 'ERL-LIVE-002' });
+                    }}
+                  >
+                    📦 Contoh 2: Siap Diambil di Toko
+                  </button>
+                  <button
+                    type="button"
+                    className="pres-pill"
+                    onClick={() => {
+                      setSearchQuery('ERL-LIVE-003');
+                      setSearchParams({ kode: 'ERL-LIVE-003' });
+                    }}
+                  >
+                    ✨ Contoh 3: Pesanan Selesai
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* STATE B: PESANAN AKTIF DITEMUKAN (FULL STEPPER & ORDER DETAILS) */}
       {activeOrder && !loading && (
         <section className="tracking-content-section">
           <div className="deux-container">
+            {/* SWITCH ORDER BACK LINK */}
+            <div className="tracking-top-nav-bar">
+              <button
+                type="button"
+                className="back-to-search-btn"
+                onClick={() => {
+                  setSearchParams({});
+                  setActiveOrder(null);
+                  setSearchQuery('');
+                }}
+              >
+                <ArrowLeft size={16} />
+                <span>Cari / Lacak Pesanan Lain</span>
+              </button>
+
+              {/* QUICK DEMO SWITCHER IF IN DEMO MODE */}
+              {activeOrder.isDemo && (
+                <div className="tracking-demo-switcher">
+                  <span className="demo-lbl">Ganti Status Demo:</span>
+                  <button
+                    type="button"
+                    className={`demo-switch-btn ${activeOrder.code === 'ERL-LIVE-001' ? 'active' : ''}`}
+                    onClick={() => {
+                      setSearchQuery('ERL-LIVE-001');
+                      setSearchParams({ kode: 'ERL-LIVE-001' });
+                    }}
+                  >
+                    🔥 Oven
+                  </button>
+                  <button
+                    type="button"
+                    className={`demo-switch-btn ${activeOrder.code === 'ERL-LIVE-002' ? 'active' : ''}`}
+                    onClick={() => {
+                      setSearchQuery('ERL-LIVE-002');
+                      setSearchParams({ kode: 'ERL-LIVE-002' });
+                    }}
+                  >
+                    📦 Siap
+                  </button>
+                  <button
+                    type="button"
+                    className={`demo-switch-btn ${activeOrder.code === 'ERL-LIVE-003' ? 'active' : ''}`}
+                    onClick={() => {
+                      setSearchQuery('ERL-LIVE-003');
+                      setSearchParams({ kode: 'ERL-LIVE-003' });
+                    }}
+                  >
+                    ✨ Selesai
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* TOP CARD: ORDER ID & CURRENT STATUS BANNER */}
             <div className="tracking-main-card">
               <div className="tracking-order-head">
@@ -644,7 +784,13 @@ export default function LacakPesananPage() {
 
                 {/* CURRENT STAGE DESCRIPTION BOX */}
                 <div className="current-stage-info-box">
-                  <div className="stage-info-icon" style={{ backgroundColor: `${activeStepObj.color}15`, color: activeStepObj.color }}>
+                  <div
+                    className="stage-info-icon"
+                    style={{
+                      backgroundColor: `${activeStepObj.color}15`,
+                      color: activeStepObj.color,
+                    }}
+                  >
                     <activeStepObj.icon size={22} />
                   </div>
                   <div className="stage-info-content">
