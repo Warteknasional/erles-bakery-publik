@@ -237,7 +237,8 @@ export default function LacakPesananPage() {
   });
 
   const performSearch = useCallback(async (codeToSearch) => {
-    const cleanCode = (codeToSearch || '').trim().toUpperCase();
+    const rawCode = (codeToSearch || '').trim().toUpperCase();
+    const cleanCode = rawCode.replace(/^#/, '');
     if (!cleanCode) {
       setErrorMessage('Silakan masukkan nomor pesanan Anda.');
       return;
@@ -260,8 +261,8 @@ export default function LacakPesananPage() {
         const parsed = JSON.parse(stored);
         const found = parsed.find(
           (o) =>
-            o.code?.toUpperCase() === cleanCode ||
-            o.kode_pesanan?.toUpperCase() === cleanCode
+            o.code?.toUpperCase().replace(/^#/, '') === cleanCode ||
+            o.kode_pesanan?.toUpperCase().replace(/^#/, '') === cleanCode
         );
         if (found) {
           const normalized = {
@@ -364,7 +365,7 @@ export default function LacakPesananPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const clean = searchQuery.trim().toUpperCase();
+    const clean = searchQuery.trim().toUpperCase().replace(/^#/, '');
     if (!clean) return;
     setSearchParams({ kode: clean });
   };

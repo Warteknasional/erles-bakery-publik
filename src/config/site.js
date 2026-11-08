@@ -3,6 +3,7 @@ export const SITE_CONFIG = {
   tagline: 'Freshly Baked Goods Every Day',
   phone: '+62 857-1722-4420',
   whatsappDigits: '6285717224420',
+  whatsappRaw: '6285717224420',
   whatsappUrl: 'https://wa.me/6285717224420',
   address: 'Jl. Vinolia No. 25B, Lowokwaru, Kota Malang, Jawa Timur 65142',
   addressShort: 'Jl. Vinolia No. 25B Malang',
