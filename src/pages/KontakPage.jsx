@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SITE_CONFIG } from '../config/site';
 import {
   MessageCircle,
   MapPin,
@@ -54,7 +55,7 @@ const contactFaq = [
   },
   {
     q: 'Bagaimana cara mengajukan pesanan khusus atau kerjasama kemitraan (B2B)?',
-    a: 'Silakan isi formulir pesan di halaman ini dengan memilih topik "Kustom Hampers & Event" atau hubungi langsung WhatsApp Business kami di +62 857-1722-4420 untuk penawaran harga grosir khusus instansi/kafe.',
+    a: 'Silakan isi formulir pesan di halaman ini dengan memilih topik "Kustom Hampers & Event" atau hubungi langsung WhatsApp Business kami di +62 821-4534-6270 untuk penawaran harga grosir khusus instansi/kafe.',
   },
 ];
 
@@ -111,7 +112,7 @@ export default function KontakPage() {
       form.topic
     )}%0A*Isi Pesan:*%0A${encodeURIComponent(form.message)}`;
 
-    window.open(`https://wa.me/6285717224420?text=${text}`, '_blank');
+    window.open(`https://wa.me/6282145346270?text=${text}`, '_blank');
   };
 
   const handleResetForm = () => {
@@ -174,13 +175,13 @@ export default function KontakPage() {
                 kurir instan, atau panduan hampers.
               </p>
               <div className="channel-contact-val">
-                <span>+62 857-1722-4420</span>
+                <span>{SITE_CONFIG.phone}</span>
               </div>
             </div>
 
             <div className="channel-actions">
               <a
-                href="https://wa.me/6285717224420"
+                href={SITE_CONFIG.whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="channel-primary-btn wa"
@@ -190,7 +191,7 @@ export default function KontakPage() {
               </a>
               <button
                 type="button"
-                onClick={() => handleCopy('+6285717224420', 'wa')}
+                onClick={() => handleCopy(SITE_CONFIG.phone, 'wa')}
                 className="channel-secondary-btn"
                 title="Salin Nomor WhatsApp"
               >
@@ -364,7 +365,7 @@ export default function KontakPage() {
                     className="success-wa-forward-btn"
                   >
                     <MessageCircle size={18} />
-                    <span>Teruskan ke WhatsApp (+62 857-1722-4420)</span>
+                    <span>Teruskan ke WhatsApp ({SITE_CONFIG.phone})</span>
                   </button>
                   <button
                     type="button"
@@ -568,13 +569,13 @@ export default function KontakPage() {
                   <ArrowRight size={18} />
                 </Link>
                 <a
-                  href="https://wa.me/6285717224420"
+                  href={SITE_CONFIG.whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="deux-banner-secondary-btn"
                 >
                   <MessageCircle size={16} />
-                  <span>Chat WhatsApp (+62 857-1722-4420)</span>
+                  <span>Chat WhatsApp ({SITE_CONFIG.phone})</span>
                 </a>
               </div>
             </div>
