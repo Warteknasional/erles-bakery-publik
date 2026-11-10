@@ -17,12 +17,12 @@ import {
   ArrowRight,
   Info,
   QrCode,
-  ExternalLink,
   AlertCircle,
   Loader2,
   Landmark,
   Banknote,
   Flame,
+  ZoomIn,
 } from 'lucide-react';
 import { useCart } from '../context/useCart';
 import { productService, orderService } from '../services/api';
@@ -277,6 +277,7 @@ export default function PesananPage() {
   // Modal States
   const [showReceiptModal, setShowReceiptModal] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
+  const [showQrisLightbox, setShowQrisLightbox] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
@@ -364,6 +365,10 @@ export default function PesananPage() {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
+        if (showQrisLightbox) {
+          setShowQrisLightbox(false);
+          return;
+        }
         setIsCheckoutOpen(false);
         setShowReceiptModal(false);
         setShowHistoryModal(false);
@@ -371,7 +376,7 @@ export default function PesananPage() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [setIsCheckoutOpen]);
+  }, [showQrisLightbox, setIsCheckoutOpen]);
 
   // Filter & Sort
   const filteredProducts = products
@@ -979,26 +984,34 @@ ${
                             <QrCode size={16} />
                             <span>QRIS PEMBAYARAN RESMI</span>
                           </div>
-                          <a
-                            href="/qris.jpg"
-                            target="_blank"
-                            rel="noreferrer"
+                          <button
+                            type="button"
+                            onClick={() => setShowQrisLightbox(true)}
                             className="qris-zoom-btn"
-                            title="Buka QRIS Gambar Penuh"
+                            title="Perbesar Tampilan QRIS di Layar"
                           >
+                            <ZoomIn size={13} />
                             <span>Perbesar QR</span>
-                            <ExternalLink size={13} />
-                          </a>
+                          </button>
                         </div>
 
                         <div className="checkout-qris-body">
-                          <div className="checkout-qris-frame">
+                          <button
+                            type="button"
+                            className="checkout-qris-frame checkout-qris-clickable"
+                            onClick={() => setShowQrisLightbox(true)}
+                            title="Klik untuk memperbesar QRIS di layar"
+                          >
                             <img
                               src="/qris.jpg"
                               alt="Barcode QRIS Resmi Erles Bakery"
                               className="checkout-qris-img"
                             />
-                          </div>
+                            <span className="qris-frame-overlay">
+                              <ZoomIn size={14} />
+                              <span>Klik Perbesar</span>
+                            </span>
+                          </button>
 
                           <div className="checkout-qris-info">
                             <strong className="qris-merchant-title">ERLES BAKERY</strong>
@@ -1272,13 +1285,22 @@ ${
                   </div>
 
                   <div className="receipt-qris-body">
-                    <div className="receipt-qris-img-wrap">
+                    <button
+                      type="button"
+                      className="receipt-qris-img-wrap receipt-qris-clickable"
+                      onClick={() => setShowQrisLightbox(true)}
+                      title="Klik untuk memperbesar QRIS di layar"
+                    >
                       <img
                         src="/qris.jpg"
                         alt="QRIS Pembayaran Erles Bakery"
                         className="receipt-qris-img"
                       />
-                    </div>
+                      <span className="qris-frame-overlay">
+                        <ZoomIn size={14} />
+                        <span>Klik Perbesar</span>
+                      </span>
+                    </button>
                     <div className="receipt-qris-info">
                       <strong className="receipt-merchant-name">ERLES BAKERY</strong>
                       <div className="receipt-qris-amount-box">
@@ -1288,15 +1310,15 @@ ${
                       <p className="receipt-qris-step-guide">
                         Scan QRIS dengan aplikasi m-Banking atau e-wallet apa saja. Simpan bukti transfer dan sertakan saat mengirim pesanan ke WhatsApp admin.
                       </p>
-                      <a
-                        href="/qris.jpg"
-                        target="_blank"
-                        rel="noreferrer"
+                      <button
+                        type="button"
+                        onClick={() => setShowQrisLightbox(true)}
                         className="receipt-qris-expand-link"
+                        title="Perbesar Tampilan QRIS di Layar"
                       >
-                        <ExternalLink size={13} />
-                        <span>Buka QRIS Layar Penuh</span>
-                      </a>
+                        <ZoomIn size={13} />
+                        <span>Perbesar Tampilan QRIS</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -1428,6 +1450,68 @@ ${
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================
+          QRIS LIGHTBOX MODAL (TIDAK PINDAH HALAMAN / IN-PAGE MODAL)
+         ========================================================= */}
+      {showQrisLightbox && (
+        <div
+          className="modal-backdrop-custom qris-lightbox-backdrop"
+          onClick={() => setShowQrisLightbox(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="QRIS Pembayaran Resmi Erles Bakery"
+        >
+          <div
+            className="qris-lightbox-card"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="qris-lightbox-close-x"
+              onClick={() => setShowQrisLightbox(false)}
+              aria-label="Tutup Tampilan QRIS"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="qris-lightbox-header">
+              <div className="qris-badge-tag">
+                <QrCode size={14} />
+                <span>QRIS RESMI TOKO</span>
+              </div>
+              <h3 className="qris-lightbox-title">ERLES BAKERY</h3>
+              <p className="qris-lightbox-nmid">NMID: <strong>{SITE_CONFIG.qrisNmid}</strong> • A01</p>
+              {(latestOrder?.total || totalCart > 0) && (
+                <div className="qris-lightbox-total-tag">
+                  <span>Nominal Bayar:</span>
+                  <strong>{formatRupiah(latestOrder?.total || totalCart)}</strong>
+                </div>
+              )}
+            </div>
+
+            <div className="qris-lightbox-image-container">
+              <img
+                src="/qris.jpg"
+                alt="Barcode QRIS Resmi Erles Bakery"
+                className="qris-lightbox-image"
+              />
+            </div>
+
+            <p className="qris-lightbox-hint">
+              Pindai kode QRIS di atas langsung dari layar atau simpan tangkapan layar. Transaksi Anda tetap berada di halaman ini tanpa perlu membuka tab baru.
+            </p>
+
+            <button
+              type="button"
+              className="qris-lightbox-action-btn"
+              onClick={() => setShowQrisLightbox(false)}
+            >
+              Tutup & Kembali
+            </button>
           </div>
         </div>
       )}

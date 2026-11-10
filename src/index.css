@@ -2594,11 +2594,13 @@ body {
   font-size: 11px;
   font-weight: 700;
   color: var(--deux-red);
-  text-decoration: none;
   background: rgba(204, 74, 59, 0.08);
   padding: 4px 10px;
   border-radius: 999px;
   transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .qris-zoom-btn:hover {
@@ -2764,12 +2766,22 @@ body {
 .receipt-qris-expand-link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   font-size: 11px;
   font-weight: 700;
   color: var(--deux-dark);
   text-decoration: underline;
-  margin-top: 2px;
+  margin-top: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  transition: color 0.15s ease;
+}
+
+.receipt-qris-expand-link:hover {
+  color: var(--deux-red);
 }
 
 .hampers-card-form-box {
@@ -5715,4 +5727,196 @@ button.faq-question-bar {
 .maps-open-ext-link:hover {
   color: #4A2E17;
   text-decoration: underline;
+}
+
+/* =========================================================
+   QRIS CLICKABLE PREVIEWS & IN-PAGE LIGHTBOX (NO TAB/REDIRECT)
+========================================================= */
+.checkout-qris-clickable,
+.receipt-qris-clickable {
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  background: #FFFFFF;
+  border: 1.5px solid var(--deux-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.checkout-qris-clickable:hover,
+.receipt-qris-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(74, 46, 23, 0.16);
+}
+
+.qris-frame-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 26, 14, 0.6);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.checkout-qris-clickable:hover .qris-frame-overlay,
+.receipt-qris-clickable:hover .qris-frame-overlay {
+  opacity: 1;
+}
+
+.qris-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10050 !important;
+  background: rgba(30, 18, 9, 0.82) !important;
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeInModal 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.qris-lightbox-card {
+  position: relative;
+  background: #FFFDF9;
+  border: 2px solid #F3CA3E;
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  width: 100%;
+  max-width: 420px;
+  max-height: 94vh;
+  overflow-y: auto;
+  padding: 28px 22px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideUpModal 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.qris-lightbox-close-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #F3EBDD;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deux-dark);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qris-lightbox-close-x:hover {
+  background: var(--deux-red);
+  color: #FFFFFF;
+  transform: rotate(90deg);
+}
+
+.qris-lightbox-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 14px;
+  width: 100%;
+}
+
+.qris-lightbox-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--deux-dark);
+  margin: 2px 0 0;
+}
+
+.qris-lightbox-nmid {
+  font-size: 12px;
+  color: #664223;
+  margin: 0;
+}
+
+.qris-lightbox-total-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--deux-soft-yellow);
+  border: 1px solid #F3CA3E;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--deux-dark);
+  margin-top: 4px;
+}
+
+.qris-lightbox-total-tag strong {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 22px;
+  color: var(--deux-red);
+  line-height: 1;
+}
+
+.qris-lightbox-image-container {
+  width: 100%;
+  max-width: 300px;
+  background: #FFFFFF;
+  border: 2px solid var(--deux-border);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 8px 24px rgba(74, 46, 23, 0.12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.qris-lightbox-image {
+  width: 100%;
+  height: auto;
+  max-height: 48vh;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+}
+
+.qris-lightbox-hint {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--deux-text-muted);
+  max-width: 340px;
+  margin: 0 0 16px;
+}
+
+.qris-lightbox-action-btn {
+  width: 100%;
+  max-width: 300px;
+  background: var(--deux-dark);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.qris-lightbox-action-btn:hover {
+  background: var(--deux-red);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(204, 74, 59, 0.25);
 }
