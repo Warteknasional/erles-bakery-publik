@@ -6,8 +6,6 @@ import {
   MapPin,
   Clock,
   Mail,
-  Copy,
-  Check,
   ExternalLink,
   Send,
   CheckCircle2,
@@ -50,7 +48,7 @@ const contactFaq = [
     a: 'Pengiriman kurir flat Rp 12.000 untuk seluruh area perkotaan Malang (Lowokwaru, Klojen, Blimbing, Sukun, Kedungkandang). Anda juga dapat memilih opsi "Ambil Sendiri di Dapur" secara gratis.',
   },
   {
-    q: 'Apakah toko fisik di Vinolia menyediakan tempat makan di tempat (Dine-in)?',
+    q: 'Apakah toko fisik Erles Bakery menyediakan tempat makan di tempat (Dine-in)?',
     a: 'Toko dan dapur kami menyediakan area duduk santai (*seating area*) untuk menikmati kopi dan roti hangat langsung dari oven, serta melayani pembelian take-away higienis.',
   },
   {
@@ -60,10 +58,7 @@ const contactFaq = [
 ];
 
 export default function KontakPage() {
-  const [copiedWA, setCopiedWA] = useState(false);
-  const [copiedIG, setCopiedIG] = useState(false);
-  const [copiedAddress, setCopiedAddress] = useState(false);
-  const [copiedEmail, setCopiedEmail] = useState(false);
+
 
   const [form, setForm] = useState({
     name: '',
@@ -75,23 +70,6 @@ export default function KontakPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
-
-  const handleCopy = (text, type) => {
-    navigator.clipboard.writeText(text);
-    if (type === 'wa') {
-      setCopiedWA(true);
-      setTimeout(() => setCopiedWA(false), 2200);
-    } else if (type === 'ig') {
-      setCopiedIG(true);
-      setTimeout(() => setCopiedIG(false), 2200);
-    } else if (type === 'addr') {
-      setCopiedAddress(true);
-      setTimeout(() => setCopiedAddress(false), 2200);
-    } else if (type === 'email') {
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2200);
-    }
-  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -189,15 +167,6 @@ export default function KontakPage() {
                 <MessageCircle size={16} />
                 <span>Chat WhatsApp</span>
               </a>
-              <button
-                type="button"
-                onClick={() => handleCopy(SITE_CONFIG.phone, 'wa')}
-                className="channel-secondary-btn"
-                title="Salin Nomor WhatsApp"
-              >
-                {copiedWA ? <Check size={16} color="#16a34a" /> : <Copy size={16} />}
-                <span>{copiedWA ? 'Tersalin' : 'Salin'}</span>
-              </button>
             </div>
           </div>
 
@@ -231,15 +200,6 @@ export default function KontakPage() {
                 <ExternalLink size={16} />
                 <span>Buka Instagram</span>
               </a>
-              <button
-                type="button"
-                onClick={() => handleCopy('@erles_donut.mlg', 'ig')}
-                className="channel-secondary-btn"
-                title="Salin Username Instagram"
-              >
-                {copiedIG ? <Check size={16} color="#16a34a" /> : <Copy size={16} />}
-                <span>{copiedIG ? 'Tersalin' : 'Salin'}</span>
-              </button>
             </div>
           </div>
 
@@ -259,7 +219,7 @@ export default function KontakPage() {
                 suguhan donat empuk.
               </p>
               <div className="channel-contact-val small">
-                <span>Jl. Vinolia No. 25B, Lowokwaru, Kota Malang 65142</span>
+                <span>{SITE_CONFIG.address}</span>
               </div>
             </div>
 
@@ -273,17 +233,6 @@ export default function KontakPage() {
                 <MapPin size={16} />
                 <span>Petunjuk Maps</span>
               </a>
-              <button
-                type="button"
-                onClick={() =>
-                  handleCopy('Jl. Vinolia No. 25B, Lowokwaru, Kota Malang 65142', 'addr')
-                }
-                className="channel-secondary-btn"
-                title="Salin Alamat Lengkap"
-              >
-                {copiedAddress ? <Check size={16} color="#16a34a" /> : <Copy size={16} />}
-                <span>{copiedAddress ? 'Tersalin' : 'Salin'}</span>
-              </button>
             </div>
           </div>
 
@@ -315,15 +264,6 @@ export default function KontakPage() {
                 <Mail size={16} />
                 <span>Kirim Email</span>
               </a>
-              <button
-                type="button"
-                onClick={() => handleCopy('erlesbakery.mlg@gmail.com', 'email')}
-                className="channel-secondary-btn"
-                title="Salin Alamat Email"
-              >
-                {copiedEmail ? <Check size={16} color="#16a34a" /> : <Copy size={16} />}
-                <span>{copiedEmail ? 'Tersalin' : 'Salin'}</span>
-              </button>
             </div>
           </div>
         </div>
