@@ -1,10 +1,10 @@
 export const SITE_CONFIG = {
   name: 'Erles Bakery',
   tagline: 'Freshly Baked Goods Every Day',
-  phone: '+62 857-1722-4420',
-  whatsappDigits: '6285717224420',
-  whatsappRaw: '6285717224420',
-  whatsappUrl: 'https://wa.me/6285717224420',
+  phone: '+62 821-4534-6270',
+  whatsappDigits: '6282145346270',
+  whatsappRaw: '6282145346270',
+  whatsappUrl: 'https://wa.me/6282145346270',
   address: 'Jl. Vinolia No. 25B, Lowokwaru, Kota Malang, Jawa Timur 65142',
   addressShort: 'Jl. Vinolia No. 25B Malang',
   hours: 'Senin - Minggu: 07.00 - 21.00 WIB',
@@ -14,4 +14,3 @@ export const SITE_CONFIG = {
   qrisNmid: 'ID1024318497657',
   deliveryFee: 12000,
 };
-
