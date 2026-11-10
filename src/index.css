@@ -1327,221 +1327,151 @@ body {
 }
 
 /* =========================================================
-   12. FOOTER & GIANT ERLES BAKERY TITLE
+   12. COMPACT ARTISAN FOOTER
 ========================================================= */
-.deux-footer-actual {
+.deux-footer-compact {
   background: var(--deux-dark);
   color: #FFF0E0;
-  padding: 70px 0 30px;
-  border-top: 2px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-}
-
-.deux-footer-top-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 48px;
-  padding-bottom: 44px;
-  border-bottom: 1px solid rgba(255, 240, 224, 0.14);
-  margin-bottom: 44px;
-}
-
-.footer-brand-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-
-.footer-logo-badge {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #F3CA3E;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  flex-shrink: 0;
-  transition: transform 0.25s ease;
-}
-
-.footer-logo-badge:hover {
-  transform: rotate(-6deg) scale(1.08);
-}
-
-.footer-mini-brand {
-  font-family: 'Erica One', cursive;
-  font-size: 28px;
-  color: var(--deux-yellow);
-  display: block;
-  margin-bottom: 0;
-}
-
-.footer-intro-desc {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #E8D5C4;
-  margin-bottom: 18px;
-  max-width: 480px;
-}
-
-.footer-contact-links {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  padding: 24px 0 18px;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.1);
   font-size: 13px;
 }
 
-.footer-contact-links a {
-  color: var(--deux-yellow);
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.insta-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.footer-contact-links .sep {
-  color: #8C6648;
-}
-
-.footer-news-col h4 {
-  font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 28px;
-  color: #FFFFFF;
-  margin-bottom: 6px;
-}
-
-.footer-news-col p {
-  font-size: 12px;
-  color: #E8D5C4;
-  margin-bottom: 16px;
-}
-
-.deux-footer-news-form {
-  display: flex;
-  gap: 8px;
-}
-
-.deux-footer-news-form input {
-  flex: 1;
-  padding: 12px 18px;
-  border-radius: 999px;
-  border: 1.5px solid rgba(255, 240, 224, 0.2);
-  background: rgba(255, 240, 224, 0.08);
-  color: #FFFFFF;
-  outline: none;
-  font-size: 13px;
-}
-
-.deux-footer-news-form button {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: var(--deux-yellow);
-  color: var(--deux-dark);
+.footer-compact-main {
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.deux-footer-news-form button:hover {
-  background: #FFFFFF;
-}
-
-.deux-footer-mid-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  padding-bottom: 44px;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 16px;
   border-bottom: 1px solid rgba(255, 240, 224, 0.1);
-  margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
-.footer-links-col h5 {
-  font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 24px;
-  color: var(--deux-yellow);
-  margin-bottom: 14px;
-}
-
-.footer-links-col ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
+.footer-compact-brand {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-.footer-links-col a {
+.footer-compact-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--deux-yellow);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.footer-compact-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.footer-compact-name {
+  font-family: 'Erica One', cursive;
+  font-size: 17px;
+  color: var(--deux-yellow);
+  letter-spacing: -0.02em;
+}
+
+.footer-compact-tagline {
+  font-size: 11px;
+  color: #CBB4A1;
+}
+
+.footer-compact-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.footer-compact-nav a {
   color: #E8D5C4;
   text-decoration: none;
   font-size: 13px;
-  transition: color 0.2s;
+  font-weight: 600;
+  transition: color 0.2s ease;
 }
 
-.footer-links-col a:hover {
+.footer-compact-nav a:hover {
   color: #FFFFFF;
 }
 
-.hours-text, .address-text {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #E8D5C4;
-  margin-bottom: 8px;
-}
-
-.fresh-note {
-  font-size: 11px;
+.footer-compact-nav .footer-nav-track {
   color: var(--deux-yellow);
+  font-weight: 700;
 }
 
-.footer-map-link {
+.footer-compact-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-social-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--deux-yellow);
+  padding: 6px 12px;
+  background: rgba(255, 240, 224, 0.08);
+  border: 1px solid rgba(255, 240, 224, 0.15);
+  border-radius: 999px;
+  color: #FFF0E0;
   text-decoration: none;
-  margin-top: 6px;
-}
-
-.deux-footer-legal-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 12px;
-  color: #CBB4A1;
-  flex-wrap: wrap;
-  gap: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.deux-footer-baked {
+.footer-social-pill:hover {
+  background: rgba(255, 240, 224, 0.16);
+  color: #FFFFFF;
+  border-color: rgba(255, 240, 224, 0.3);
+}
+
+.footer-social-pill.wa:hover {
+  background: #25D366;
+  border-color: #25D366;
+  color: #FFFFFF;
+}
+
+.footer-compact-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  font-size: 11px;
+  color: #A68D79;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-compact-baked {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-/* GIANT FOOTER BRAND */
-.deux-giant-footer-title {
-  text-align: center;
-  margin-top: 40px;
-  line-height: 0.85;
-  user-select: none;
-}
-
-.deux-giant-footer-title span {
-  font-family: 'Erica One', cursive;
-  font-size: clamp(48px, 13vw, 175px);
-  color: var(--deux-yellow);
-  letter-spacing: -0.04em;
-  display: inline-block;
-  opacity: 0.95;
+@media (max-width: 768px) {
+  .footer-compact-main {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+  .footer-compact-nav {
+    justify-content: center;
+    gap: 14px;
+  }
+  .footer-compact-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
 }
 
 /* =========================================================
