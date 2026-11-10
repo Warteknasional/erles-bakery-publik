@@ -511,16 +511,7 @@ export default function LacakPesananPage() {
                     <MessageCircle size={16} />
                     <span>Tanya Admin via WhatsApp</span>
                   </a>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSearchQuery('ERL-LIVE-001');
-                      setSearchParams({ kode: 'ERL-LIVE-001' });
-                    }}
-                    className="error-btn-demo"
-                  >
-                    Lihat Contoh Demo Pelacakan
-                  </button>
+
                 </div>
               </div>
             </div>
@@ -583,49 +574,6 @@ export default function LacakPesananPage() {
                   <span className="step-num">03</span>
                   <strong>Pantau Status Dapur</strong>
                   <p>Lacak tahap adonan, proses memanggang, hingga siap diantar.</p>
-                </div>
-              </div>
-
-              {/* DEMO SHORTCUTS FOR LECTURER / EVALUATION PRESENTATION */}
-              <div className="tracking-presentation-box">
-                <div className="pres-head">
-                  <Sparkles size={14} />
-                  <span>Mode Presentasi / Evaluasi Dosen</span>
-                </div>
-                <p className="pres-note">
-                  Klik tombol di bawah untuk melihat simulasi tampilan live tracker saat ada pesanan aktif:
-                </p>
-                <div className="pres-pills">
-                  <button
-                    type="button"
-                    className="pres-pill"
-                    onClick={() => {
-                      setSearchQuery('ERL-LIVE-001');
-                      setSearchParams({ kode: 'ERL-LIVE-001' });
-                    }}
-                  >
-                    🔥 Contoh 1: Sedang Dipanggang
-                  </button>
-                  <button
-                    type="button"
-                    className="pres-pill"
-                    onClick={() => {
-                      setSearchQuery('ERL-LIVE-002');
-                      setSearchParams({ kode: 'ERL-LIVE-002' });
-                    }}
-                  >
-                    📦 Contoh 2: Siap Diambil di Toko
-                  </button>
-                  <button
-                    type="button"
-                    className="pres-pill"
-                    onClick={() => {
-                      setSearchQuery('ERL-LIVE-003');
-                      setSearchParams({ kode: 'ERL-LIVE-003' });
-                    }}
-                  >
-                    ✨ Contoh 3: Pesanan Selesai
-                  </button>
                 </div>
               </div>
             </div>
