@@ -145,8 +145,8 @@ export default function TentangPage() {
               </p>
 
               <div className="founder-signature-box">
-                <strong className="founder-name">ERLES & TIM BAKERS</strong>
-                <span className="founder-role">Dapur Erles Bakery • Lowokwaru, Kota Malang</span>
+                <strong className="founder-name">BU ERNI LESTARI</strong>
+                <span className="founder-role">Founder & Head Baker • Jl. Ikan Gurami No. 7e, Lowokwaru, Kota Malang</span>
               </div>
 
               <div className="founder-proof-strip">

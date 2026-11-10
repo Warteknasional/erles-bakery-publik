@@ -82,27 +82,30 @@ const featuredProducts = [
 const blogArticles = [
   {
     category: 'SEASONAL',
-    date: 'Apr 15, 2026',
+    date: '15 Apr 2026',
     title: 'Apa yang Sedang Kami Panggang Musim Ini di Dapur Malang',
     desc: 'Dari sourdough gandum utuh hingga varian donat kentang rasa musiman terbaru.',
     image:
       'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+    slug: 'panggangan-musim-ini-dapur-malang',
   },
   {
-    category: 'BAKING',
-    date: 'Apr 10, 2026',
+    category: 'BAKING CRAFT',
+    date: '10 Apr 2026',
     title: 'Mengapa Suhu Mentega Mengubah Seluruh Hasil Panggangan Roti',
-    desc: 'Eksplorasi teknik laminasi butter Prancis dan efeknya terhadap kelembutan serat roti.',
+    desc: 'Eksplorasi teknik laminasi butter murni dan efeknya terhadap kelembutan serat roti.',
     image:
       'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=600&q=80',
+    slug: 'suhu-mentega-dan-serat-roti',
   },
   {
-    category: 'RECIPES',
-    date: 'Apr 02, 2026',
+    category: 'STORIES & RECIPES',
+    date: '02 Apr 2026',
     title: 'Roti Akhir Pekan: Ritual Panggangan Lambat Penuh Makna',
     desc: 'Menghabiskan pagi akhir pekan bersama aroma ragi alami dan kopi seduh manual.',
     image:
       'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=600&q=80',
+    slug: 'ritual-roti-akhir-pekan-sourdough',
   },
 ];
 
@@ -161,8 +164,9 @@ export default function HomePage() {
             {/* LEFT TEXT */}
             <div className="deux-hero-trio-left">
               <p>
-                Dapur artisan kami lahir dari kebahagiaan berbagi roti segar, donat kentang empuk,
-                dan kue istimewa yang dibuat dengan ketulusan setiap pagi.
+                Dapur rumahan Bu Erni Lestari (@erles_donut.mlg) di Lowokwaru, Malang.
+                Setiap pukul 04.00 subuh kami memanggang sourdough fermentasi 24 jam, donat kentang lokal segar,
+                dan hampers istimewa dengan sistem made-to-order tanpa pengawet sintetis.
               </p>
             </div>
 
@@ -319,8 +323,10 @@ export default function HomePage() {
                 Everyday Moments
               </h2>
               <blockquote className="why-exact-quote">
-                “Kami percaya memanggang adalah tentang menyatukan orang-orang terkasih lewat aroma
-                kehangatan roti yang dibuat dengan kejujuran resep.”
+                “Memanggang adalah tentang menyatukan orang-orang terkasih lewat aroma kehangatan roti jujur. Kami meracik setiap adonan dengan tangan sendiri di Lowokwaru sejak subuh tanpa pengawet sintetis.”
+                <footer style={{ marginTop: '10px', fontSize: '13.5px', fontStyle: 'normal', fontWeight: '700', color: '#C25E34' }}>
+                  — Bu Erni Lestari, Founder & Head Baker
+                </footer>
               </blockquote>
             </div>
 
@@ -328,10 +334,9 @@ export default function HomePage() {
               <div className="why-feature-block reveal-up stagger-1">
                 <span className="f-num">01</span>
                 <div>
-                  <h4>Made Fresh Daily</h4>
+                  <h4>Panggangan Subuh 04.00 WIB</h4>
                   <p>
-                    Seluruh roti dan donat dipanggang setiap subuh, memastikan setiap gigitan
-                    menghadirkan tekstur dan rasa terbaik.
+                    Seluruh roti dan donat mulai dipanggang setiap subuh oleh Bu Erni Lestari di Lowokwaru Malang, memastikan kehangatan segar saat tiba di meja Anda.
                   </p>
                 </div>
               </div>
@@ -339,10 +344,9 @@ export default function HomePage() {
               <div className="why-feature-block reveal-up stagger-2">
                 <span className="f-num">02</span>
                 <div>
-                  <h4>Quality Ingredients</h4>
+                  <h4>Kentang Segar & Mentega Murni</h4>
                   <p>
-                    Mentega murni pilihan, ragi alami tanpa pengawet sintetis, dan bahan lokal
-                    berkualitas tinggi.
+                    Donat kentang empuk alami dari kentang kukus lokal Malang, dipadukan mentega murni dan ragi hidup tanpa pelembut kimia sintetis.
                   </p>
                 </div>
               </div>
@@ -350,10 +354,9 @@ export default function HomePage() {
               <div className="why-feature-block reveal-up stagger-3">
                 <span className="f-num">03</span>
                 <div>
-                  <h4>Crafted By Hand</h4>
+                  <h4>Fermentasi Lambat 24 Jam</h4>
                   <p>
-                    Fermentasi perlahan serta pembentukan adonan menggunakan tangan terampil
-                    pengrajin roti kami.
+                    Sourdough difermentasikan dingin selama 24 jam untuk menghasilkan rongga remah kenyal, kerak keemasan renyah, dan lebih ramah pencernaan.
                   </p>
                 </div>
               </div>
@@ -361,10 +364,9 @@ export default function HomePage() {
               <div className="why-feature-block reveal-up stagger-4">
                 <span className="f-num">04</span>
                 <div>
-                  <h4>Made To Share</h4>
+                  <h4>Sistem Made-To-Order</h4>
                   <p>
-                    Cocok untuk sarapan keluarga, teman kopi santai, maupun bingkisan hampers hari
-                    raya.
+                    Setiap batch dibuat sesuai pesanan, memastikan tidak ada roti basi sisa kemarin baik untuk konsumsi harian maupun hampers hantaran.
                   </p>
                 </div>
               </div>
@@ -507,8 +509,8 @@ export default function HomePage() {
                   </span>
                   <h3 className="blog-title">{art.title}</h3>
                   <p className="blog-desc">{art.desc}</p>
-                  <Link to="/pesanan" className="blog-read-more">
-                    <span>Lihat di Katalog Menu</span>
+                  <Link to={`/blog/${art.slug}`} className="blog-read-more">
+                    <span>Baca Cerita Lengkap</span>
                     <ArrowUpRight size={14} />
                   </Link>
                 </div>

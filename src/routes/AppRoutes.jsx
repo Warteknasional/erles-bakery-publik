@@ -4,6 +4,7 @@ import PesananPage from '../pages/PesananPage';
 import TentangPage from '../pages/TentangPage';
 import KontakPage from '../pages/KontakPage';
 import LacakPesananPage from '../pages/LacakPesananPage';
+import BlogDetailPage from '../pages/BlogDetailPage';
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
       <Route path="/kontak" element={<KontakPage />} />
       <Route path="/lacak-pesanan" element={<LacakPesananPage />} />
       <Route path="/lacak" element={<LacakPesananPage />} />
+      <Route path="/blog/:slug" element={<BlogDetailPage />} />
     </Routes>
   );
 }

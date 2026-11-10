@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://erlesbakery.netlify.app/sitemap.xml

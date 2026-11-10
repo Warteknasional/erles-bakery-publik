@@ -1,0 +1,40 @@
+# Erles Bakery Malang (@erles_donut.mlg)
+
+> Toko roti artisan rumahan dan donat kentang legendaris oleh Bu Erni Lestari di Kota Malang, Jawa Timur.
+
+## Ringkasan Bisnis
+- **Nama Usaha**: Erles Bakery (Erles Donut & Bakery Malang)
+- **Pendiri & Head Baker**: Bu Erni Lestari
+- **Alamat Dapur**: Jl. Ikan Gurami Gg. II No.7e, Kelurahan Tunjungsekar, Kecamatan Lowokwaru, Kota Malang, Jawa Timur 65143, Indonesia
+- **Wilayah Layanan**: Kota Malang, Kabupaten Malang, Kota Batu (Kurir Instan & Ambil di Dapur)
+- **Jam Operasional**: Senin – Minggu, 07:00 – 21:00 WIB (Panggangan pertama subuh siap pukul 06:30 WIB)
+- **Kontak WhatsApp**: +62 821-4534-6270 (wa.me/6282145346270)
+- **Instagram**: https://www.instagram.com/erles_donut.mlg/
+- **Website Utama**: https://erlesbakery.netlify.app/
+- **Portal Admin & ERP**: https://erlesbakery-admin.netlify.app/
+
+## Filosofi & Cara Produksi
+1. **Panggangan Subuh 04.00 WIB**: Seluruh adonan mulai dipanggang setiap subuh untuk memastikan kehangatan, remah lembut, dan aroma terbaik sampai ke tangan pelanggan.
+2. **Kentang Kukus Asli Malang**: Donat kentang dibuat menggunakan perpaduan kentang kukus segar lokal Malang tanpa perisa buatan atau pelembut kimia sintetis.
+3. **Fermentasi Lambat 24 Jam**: Roti sourdough difermentasikan secara alami selama 24 jam dengan kultur ragi hidup (*wild yeast starter*), menghasilkan kerak renyah (*crusty*) berongga basah yang ramah pencernaan.
+4. **Sistem Made-to-Order**: Mencegah penimbunan roti basi dan menjamin produk yang dikirim adalah hasil panggangan hari yang sama.
+
+## Menu Utama & Harga Resmi
+- **Sourdough Country Boule** — Rp 45.000 (Kerak renyah keemasan, fermentasi alami 24 jam)
+- **Olive & Rosemary Ciabatta** — Rp 32.000 (Roti klasik Italia berongga basah dengan potongan zaitun hitam dan rosemary)
+- **French Baguette Tradisi** — Rp 28.000 (Baguette garing renyah ala boulangerie Prancis)
+- **Donat Kentang Gula Halus** — Rp 8.000 (Donat kentang super empuk dengan taburan gula dingin)
+- **Donat Coklat Almond Panggang** — Rp 12.000 (Balutan dark chocolate pekat bertabur irisan kacang almond panggang)
+- **Hampers Lebaran Deluxe** — Rp 350.000 (Kotak eksklusif velvet gold isi 3 toples kue kering butter Wisman + kartu ucapan)
+
+## Cara Pemesanan
+1. Kunjungi website https://erlesbakery.netlify.app/pesanan
+2. Pilih produk dan jumlah pesanan yang diinginkan
+3. Tentukan metode pengambilan (Ambil di Toko atau Kurir Instan Malang)
+4. Pembayaran via QRIS (NMID: ID1024318497657) atau Tunai saat ambil
+5. Lacak status pesanan secara real-time di https://erlesbakery.netlify.app/lacak-pesanan
+
+## Catatan Dapur & Artikel Terkait
+- /blog/panggangan-musim-ini-dapur-malang: Apa yang Sedang Kami Panggang Musim Ini di Dapur Malang
+- /blog/suhu-mentega-dan-serat-roti: Mengapa Suhu Mentega Mengubah Seluruh Hasil Panggangan Roti
+- /blog/ritual-roti-akhir-pekan-sourdough: Roti Akhir Pekan: Ritual Panggangan Lambat Penuh Makna
