@@ -5604,61 +5604,6 @@ button.faq-question-bar {
   line-height: 1.45;
 }
 
-/* LECTURER / EVALUATION DEMO BOX */
-.tracking-presentation-box {
-  background: #FAF0E4;
-  border: 1.5px solid #EAD3BD;
-  border-radius: 20px;
-  padding: 20px 24px;
-  text-align: center;
-}
-
-.pres-head {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: #B45309;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-.pres-note {
-  font-size: 13px;
-  color: #6E533F;
-  margin: 0 0 14px;
-}
-
-.pres-pills {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.pres-pill {
-  padding: 8px 16px;
-  background: #FFFFFF;
-  border: 1px solid #D9C3B0;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #4A2E17;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(74, 46, 23, 0.05);
-}
-
-.pres-pill:hover {
-  background: #CC4A3B;
-  color: #FFFFFF;
-  border-color: #CC4A3B;
-  transform: translateY(-1px);
-}
-
 /* TOP NAV BAR (WHEN ORDER IS ACTIVE) */
 .tracking-top-nav-bar {
   display: flex;
