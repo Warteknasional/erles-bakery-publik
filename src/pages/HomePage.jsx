@@ -113,7 +113,7 @@ const faqData = [
   },
   {
     q: 'Bisa kirim langsung (instan) ke seluruh area Malang?',
-    a: 'Tentu bisa. Kami melayani kurir instan (GrabExpress/GoSend) maupun ambil langsung di toko (Jl. Vinolia No. 25B, Lowokwaru, Kota Malang).',
+    a: 'Tentu bisa. Kami melayani kurir instan (GrabExpress/GoSend) maupun ambil langsung di toko (Jl. Ikan Gurami Gg. II No.7e, Lowokwaru, Kota Malang).',
   },
   {
     q: 'Bagaimana cara memesan paket hampers dengan kartu ucapan kustom?',
