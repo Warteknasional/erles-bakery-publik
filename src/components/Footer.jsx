@@ -32,7 +32,7 @@ export default function Footer() {
             <img src="/logo.jpg" alt="Erles Bakery" className="footer-compact-logo" />
             <div className="footer-compact-brand-text">
               <span className="footer-compact-name">erles bakery</span>
-              <span className="footer-compact-tagline">{SITE_CONFIG.addressShort}</span>
+              <a href={SITE_CONFIG.mapsUrl} target="_blank" rel="noreferrer" className="footer-compact-tagline" title="Buka di Google Maps">{SITE_CONFIG.addressShort} ↗</a>
             </div>
           </div>
 

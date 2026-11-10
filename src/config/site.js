@@ -11,6 +11,7 @@ export const SITE_CONFIG = {
   freshNote: '*Panggangan pertama siap pukul 06.30 WIB setiap pagi',
   instagramUrl: 'https://www.instagram.com/erles_donut.mlg',
   instagramHandle: '@erles_donut.mlg',
+  mapsUrl: 'https://maps.app.goo.gl/P8WgohV3db6iBKWX6',
   qrisNmid: 'ID1024318497657',
   deliveryFee: 12000,
 };

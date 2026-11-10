@@ -265,7 +265,7 @@ export default function KontakPage() {
 
             <div className="channel-actions">
               <a
-                href="https://maps.google.com/?q=Jl.+Vinolia+No.+25B+Lowokwaru+Malang"
+                href={SITE_CONFIG.mapsUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="channel-primary-btn dark"
@@ -465,7 +465,7 @@ export default function KontakPage() {
             <div className="deux-maps-frame">
               <iframe
                 title="Peta Lokasi Erles Bakery Malang"
-                src="https://maps.google.com/maps?q=Jl.+Vinolia+No.+25B+Lowokwaru+Malang&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=-7.9254188,112.6231506&t=&z=17&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="260"
                 style={{ border: 0 }}
@@ -473,6 +473,18 @@ export default function KontakPage() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
+              <div className="maps-bottom-link-row">
+                <a
+                  href={SITE_CONFIG.mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="maps-open-ext-link"
+                >
+                  <MapPin size={13} />
+                  <span>Buka di Google Maps Langsung</span>
+                  <ExternalLink size={12} />
+                </a>
+              </div>
             </div>
 
             {/* STORE HIGHLIGHT DETAILS */}
