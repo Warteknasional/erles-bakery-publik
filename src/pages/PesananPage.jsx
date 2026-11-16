@@ -32,7 +32,7 @@ const fallbackProducts = [
   {
     id: 1,
     nama: 'Roti Abon',
-    harga: 5000,
+    harga: 7500,
     kategori: 'Roti Manis',
     stok: 50,
     deskripsi:
@@ -43,7 +43,7 @@ const fallbackProducts = [
   {
     id: 2,
     nama: 'Roti Sosis',
-    harga: 5000,
+    harga: 6000,
     kategori: 'Roti Manis',
     stok: 50,
     deskripsi:
@@ -54,7 +54,7 @@ const fallbackProducts = [
   {
     id: 3,
     nama: 'Roti Keju',
-    harga: 5000,
+    harga: 5500,
     kategori: 'Roti Manis',
     stok: 40,
     deskripsi:
@@ -65,7 +65,7 @@ const fallbackProducts = [
   {
     id: 4,
     nama: 'Roti Pizza',
-    harga: 5000,
+    harga: 7000,
     kategori: 'Roti Manis',
     stok: 40,
     deskripsi:
@@ -76,7 +76,7 @@ const fallbackProducts = [
   {
     id: 5,
     nama: 'Roti Sakura',
-    harga: 5000,
+    harga: 4500,
     kategori: 'Roti Manis',
     stok: 35,
     deskripsi:
@@ -87,7 +87,7 @@ const fallbackProducts = [
   {
     id: 6,
     nama: 'Roti Kepang',
-    harga: 5000,
+    harga: 4000,
     kategori: 'Roti Manis',
     stok: 35,
     deskripsi:
@@ -109,7 +109,7 @@ const fallbackProducts = [
   {
     id: 8,
     nama: 'Roti Pisang Coklat Keju',
-    harga: 6000,
+    harga: 6500,
     kategori: 'Roti Manis',
     stok: 45,
     deskripsi:
@@ -153,7 +153,7 @@ const fallbackProducts = [
   {
     id: 12,
     nama: 'Donuts Premium',
-    harga: 7000,
+    harga: 7500,
     kategori: 'Donat',
     stok: 40,
     deskripsi:

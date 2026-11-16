@@ -21,7 +21,7 @@ const featuredProducts = [
     id: 1,
     category: 'ROTI MANIS',
     name: 'Roti Abon',
-    price: 'Rp 5.000',
+    price: 'Rp 7.500',
     desc: 'Roti manis empuk bertabur abon sapi gurih melimpah dan saus manis khas bakery.',
     image:
       'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80',
@@ -31,7 +31,7 @@ const featuredProducts = [
     id: 8,
     category: 'ROTI MANIS',
     name: 'Roti Pisang Coklat Keju',
-    price: 'Rp 6.000',
+    price: 'Rp 6.500',
     desc: 'Paduan pisang manis, lelehan cokelat lumer, dan taburan keju cheddar gurih.',
     image:
       'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80',
@@ -41,7 +41,7 @@ const featuredProducts = [
     id: 2,
     category: 'ROTI MANIS',
     name: 'Roti Sosis',
-    price: 'Rp 5.000',
+    price: 'Rp 6.000',
     desc: 'Roti lembut dengan isian sosis sapi pilihan dan saus gurih favorit sarapan.',
     image:
       'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=800&q=80',
@@ -71,7 +71,7 @@ const featuredProducts = [
     id: 9,
     category: 'ROTI MANIS',
     name: 'Roti Abon 1 Loyang (40 x 40)',
-    price: 'Rp 60.000',
+    price: 'Rp 65.000',
     desc: 'Porsi besar 1 loyang 40x40 cm bertabur abon melimpah, pas untuk hantaran & keluarga.',
     image:
       'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80',
