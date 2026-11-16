@@ -247,14 +247,80 @@ export default function LacakPesananPage() {
     setLoading(true);
     setErrorMessage('');
 
-    // 1. Check in DEMO_ORDERS
+    // 1. Check in DEMO_ORDERS (for presentation/demo shortcuts)
     if (DEMO_ORDERS[cleanCode]) {
       setActiveOrder(DEMO_ORDERS[cleanCode]);
       setLoading(false);
       return;
     }
 
-    // 2. Check in LocalStorage history
+    // 2. Query Live API Backend FIRST so customer gets the real-time status from kitchen
+    try {
+      const res = await orderService.track(cleanCode);
+      const data = res?.data || res;
+      if (data && (data.kode_pesanan || data.id)) {
+        // Also retrieve any rich details from localStorage if present (e.g. greeting cards)
+        let localMatch = null;
+        try {
+          const stored = localStorage.getItem('erles_orders_history');
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            localMatch = parsed.find(
+              (o) =>
+                o.code?.toUpperCase().replace(/^#/, '') === cleanCode ||
+                o.kode_pesanan?.toUpperCase().replace(/^#/, '') === cleanCode
+            );
+            // Update local storage status with live backend status
+            if (localMatch) {
+              localMatch.status = data.status || 'pending';
+              localMatch.payment_status = data.payment_status;
+              localStorage.setItem('erles_orders_history', JSON.stringify(parsed));
+            }
+          }
+        } catch {
+          // Ignore storage errors
+        }
+
+        const normalized = {
+          code: data.kode_pesanan || `#${data.id}`,
+          status: data.status || 'pending',
+          statusText: `Status Pesanan: ${data.status}`,
+          createdAt: data.created_at || localMatch?.createdAt || 'Baru Saja',
+          customer: {
+            name: data.customer_name || localMatch?.customer?.name || 'Pelanggan Setia',
+            phone: data.customer_phone || localMatch?.customer?.phone || '-',
+            address: data.alamat || localMatch?.customer?.address || 'Ambil di Toko',
+            notes: data.catatan || localMatch?.customer?.notes || '-',
+            deliveryMethod: data.alamat?.toLowerCase().includes('ambil')
+              ? 'pickup'
+              : (localMatch?.customer?.deliveryMethod || 'delivery'),
+            deliveryDate: data.tanggal_ambil || localMatch?.customer?.deliveryDate || 'Sesuai Jadwal',
+            paymentMethod: data.payment_status === 'paid' ? 'Lunas (QRIS Terverifikasi)' : 'Menunggu Pembayaran',
+          },
+          items: (data.items && data.items.length > 0)
+            ? data.items.map((it) => ({
+                id: it.id,
+                name: it.product?.nama || it.nama_produk || 'Roti Artisan',
+                price: Number(it.unit_price || it.harga || 0),
+                qty: it.qty || 1,
+                image: it.product?.gambar || it.product?.gambar_url || 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&auto=format&fit=crop&q=80',
+              }))
+            : (localMatch?.items || []),
+          subtotal: Number(data.total_price || localMatch?.subtotal || 0),
+          deliveryFee: localMatch?.deliveryFee || 0,
+          total: Number(data.total_price || localMatch?.total || 0),
+          greetingCard: localMatch?.greetingCard || null,
+          isFromApi: true,
+        };
+        setActiveOrder(normalized);
+        setLoading(false);
+        return;
+      }
+    } catch {
+      // Backend lookup failed or offline, fall through to localStorage
+    }
+
+    // 3. Fallback to LocalStorage history if backend offline or uncontactable
     try {
       const stored = localStorage.getItem('erles_orders_history');
       if (stored) {
@@ -267,7 +333,7 @@ export default function LacakPesananPage() {
         if (found) {
           const normalized = {
             ...found,
-            status: found.status || 'confirmed',
+            status: found.status || 'pending',
             statusText: found.status ? `Status: ${found.status}` : 'Menunggu Konfirmasi Dapur',
             items: found.items || [],
             customer: found.customer || {
@@ -286,46 +352,6 @@ export default function LacakPesananPage() {
       }
     } catch {
       // Ignore
-    }
-
-    // 3. Try Real API backend
-    try {
-      const res = await orderService.track(cleanCode);
-      const data = res?.data || res;
-      if (data && (data.kode_pesanan || data.id)) {
-        const normalized = {
-          code: data.kode_pesanan || `#${data.id}`,
-          status: data.status || 'pending',
-          statusText: `Status Pesanan: ${data.status}`,
-          createdAt: data.created_at || 'Baru Saja',
-          customer: {
-            name: data.customer_name || 'Pelanggan Setia',
-            phone: data.customer_phone || '-',
-            address: data.alamat || 'Ambil di Toko',
-            notes: data.catatan || '-',
-            deliveryMethod: data.alamat ? 'delivery' : 'pickup',
-            deliveryDate: data.tanggal_ambil || 'Sesuai Jadwal',
-            paymentMethod: data.payment_status === 'paid' ? 'Lunas' : 'Belum Lunas',
-          },
-          items: (data.items || []).map((it) => ({
-            id: it.id,
-            name: it.product?.nama || it.nama_produk || 'Roti Artisan',
-            price: Number(it.unit_price || it.harga || 0),
-            qty: it.qty || 1,
-            image: it.product?.gambar_url || 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&auto=format&fit=crop&q=80',
-          })),
-          subtotal: Number(data.total_price || 0),
-          deliveryFee: 0,
-          total: Number(data.total_price || 0),
-          greetingCard: null,
-          isFromApi: true,
-        };
-        setActiveOrder(normalized);
-        setLoading(false);
-        return;
-      }
-    } catch {
-      // Fallback
     }
 
     // Not found
@@ -653,6 +679,17 @@ export default function LacakPesananPage() {
                     >
                       {copiedCode ? <Check size={14} /> : <Copy size={14} />}
                       <span>{copiedCode ? 'Disalin' : 'Salin'}</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="order-copy-chip"
+                      onClick={() => performSearch(activeOrder.code)}
+                      disabled={loading}
+                      title="Perbarui status dari dapur secara live"
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <RefreshCw size={13} style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
+                      <span>{loading ? 'Memuat...' : 'Cek Status'}</span>
                     </button>
                     {activeOrder.isDemo && (
                       <span className="order-demo-tag">SIMULASI DEMO</span>
