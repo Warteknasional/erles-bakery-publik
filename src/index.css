@@ -204,7 +204,17 @@ body {
   border: none;
   color: var(--deux-dark);
   cursor: pointer;
-  padding: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.deux-burger-btn:focus-visible {
+  outline: 2px solid var(--deux-red, #CC4A3B);
+  outline-offset: 2px;
 }
 
 /* MOBILE DRAWER */
@@ -247,6 +257,17 @@ body {
   border: none;
   color: var(--deux-dark);
   cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.deux-drawer-close:focus-visible {
+  outline: 2px solid var(--deux-red, #CC4A3B);
+  outline-offset: 2px;
 }
 
 .deux-drawer-links {
@@ -1925,7 +1946,7 @@ body {
 
 .deux-search-box:focus-within {
   border-color: var(--deux-dark);
-  box-shadow: 0 6px 20px rgba(74, 46, 23, 0.12);
+  box-shadow: 0 0 0 2px var(--deux-dark), 0 6px 20px rgba(74, 46, 23, 0.12);
   transform: translateY(-1px);
 }
 
@@ -1936,6 +1957,12 @@ body {
   font-size: 13px;
   color: var(--deux-dark);
   width: 100%;
+}
+
+.deux-search-box input:focus-visible {
+  outline: 2px solid var(--deux-red, #CC4A3B);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .deux-toolbar-actions {
@@ -3579,10 +3606,20 @@ html {
 }
 
 .deux-nav-cart-pill.mobile {
-  width: 36px;
-  height: 36px;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-left: 0;
   margin-right: 8px;
+}
+
+.deux-nav-cart-pill.mobile:focus-visible {
+  outline: 2px solid var(--deux-red, #CC4A3B);
+  outline-offset: 2px;
 }
 
 button.faq-question-bar {
@@ -4533,7 +4570,7 @@ button.faq-question-bar {
 
 .tracking-search-bar:focus-within {
   border-color: #CC4A3B;
-  box-shadow: 0 14px 40px rgba(204, 74, 59, 0.15);
+  box-shadow: 0 0 0 2px #CC4A3B, 0 14px 40px rgba(204, 74, 59, 0.15);
 }
 
 .tracking-input-wrap {
@@ -4557,6 +4594,12 @@ button.faq-question-bar {
   color: #3C2415;
   background: transparent;
   font-family: inherit;
+}
+
+.tracking-input-wrap input:focus-visible {
+  outline: 2px solid #CC4A3B;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .tracking-input-wrap input::placeholder {

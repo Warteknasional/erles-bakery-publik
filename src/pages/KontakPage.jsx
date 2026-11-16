@@ -48,8 +48,8 @@ const contactFaq = [
     a: 'Pengiriman kurir flat Rp 12.000 untuk seluruh area perkotaan Malang (Lowokwaru, Klojen, Blimbing, Sukun, Kedungkandang). Anda juga dapat memilih opsi "Ambil Sendiri di Dapur" secara gratis.',
   },
   {
-    q: 'Apakah toko fisik Erles Bakery menyediakan tempat makan di tempat (Dine-in)?',
-    a: 'Toko dan dapur kami menyediakan area duduk santai (*seating area*) untuk menikmati kopi dan roti hangat langsung dari oven, serta melayani pembelian take-away higienis.',
+    q: 'Apakah Erles Bakery melayani pengambilan langsung di lokasi (Self Pick-up)?',
+    a: 'Bisa. Dapur kami beroperasi secara made-to-order di Jl. Ikan Gurami Gg. II No.7e, Lowokwaru, Kota Malang. Anda dapat memesan terlebih dahulu melalui web atau WhatsApp, lalu mengambil pesanan langsung di dapur kami secara gratis.',
   },
   {
     q: 'Bagaimana cara mengajukan pesanan khusus atau kerjasama kemitraan (B2B)?',

@@ -31,55 +31,48 @@ const cardsWhy = [
 
 const stats = [
   {
-    num: '5+',
-    label: 'Tahun Memanggang',
-    desc: 'Mengasah resep artisan dan kelembutan donat kentang autentik sejak 2021.',
+    num: '04.00 WIB',
+    label: 'Mulai Memanggang',
+    desc: 'Oven dinyalakan setiap subuh agar panggangan tiba dalam kondisi segar.',
   },
   {
-    num: '25+',
-    label: 'Varian Pilihan',
-    desc: 'Koleksi sourdough, brioche, donat kentang, dan box hampers tematik.',
-  },
-  {
-    num: '10.000+',
-    label: 'Pelanggan Bahagia',
-    desc: 'Momen kehangatan panggangan yang dibagikan kepada keluarga di Kota Malang.',
+    num: '24 Jam',
+    label: 'Fermentasi Alami',
+    desc: 'Fermentasi lambat ragi starter untuk rasa asam gurih dan tekstur remah optimal.',
   },
   {
     num: '100%',
-    label: 'Tanpa Pengawet',
-    desc: 'Komitmen bahan bersih dan sehat tanpa pemanis atau pengawet buatan.',
+    label: 'Bahan Pangan Halal',
+    desc: 'Komitmen bahan bersih tanpa pengawet atau pemanis buatan, aman bagi keluarga.',
+  },
+  {
+    num: '6',
+    label: 'Koleksi Artisan',
+    desc: 'Koleksi roti dan donat kentang pilihan yang dirawat kualitasnya dalam jumlah terbatas.',
   },
 ];
 
-const teamMembers = [
+const artisanPillars = [
   {
-    name: 'ERLES',
-    role: 'Founder & Head Baker',
-    desc: 'Memulai dari oven rumahan dengan cinta pada sourdough tradisional dan donat kentang khas Malang.',
+    title: 'Ragi Alami Sourdough',
+    role: 'Fermentasi Lambat 24 Jam',
+    desc: 'Starter ragi alami dirawat setiap hari dengan tepung pilihan untuk menghasilkan kerak renyah keemasan dan remah berongga lembut.',
     image:
-      'https://images.unsplash.com/photo-1583394293214-28ded15ee548?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
   },
   {
-    name: 'SITI RAHMA',
-    role: 'Sourdough Artisan',
-    desc: 'Merawat ragi alami (starter) dan mengontrol fermentasi lambat 24 jam untuk tekstur kerak sempurna.',
+    title: 'Donat Kentang Kukus',
+    role: 'Resep Asli Malang',
+    desc: 'Menggunakan kentang kukus asli hasil pertanian lokal, menghadirkan keempukan alami yang bertahan lembut hingga keesokan hari.',
     image:
-      'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?auto=format&fit=crop&w=600&q=80',
   },
   {
-    name: 'DIMAS ARDIAN',
-    role: 'Donut & Pastry Chef',
-    desc: 'Menjaga kelembutan donat kentang asli, racikan glaze cokelat, dan adonan brioche yang harum.',
+    title: 'Hampers & Hantaran',
+    role: 'Sentuhan Kasih Personal',
+    desc: 'Dikemas rapi dalam hardbox eksklusif dengan kartu ucapan kustom untuk hantaran silaturahmi, hari raya, dan perayaan keluarga.',
     image:
-      'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    name: 'ANISA PUTRI',
-    role: 'Hampers Stylist',
-    desc: 'Mendesain packaging hampers estetik, pita satin elegan, dan kartu ucapan kustom untuk momen spesial.',
-    image:
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80',
   },
 ];
 
@@ -98,7 +91,7 @@ export default function TentangPage() {
               with a soft spot
             </h1>
             <p className="deux-about-lead">
-              Kami memanggang kehangatan klasik dengan sepenuh hati — dibuat tangan oleh pengrajin
+              Kami memanggang kehangatan klasik dengan sepenuh hati, dibuat tangan oleh pengrajin
               lokal, dalam kelompok kecil (small batches), setiap subuh di dapur kami di Kota Malang.
             </p>
           </div>
@@ -133,7 +126,7 @@ export default function TentangPage() {
               </div>
 
               <blockquote className="founder-quote">
-                “SAYA INGIN ERLES BAKERY MENJADI DAPUR HANGAT YANG SELALU ANDA RINDUKAN — PENUH
+                “SAYA INGIN ERLES BAKERY MENJADI DAPUR HANGAT YANG SELALU ANDA RINDUKAN: PENUH
                 KEJUJURAN RASA DAN SENTUHAN PERSONAL.”
               </blockquote>
 
@@ -188,13 +181,13 @@ export default function TentangPage() {
         </div>
       </section>
 
-      {/* 4. IN NUMBERS SECTION */}
+      {/* 4. Dedikasi Dapur Artisan */}
       <section className="deux-numbers-section">
         <div className="deux-container">
           <div className="deux-center-header reveal-up">
-            <span className="deux-scallop-tag light">in numbers</span>
+            <span className="deux-scallop-tag light">komitmen rasa</span>
             <h2 className="deux-display-title">
-              The Numbers Behind Every Loaf We Bake
+              Dedikasi Dapur di Balik Setiap Panggangan
             </h2>
           </div>
 
@@ -210,28 +203,27 @@ export default function TentangPage() {
         </div>
       </section>
 
-      {/* 5. MEET OUR TEAM / BAKERS */}
+      {/* 5. Pilar Keahlian Dapur */}
       <section className="deux-team-section">
         <div className="deux-container">
           <div className="deux-center-header reveal-up">
-            <span className="deux-scallop-tag">team member</span>
-            <h2 className="deux-display-title">THE HANDS BEHIND OUR OVEN</h2>
+            <span className="deux-scallop-tag">Dapur & Baker</span>
+            <h2 className="deux-display-title">SENTUHAN TANGAN PENGRAJIN ROTI</h2>
             <p className="deux-team-subtitle">
-              Orang-orang berdedikasi yang bangun sebelum fajar untuk menyiapkan panggangan terbaik
-              bagi Anda.
+              Erles Bakery didirikan dan dikelola langsung oleh Bu Erni Lestari dengan dedikasi memanggang dari dapur rumahan di Lowokwaru, Kota Malang.
             </p>
           </div>
 
-          <div className="deux-team-grid">
-            {teamMembers.map((m, idx) => (
+          <div className="deux-team-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+            {artisanPillars.map((p, idx) => (
               <div key={idx} className={`deux-team-card reveal-up stagger-${idx + 1}`}>
                 <div className="team-photo-wrap">
-                  <img src={m.image} alt={m.name} />
+                  <img src={p.image} alt={p.title} />
                 </div>
                 <div className="team-info">
-                  <h4 className="team-name">{m.name}</h4>
-                  <span className="team-role">{m.role}</span>
-                  <p className="team-desc">{m.desc}</p>
+                  <h4 className="team-name">{p.title}</h4>
+                  <span className="team-role">{p.role}</span>
+                  <p className="team-desc">{p.desc}</p>
                 </div>
               </div>
             ))}

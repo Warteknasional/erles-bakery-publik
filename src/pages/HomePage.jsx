@@ -19,63 +19,63 @@ const heroCenterImg =
 const featuredProducts = [
   {
     id: 1,
-    category: 'BREADS',
-    name: 'Sourdough Country Boule',
-    price: 'Rp 45.000',
-    desc: 'Kerak keemasan renyah berongga lembut hasil fermentasi alami 24 jam.',
+    category: 'ROTI MANIS',
+    name: 'Roti Abon',
+    price: 'Rp 5.000',
+    desc: 'Roti manis empuk bertabur abon sapi gurih melimpah dan saus manis khas bakery.',
     image:
-      'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80',
-    tag: 'Favorite',
-  },
-  {
-    id: 2,
-    category: 'BREADS',
-    name: 'Olive & Rosemary Ciabatta',
-    price: 'Rp 32.000',
-    desc: 'Roti klasik Italia dengan potongan zaitun hitam dan taburan rosemary wangi.',
-    image:
-      'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=800&q=80',
-    tag: 'Artisan',
-  },
-  {
-    id: 3,
-    category: 'BREADS',
-    name: 'French Baguette Tradisi',
-    price: 'Rp 28.000',
-    desc: 'Baguette renyah autentik Prancis, pasangan sempurna untuk selai atau keju.',
-    image:
-      'https://images.unsplash.com/photo-1534620808146-d33bb39128b2?auto=format&fit=crop&w=800&q=80',
-    tag: 'Classic',
-  },
-  {
-    id: 4,
-    category: 'PASTRIES',
-    name: 'Donat Kentang Gula Halus',
-    price: 'Rp 8.000',
-    desc: 'Donat kentang asli Malang super empuk dan kenyal dengan taburan gula dingin.',
-    image:
-      'https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80',
     tag: 'Best Seller',
   },
   {
-    id: 5,
-    category: 'PASTRIES',
-    name: 'Donat Coklat Almond Panggang',
-    price: 'Rp 12.000',
-    desc: 'Glaze dark chocolate pekat bertabur irisan kacang almond panggang gurih.',
+    id: 8,
+    category: 'ROTI MANIS',
+    name: 'Roti Pisang Coklat Keju',
+    price: 'Rp 6.000',
+    desc: 'Paduan pisang manis, lelehan cokelat lumer, dan taburan keju cheddar gurih.',
+    image:
+      'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80',
+    tag: 'Favorit',
+  },
+  {
+    id: 2,
+    category: 'ROTI MANIS',
+    name: 'Roti Sosis',
+    price: 'Rp 5.000',
+    desc: 'Roti lembut dengan isian sosis sapi pilihan dan saus gurih favorit sarapan.',
+    image:
+      'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=800&q=80',
+    tag: 'Spesial',
+  },
+  {
+    id: 10,
+    category: 'DONUTS',
+    name: 'Donuts Biasa',
+    price: 'Rp 2.500',
+    desc: 'Donat kentang tradisional super empuk dan kenyal dengan taburan gula halus dingin.',
+    image:
+      'https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?auto=format&fit=crop&w=800&q=80',
+    tag: 'Klasik',
+  },
+  {
+    id: 11,
+    category: 'DONUTS',
+    name: 'Donuts Meses Coklat',
+    price: 'Rp 5.000',
+    desc: 'Donat empuk dengan olesan krim lembut dan taburan meses cokelat melimpah.',
     image:
       'https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=800&q=80',
     tag: 'Favorit',
   },
   {
-    id: 6,
-    category: 'HAMPERS',
-    name: 'Hampers Lebaran Deluxe',
-    price: 'Rp 350.000',
-    desc: 'Box eksklusif velvet gold berisi 3 toples kue kering wisman legendaris & kartu ucapan.',
+    id: 9,
+    category: 'ROTI MANIS',
+    name: 'Roti Abon 1 Loyang (40 x 40)',
+    price: 'Rp 60.000',
+    desc: 'Porsi besar 1 loyang 40x40 cm bertabur abon melimpah, pas untuk hantaran & keluarga.',
     image:
-      'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80',
-    tag: 'Special Gift',
+      'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80',
+    tag: 'Porsi Besar',
   },
 ];
 
@@ -325,7 +325,7 @@ export default function HomePage() {
               <blockquote className="why-exact-quote">
                 “Memanggang adalah tentang menyatukan orang-orang terkasih lewat aroma kehangatan roti jujur. Kami meracik setiap adonan dengan tangan sendiri di Lowokwaru sejak subuh tanpa pengawet sintetis.”
                 <footer style={{ marginTop: '10px', fontSize: '13.5px', fontStyle: 'normal', fontWeight: '700', color: '#C25E34' }}>
-                  — Bu Erni Lestari, Founder & Head Baker
+                  Bu Erni Lestari, Pendiri & Head Baker
                 </footer>
               </blockquote>
             </div>
@@ -447,21 +447,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* =========================================================
-          7. TESTIMONIALS (DEUX 2-COL WITH BUTTER CARD)
-      ========================================================= */}
+      {/* Testimoni pelanggan */}
       <section className="deux-exact-section">
         <div className="deux-exact-container">
           <div className="deux-testi-exact-grid">
-            {/* LEFT IMAGE */}
             <div className="testi-exact-image-col reveal-left">
               <img
                 src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=85"
-                alt="Bakery moment"
+                alt="Suasana dapur panggangan roti Erles Bakery"
               />
             </div>
 
-            {/* RIGHT BUTTER GOLD CARD (RADIUS 48px) */}
             <div className="testi-exact-card-col reveal-right">
               <div className="testi-quote-mark">“</div>
               <div className="testi-stars-row">
@@ -470,13 +466,11 @@ export default function HomePage() {
                 ))}
               </div>
               <blockquote className="testi-quote-phrase">
-                “The bread is incredible, crisp on the outside, soft in the middle, and full of
-                flavor. Everything tastes so fresh and thoughtfully made, from the potato donuts to
-                the sourdough.”
+                “Donat kentangnya lembut sekali dan empuk sampai besoknya, wangi menteganya terasa. Roti sisir dan sourdough-nya selalu jadi pesanan favorit keluarga untuk sarapan pagi.”
               </blockquote>
               <div className="testi-author-exact">
-                <strong>BUDI SANTOSO</strong>
-                <span>Pelanggan Setia • Lowokwaru, Malang</span>
+                <strong>IBU RATNA</strong>
+                <span>Pelanggan Pesanan Harian • Lowokwaru, Malang</span>
               </div>
             </div>
           </div>

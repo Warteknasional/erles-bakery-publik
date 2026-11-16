@@ -29,206 +29,141 @@ import { productService, orderService } from '../services/api';
 import { SITE_CONFIG } from '../config/site';
 
 const fallbackProducts = [
-  // 1. SOURDOUGH & ARTISAN BREADS
   {
-    id: 5,
-    nama: 'Sourdough Country Boule',
-    harga: 45000,
-    kategori: 'Sourdough',
-    stok: 20,
-    deskripsi:
-      'Kerak renyah keemasan dengan remah berongga lembut hasil fermentasi lambat 24 jam dengan ragi alami pilihan.',
-    image:
-      'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=700&q=80',
-  },
-  {
-    id: 6,
-    nama: 'Olive & Rosemary Ciabatta',
-    harga: 32000,
-    kategori: 'Sourdough',
-    stok: 25,
-    deskripsi:
-      'Roti klasik Italia bertekstur empuk kenyal dengan potongan buah zaitun hitam dan taburan rosemary wangi.',
-    image:
-      'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=700&q=80',
-  },
-
-  // 2. DONAT KENTANG KHAS MALANG
-  {
-    id: 11,
-    nama: 'Donat Gula Halus Klasik',
-    harga: 8000,
-    kategori: 'Donat',
-    stok: 45,
-    deskripsi:
-      'Donat kentang tradisional super empuk dan kenyal, ditaburi gula halus dingin yang pas manisnya.',
-    image:
-      'https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?auto=format&fit=crop&w=700&q=80',
-  },
-  {
-    id: 12,
-    nama: 'Donat Coklat Almond Panggang',
-    harga: 12000,
-    kategori: 'Donat',
-    stok: 30,
-    deskripsi:
-      'Glaze dark chocolate pekat bertabur irisan kacang almond sangrai renyah dan gurih.',
-    image:
-      'https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=700&q=80',
-  },
-  {
-    id: 13,
-    nama: 'Donat Bomboloni Nutella',
-    harga: 14000,
-    kategori: 'Donat',
-    stok: 35,
-    deskripsi:
-      'Donat montok bulat tanpa lubang khas Italia berisi lelehan selai coklat hazelnut Nutella melimpah.',
-    image:
-      'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=700&q=80',
-  },
-
-  // 3. ROTI & VIENNOISERIE HARIAN
-  {
-    id: 7,
-    nama: 'Roti Tawar Gandum Susu',
-    harga: 25000,
-    kategori: 'Roti',
+    id: 1,
+    nama: 'Roti Abon',
+    harga: 5000,
+    kategori: 'Roti Manis',
     stok: 50,
     deskripsi:
-      'Tekstur sangat lembut dan wangi susu segar dengan serat gandum bergizi, cocok untuk sarapan keluarga setiap hari.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCD_uknovKEHZ9EoHPpe-xkLdcsADeFVDG0knPyxCM1PvQOY8jFARPun8nTd7afhy_H01n0XPOr5EwBK2VmE41YSUJRys-B9NGyVHlK_dM_ZBqnwlgtvVJNIvqrVYEtCneLaIPBiAdj7peXbDxu30svoCxnuQIGrIEWhZ8_QwbfpN_wJl0KdiNaVxqOSgAVEwpxM0_-fwZyXpf3RBjGVl6ZtQnXeRGDbbawSRWcv-VBxHHoaLxqsbpI4g',
-  },
-  {
-    id: 8,
-    nama: 'Butter Croissant Prancis',
-    harga: 18000,
-    kategori: 'Roti',
-    stok: 30,
-    deskripsi:
-      'Flaky, buttery dengan lapisan renyah khas Prancis dan aroma mentega murni dari panggangan pertama pagi hari.',
-    image:
-      'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80',
-  },
-  {
-    id: 9,
-    nama: 'Roti Sisir Mentega Jadul',
-    harga: 15000,
-    kategori: 'Roti',
-    stok: 40,
-    deskripsi:
-      'Roti sisir empuk dengan olesan butter cream manis gurih nostalgia khas resep rumahan tempo dulu.',
+      'Roti manis empuk bertabur abon sapi gurih melimpah dengan olesan saus manis khas bakery.',
     image:
       'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80',
   },
   {
-    id: 10,
-    nama: 'Roti Sobek Coklat Keju',
-    harga: 28000,
-    kategori: 'Roti',
-    stok: 25,
+    id: 2,
+    nama: 'Roti Sosis',
+    harga: 5000,
+    kategori: 'Roti Manis',
+    stok: 50,
     deskripsi:
-      'Roti sobek porsi keluarga dengan isian coklat leleh belgian dan potongan keju cheddar gurih di tiap sobekannya.',
+      'Roti lembut dengan isian sosis sapi pilihan berpadu saus gurih favorit sarapan keluarga.',
+    image:
+      'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=700&q=80',
+  },
+  {
+    id: 3,
+    nama: 'Roti Keju',
+    harga: 5000,
+    kategori: 'Roti Manis',
+    stok: 40,
+    deskripsi:
+      'Roti manis lembut berisikan keju gurih dengan parutan keju cheddar panggang di atasnya.',
+    image:
+      'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=700&q=80',
+  },
+  {
+    id: 4,
+    nama: 'Roti Pizza',
+    harga: 5000,
+    kategori: 'Roti Manis',
+    stok: 40,
+    deskripsi:
+      'Roti mini pizza dengan topping potongan sosis, saus tomat rempah, dan taburan keju leleh.',
+    image:
+      'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=80',
+  },
+  {
+    id: 5,
+    nama: 'Roti Sakura',
+    harga: 5000,
+    kategori: 'Roti Manis',
+    stok: 35,
+    deskripsi:
+      'Roti manis klasik dibentuk kelopak bunga sakura yang cantik dan harum mentega segar.',
+    image:
+      'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80',
+  },
+  {
+    id: 6,
+    nama: 'Roti Kepang',
+    harga: 5000,
+    kategori: 'Roti Manis',
+    stok: 35,
+    deskripsi:
+      'Roti kepang tradisional dengan olesan mentega manis dan taburan gula pasir renyah.',
+    image:
+      'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=700&q=80',
+  },
+  {
+    id: 7,
+    nama: 'Roti Pisang Coklat',
+    harga: 5000,
+    kategori: 'Roti Manis',
+    stok: 50,
+    deskripsi:
+      'Kombinasi klasik pisang raja manis alami dan lelehan cokelat legit berbalut adonan roti empuk.',
     image:
       'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=700&q=80',
   },
-
-  // 4. KUE & CAKE
   {
-    id: 14,
-    nama: 'Fudgy Brownies Coklat',
-    harga: 35000,
-    kategori: 'Kue',
-    stok: 20,
+    id: 8,
+    nama: 'Roti Pisang Coklat Keju',
+    harga: 6000,
+    kategori: 'Roti Manis',
+    stok: 45,
     deskripsi:
-      'Brownies panggang coklat fudgy legit dengan shiny crust renyah di atas dan lumer di dalam mulut.',
+      'Perpaduan sempurna pisang manis, lelehan cokelat lumer, dan keju cheddar gurih dalam satu roti.',
+    image:
+      'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80',
+  },
+  {
+    id: 9,
+    nama: 'Roti Abon 1 Loyang (40 x 40)',
+    harga: 60000,
+    kategori: 'Roti Manis',
+    stok: 15,
+    deskripsi:
+      'Porsi besar 1 loyang ukuran 40 × 40 cm penuh abon sapi tebal, sangat cocok untuk hantaran dan acara keluarga.',
     image:
       'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=80',
   },
   {
-    id: 15,
-    nama: 'Red Velvet Cake Slice',
-    harga: 45000,
-    kategori: 'Kue',
-    stok: 18,
+    id: 10,
+    nama: 'Donuts Biasa',
+    harga: 2500,
+    kategori: 'Donat',
+    stok: 60,
     deskripsi:
-      'Cake lembut warna merah merona dengan olesan cream cheese frosting segar dan taburan remahan red velvet.',
+      'Donat kentang tradisional super empuk dan kenyal, ditaburi gula halus dingin yang manis pas.',
     image:
-      'https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=700&q=80',
+      'https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?auto=format&fit=crop&w=700&q=80',
   },
   {
-    id: 16,
-    nama: 'Kue Lapis Legit Tradisional',
-    harga: 180000,
-    kategori: 'Kue',
-    stok: 8,
+    id: 11,
+    nama: 'Donuts Meses Coklat',
+    harga: 5000,
+    kategori: 'Donat',
+    stok: 50,
     deskripsi:
-      'Lapis legit panggang otentik bertabur aroma kapulaga manis dan wisman gurih di setiap helai lapisannya.',
+      'Donat empuk dengan olesan krim manis lembut dan taburan meses cokelat tebal yang melimpah.',
     image:
-      'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80',
-  },
-
-  // 5. HAMPERS & GIFT SET SPESIAL
-  {
-    id: 1,
-    nama: 'Hampers Lebaran Deluxe',
-    harga: 350000,
-    kategori: 'Hampers',
-    stok: 15,
-    isHampers: true,
-    hampersBadge: '🎁 Best Seller Gift',
-    isiPaket: ['Nastar Wisman 350g', 'Kastengel Keju Edam 350g', 'Putri Salju Mede 350g', 'Box Velvet & Kartu Ucapan'],
-    deskripsi:
-      'Paket hampers eksklusif dengan kotak premium bernuansa emas, pita satin, dan 3 toples kue kering resep legendaris Erles.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuA699ixzAfxDLv2kn9VG6y1inXtUwNodFyNwvoyY7dNs9vkyQ6UHfQdU0m6UxhD-E-AottAqOgCpw1kE20Vp7ti4qaTo2Jz-bRmobWHdcP8JfE6QDKnaUh_YRvY5XpIRcIvIj2tK7r4gxYeBdQEeAnXL9yN664dSlI0q4GrYrpbxoMS7mF6g7vqjd-KLLivygHgboOPIK0VO17q8QySmmy9k0iSjA7ax8DV6nSwQsCq2ob8QnPCgp5hbw',
+      'https://images.unsplash.com/photo-1527515862127-a4fc05baf7a5?auto=format&fit=crop&w=700&q=80',
   },
   {
-    id: 2,
-    nama: 'Hampers Wedding & Event Classic',
-    harga: 275000,
-    kategori: 'Hampers',
-    stok: 25,
-    isHampers: true,
-    hampersBadge: '💍 Hadiah Spesial',
-    isiPaket: ['4 Roti Artisan Pilihan', 'Mini Lapis Legit', 'Artisan Cookies Box', 'Hangtag & Pita Estetik'],
+    id: 12,
+    nama: 'Donuts Premium',
+    harga: 7000,
+    kategori: 'Donat',
+    stok: 40,
     deskripsi:
-      'Hampers hantaran pernikahan dan bingkisan acara formal dengan paduan roti artisan empuk dan kue lapis legit aroma rempah.',
+      'Donat kentang premium bertekstur lembut istimewa dengan pilihan topping glaze artisan cokelat dan keju.',
     image:
-      'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=700&q=80',
-  },
-  {
-    id: 3,
-    nama: 'Hampers Birthday Sweet Box',
-    harga: 200000,
-    kategori: 'Hampers',
-    stok: 20,
-    isHampers: true,
-    hampersBadge: '🎂 Sweet Surprise',
-    isiPaket: ['6 Donat Artisan Pilihan', 'Fudgy Brownies Slice', 'Lilin Ulang Tahun', 'Custom Greeting Card'],
-    deskripsi:
-      'Bingkisan manis hari ulang tahun berisi donat topping melimpah, brownies coklat pekat, lengkap dengan kartu ucapan custom.',
-    image:
-      'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=700&q=80',
-  },
-  {
-    id: 4,
-    nama: 'Hampers Mini Souvenir Bag',
-    harga: 85000,
-    kategori: 'Hampers',
-    stok: 35,
-    isHampers: true,
-    hampersBadge: '✨ Bingkisan Personal',
-    isiPaket: ['3 Roti Manis Favorit', 'Selai Buah Homemade', 'Tas Jinjing Goni Estetik'],
-    deskripsi:
-      'Paket bingkisan ramah kantong berukuran personal dalam balutan tas rami rustic, pas untuk oleh-oleh atau rapat kantor.',
-    image:
-      'https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&w=700&q=80',
+      'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=700&q=80',
   },
 ];
 
-const categories = ['Semua', 'Sourdough', 'Donat', 'Roti', 'Kue', 'Hampers'];
+const categories = ['Semua', 'Roti Manis', 'Donat'];
 
 const getDefaultDeliveryDate = () => {
   const tomorrow = new Date();
@@ -326,23 +261,27 @@ export default function PesananPage() {
       try {
         const response = await productService.getAll();
         if (isMounted && response?.data && Array.isArray(response.data) && response.data.length > 0) {
-          // Map backend products and merge with fallback metadata if missing
-          const mapped = response.data.map((item) => {
-            const fallback = fallbackProducts.find((f) => f.id === item.id) || {};
-            return {
-              id: item.id,
-              nama: item.nama,
-              harga: Number(item.harga),
-              stok: Number(item.stok ?? 20),
-              kategori: item.kategori || fallback.kategori || 'Roti',
-              deskripsi: item.deskripsi || fallback.deskripsi || '',
-              image: item.gambar || fallback.image || 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80',
-              isHampers: item.kategori === 'Hampers' || fallback.isHampers,
-              hampersBadge: fallback.hampersBadge,
-              isiPaket: fallback.isiPaket,
-            };
-          });
-          setProducts(mapped);
+          const hasNewMenu = response.data.some((p) => p.nama?.toLowerCase().includes('abon'));
+          if (hasNewMenu) {
+            const mapped = response.data.map((item) => {
+              const fallback = fallbackProducts.find((f) => f.id === item.id || f.nama === item.nama) || {};
+              return {
+                id: item.id,
+                nama: item.nama,
+                harga: Number(item.harga),
+                stok: Number(item.stok ?? 30),
+                kategori: item.kategori || fallback.kategori || 'Roti Manis',
+                deskripsi: item.deskripsi || fallback.deskripsi || '',
+                image: item.gambar || fallback.image || 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80',
+                isHampers: item.kategori === 'Hampers' || fallback.isHampers,
+                hampersBadge: fallback.hampersBadge,
+                isiPaket: fallback.isiPaket,
+              };
+            });
+            setProducts(mapped);
+          } else {
+            setProducts(fallbackProducts);
+          }
         }
       } catch (err) {
         if (isMounted) {
@@ -382,7 +321,10 @@ export default function PesananPage() {
   const filteredProducts = products
     .filter((product) => {
       const matchCategory =
-        selectedCategory === 'Semua' || product.kategori === selectedCategory;
+        selectedCategory === 'Semua' ||
+        product.kategori === selectedCategory ||
+        (selectedCategory === 'Donat' && (product.kategori === 'Donuts' || product.kategori === 'Donat Kentang')) ||
+        (selectedCategory === 'Roti Manis' && (product.kategori === 'Roti' || product.kategori === 'Roti Sourdough & Artisan'));
 
       const matchSearch =
         product.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||

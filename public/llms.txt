@@ -38,3 +38,4 @@
 - /blog/panggangan-musim-ini-dapur-malang: Apa yang Sedang Kami Panggang Musim Ini di Dapur Malang
 - /blog/suhu-mentega-dan-serat-roti: Mengapa Suhu Mentega Mengubah Seluruh Hasil Panggangan Roti
 - /blog/ritual-roti-akhir-pekan-sourdough: Roti Akhir Pekan: Ritual Panggangan Lambat Penuh Makna
+
