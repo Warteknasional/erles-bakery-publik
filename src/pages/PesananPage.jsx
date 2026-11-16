@@ -165,10 +165,102 @@ const fallbackProducts = [
 
 const categories = ['Semua', 'Roti Manis', 'Donat'];
 
+const getTodayDateString = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 const getDefaultDeliveryDate = () => {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow.toISOString().split('T')[0];
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const normalizePhone = (phone) => {
+  if (!phone) return '';
+  let clean = String(phone).replace(/[^0-9]/g, '');
+  if (clean.startsWith('62')) {
+    clean = '0' + clean.slice(2);
+  }
+  return clean;
+};
+
+// Direktori pelanggan di localStorage: menyimpan nomor HP & nama pemesan pertama
+const ensureCustomerDirectory = () => {
+  try {
+    const raw = localStorage.getItem('erles_customer_directory');
+    if (!raw) {
+      // Seed awal contoh: Chelsea dengan nomor 081554828616
+      const initial = {
+        '081554828616': {
+          name: 'Chelsea',
+          phone: '081554828616',
+          registeredAt: new Date().toISOString(),
+        },
+      };
+      localStorage.setItem('erles_customer_directory', JSON.stringify(initial));
+      return initial;
+    }
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+};
+
+const getCustomerByPhone = (phone, history = []) => {
+  const clean = normalizePhone(phone);
+  if (!clean || clean.length < 8) return null;
+
+  // 1. Cek dari direktori pelanggan lokal
+  try {
+    const dir = ensureCustomerDirectory();
+    if (dir[clean] && dir[clean].name) {
+      return dir[clean];
+    }
+  } catch {
+    // Abaikan
+  }
+
+  // 2. Cek dari riwayat pesanan (ambil pesanan pertama / tertua untuk nomor ini)
+  if (Array.isArray(history) && history.length > 0) {
+    const matching = history.filter((o) => normalizePhone(o?.customer?.phone) === clean);
+    if (matching.length > 0) {
+      const oldest = matching[matching.length - 1];
+      if (oldest?.customer?.name) {
+        return {
+          name: oldest.customer.name,
+          phone: oldest.customer.phone,
+        };
+      }
+    }
+  }
+
+  return null;
+};
+
+const saveCustomerToDirectory = (phone, name) => {
+  const clean = normalizePhone(phone);
+  if (!clean || !name || !name.trim()) return;
+  try {
+    const dir = ensureCustomerDirectory();
+    // Hanya simpan jika belum ada (nama pemesan pertama tidak boleh ditimpa)
+    if (!dir[clean]) {
+      dir[clean] = {
+        name: name.trim(),
+        phone: clean,
+        registeredAt: new Date().toISOString(),
+      };
+      localStorage.setItem('erles_customer_directory', JSON.stringify(dir));
+    }
+  } catch {
+    // Abaikan
+  }
 };
 
 export default function PesananPage() {
@@ -216,6 +308,8 @@ export default function PesananPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
+  const [customerSyncNotice, setCustomerSyncNotice] = useState(null);
+  const [dateError, setDateError] = useState('');
 
   // Form State
   const [form, setForm] = useState({
@@ -437,6 +531,31 @@ export default function PesananPage() {
     event.preventDefault();
     setIsSubmitting(true);
     setSubmitError(null);
+
+    // 1. Validasi Tanggal (Tidak Boleh Tanggal yang Sudah Berlalu)
+    const todayStr = getTodayDateString();
+    if (form.deliveryDate && form.deliveryDate < todayStr) {
+      setDateError(`Tanggal ${form.deliveryDate} sudah berlalu. Silakan pilih tanggal hari ini atau mendatang.`);
+      setSubmitError(`Pesanan ditolak: Tanggal pengambilan/pengantaran (${form.deliveryDate}) sudah berlalu. Pelanggan tidak dapat memesan untuk tanggal yang telah lewat.`);
+      setIsSubmitting(false);
+      return;
+    }
+
+    // 2. Validasi & Sinkronisasi Nama Pemesan Berdasarkan Nomor Telepon (Pemesan Pertama)
+    const existingCust = getCustomerByPhone(form.phone, orderHistory);
+    let finalCustomerName = form.name.trim();
+
+    if (existingCust && existingCust.name) {
+      finalCustomerName = existingCust.name;
+      if (form.name.trim().toLowerCase() !== existingCust.name.toLowerCase()) {
+        setForm((prev) => ({ ...prev, name: existingCust.name }));
+        setCustomerSyncNotice(
+          `Nama pesanan disesuaikan otomatis menjadi "${existingCust.name}" sesuai data pemesan pertama untuk nomor ${form.phone}.`
+        );
+      }
+    } else {
+      saveCustomerToDirectory(form.phone, finalCustomerName);
+    }
 
     // Payload formatted for Laravel backend OrderStoreRequest
     const orderPayload = {
