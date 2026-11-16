@@ -41,4 +41,15 @@ export const orderService = {
   },
 };
 
+export const customerService = {
+  async lookupByPhone(phone) {
+    try {
+      const res = await api.get('/customers/lookup', { params: { phone } });
+      return res.data;
+    } catch {
+      return null;
+    }
+  },
+};
+
 export default api;

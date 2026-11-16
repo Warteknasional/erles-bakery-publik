@@ -25,7 +25,7 @@ import {
   ZoomIn,
 } from 'lucide-react';
 import { useCart } from '../context/useCart';
-import { productService, orderService } from '../services/api';
+import { productService, orderService, customerService } from '../services/api';
 import { SITE_CONFIG } from '../config/site';
 
 const fallbackProducts = [
@@ -349,6 +349,90 @@ export default function PesananPage() {
     form.deliveryMethod === 'delivery' && subtotalCart > 0 ? SITE_CONFIG.deliveryFee : 0;
   const totalCart = subtotalCart + deliveryFee;
 
+  // Handler input nomor WhatsApp dengan sinkronisasi nama pemesan pertama
+  const handlePhoneChange = async (e) => {
+    const inputPhone = e.target.value;
+    const existing = getCustomerByPhone(inputPhone, orderHistory);
+
+    if (existing && existing.name) {
+      setForm((prev) => ({ ...prev, phone: inputPhone, name: existing.name }));
+      setCustomerSyncNotice(
+        `Nomor ${inputPhone} terdaftar atas nama ${existing.name}. Nama disesuaikan otomatis dengan pemesan pertama.`
+      );
+    } else {
+      setForm((prev) => ({ ...prev, phone: inputPhone }));
+      setCustomerSyncNotice(null);
+    }
+
+    const clean = normalizePhone(inputPhone);
+    if (clean.length >= 10) {
+      try {
+        const res = await customerService.lookupByPhone(inputPhone);
+        if (res?.found && res?.data?.name) {
+          const remoteName = res.data.name;
+          setForm((prev) => ({ ...prev, name: remoteName }));
+          setCustomerSyncNotice(
+            `Nomor ${inputPhone} terdaftar atas nama ${remoteName}. Nama disesuaikan otomatis dengan pemesan pertama.`
+          );
+          saveCustomerToDirectory(inputPhone, remoteName);
+        }
+      } catch {
+        // Abaikan jika backend offline
+      }
+    }
+  };
+
+  const handlePhoneBlur = () => {
+    const existing = getCustomerByPhone(form.phone, orderHistory);
+    if (existing && existing.name) {
+      setForm((prev) => ({ ...prev, name: existing.name }));
+      setCustomerSyncNotice(
+        `Nomor ${form.phone} terdaftar atas nama ${existing.name}. Nama otomatis disesuaikan dengan pemesan pertama.`
+      );
+    }
+  };
+
+  // Handler nama: jika nomor HP sudah terdaftar, pastikan nama tetap nama pemesan pertama
+  const handleNameChange = (e) => {
+    const newName = e.target.value;
+    const existing = getCustomerByPhone(form.phone, orderHistory);
+
+    if (existing && existing.name && newName.trim().toLowerCase() !== existing.name.toLowerCase()) {
+      setCustomerSyncNotice(
+        `Nomor ${form.phone} sudah terdaftar atas nama ${existing.name}. Nama pesanan akan tetap disimpan sebagai ${existing.name}.`
+      );
+    } else if (!existing) {
+      setCustomerSyncNotice(null);
+    }
+
+    setForm((prev) => ({ ...prev, name: newName }));
+  };
+
+  const handleNameBlur = () => {
+    const existing = getCustomerByPhone(form.phone, orderHistory);
+    if (existing && existing.name) {
+      if (form.name.trim().toLowerCase() !== existing.name.toLowerCase()) {
+        setForm((prev) => ({ ...prev, name: existing.name }));
+        setCustomerSyncNotice(
+          `Nama dikembalikan ke "${existing.name}" sesuai data pemesan pertama untuk nomor ${form.phone}.`
+        );
+      }
+    }
+  };
+
+  // Handler tanggal ambil / antar: tolak tanggal yang sudah lewat
+  const handleDateChange = (e) => {
+    const selectedDate = e.target.value;
+    const today = getTodayDateString();
+    setForm((prev) => ({ ...prev, deliveryDate: selectedDate }));
+
+    if (selectedDate && selectedDate < today) {
+      setDateError(`Tanggal ${selectedDate} sudah berlalu. Pelanggan tidak dapat memesan di tanggal yang telah lewat.`);
+    } else {
+      setDateError('');
+    }
+  };
+
   const handleSubmitOrder = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -356,7 +440,7 @@ export default function PesananPage() {
 
     // Payload formatted for Laravel backend OrderStoreRequest
     const orderPayload = {
-      customer_name: form.name.trim(),
+      customer_name: finalCustomerName,
       customer_phone: form.phone.trim(),
       alamat:
         form.deliveryMethod === 'delivery'
@@ -401,7 +485,7 @@ export default function PesananPage() {
         timeStyle: 'short',
       }),
       customer: {
-        name: form.name,
+        name: finalCustomerName,
         phone: form.phone,
         deliveryMethod: form.deliveryMethod,
         address:
@@ -420,7 +504,7 @@ export default function PesananPage() {
       greetingCard: hasHampersInCart
         ? {
             to: form.greetingTo || 'Penerima Terkasih',
-            from: form.greetingFrom || form.name,
+            from: form.greetingFrom || finalCustomerName,
             message: form.greetingMessage || 'Semoga hari Anda menyenangkan bersama sajian hangat Erles Bakery.',
           }
         : null,
@@ -783,10 +867,17 @@ ${
                       id="order-customer-name"
                       type="text"
                       required
-                      placeholder="Contoh: Budi Santoso"
+                      placeholder="Contoh: Chelsea"
                       value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      onChange={handleNameChange}
+                      onBlur={handleNameBlur}
                     />
+                    {customerSyncNotice && (
+                      <div className="customer-sync-badge">
+                        <Info size={13} />
+                        <span>{customerSyncNotice}</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="form-group-custom">
@@ -795,9 +886,10 @@ ${
                       id="order-customer-phone"
                       type="tel"
                       required
-                      placeholder="Contoh: 08123456789"
+                      placeholder="Contoh: 081554828616"
                       value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      onChange={handlePhoneChange}
+                      onBlur={handlePhoneBlur}
                     />
                   </div>
 
@@ -850,14 +942,22 @@ ${
 
                   <div className="form-row-custom">
                     <div className="form-group-custom">
-                      <label htmlFor="order-delivery-date">Tanggal Diambil / Diantar</label>
+                      <label htmlFor="order-delivery-date">Tanggal Diambil / Diantar *</label>
                       <input
                         id="order-delivery-date"
                         type="date"
                         required
+                        min={getTodayDateString()}
+                        className={dateError ? 'input-has-error' : ''}
                         value={form.deliveryDate}
-                        onChange={(e) => setForm({ ...form, deliveryDate: e.target.value })}
+                        onChange={handleDateChange}
                       />
+                      {dateError && (
+                        <div className="form-field-error-msg">
+                          <AlertCircle size={13} />
+                          <span>{dateError}</span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="form-group-custom">
@@ -1096,7 +1196,7 @@ ${
 
                     <button
                       type="submit"
-                      disabled={isSubmitting || cart.length === 0}
+                      disabled={isSubmitting || cart.length === 0 || !!dateError || (form.deliveryDate && form.deliveryDate < getTodayDateString())}
                       className="submit-checkout-btn"
                     >
                       {isSubmitting ? (

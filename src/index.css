@@ -5963,3 +5963,48 @@ button.faq-question-bar {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(204, 74, 59, 0.25);
 }
+
+/* =========================================================
+   CUSTOMER SYNC NOTICE & DATE ERROR STYLES
+========================================================= */
+.customer-sync-badge {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  background: #FEF9C3;
+  border: 1px solid #FDE047;
+  color: #854D0E;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-top: 6px;
+  animation: fadeInModal 0.2s ease;
+}
+
+.customer-sync-badge.success {
+  background: #DCFCE7;
+  border: 1px solid #86EFAC;
+  color: #166534;
+}
+
+.form-field-error-msg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #DC2626;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin-top: 6px;
+  animation: fadeInModal 0.2s ease;
+}
+
+.form-group-custom input.input-has-error {
+  border-color: #DC2626 !important;
+  background-color: #FFF8F8 !important;
+}
